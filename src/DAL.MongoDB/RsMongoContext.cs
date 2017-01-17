@@ -5,10 +5,12 @@ using MongoDB.Driver.Linq;
 using Core.Dtos;
 using System;
 using Core.Interfaces;
+using DAL.MongoDB.Interfaces;
+using DAL.MongoDB.Interfaces.Models;
 
 namespace DAL.MongoDB
 {
-    public class RsMongoContext : IDisposable
+    public class RsMongoContext : IDisposable, IRsMongoContext
     {
         public IMongoDatabase Database;
 
@@ -17,7 +19,7 @@ namespace DAL.MongoDB
             this.Database = client.GetDatabase(appSettings.DatabaseName);
         }
 
-        public IMongoCollection<User> Users => Database.GetCollection<User>("users");
+        public IMongoCollection<DbUser> Users => Database.GetCollection<DbUser>("users");
 
         public void Dispose() {
             // TODO: Check if we need to close connection;
