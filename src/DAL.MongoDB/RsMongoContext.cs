@@ -4,17 +4,17 @@ using MongoDB.Driver.Core;
 using MongoDB.Driver.Linq;
 using Core.Dtos;
 using System;
+using Core.Interfaces;
 
 namespace DAL.MongoDB
 {
     public class RsMongoContext : IDisposable
     {
         public IMongoDatabase Database;
-        public AppSettings AppSettings;
 
-        public RsMongoContext() {
-            var client = new MongoClient(AppSettings.ConnectionString); // TODO: Get connection string from settings
-            this.Database = client.GetDatabase(AppSettings.DatabaseName);
+        public RsMongoContext(IAppSettings appSettings) {
+            var client = new MongoClient(appSettings.ConnectionString);
+            this.Database = client.GetDatabase(appSettings.DatabaseName);
         }
 
         public IMongoCollection<User> Users => Database.GetCollection<User>("users");
