@@ -55,7 +55,7 @@ namespace DAL.MongoDB.Repositories
                 if (oldUser != null) {
                     var filter = Builders<User>.Filter.Eq(x => x.Id, user.Id);
                     await ctx.Users.DeleteOneAsync(filter);
-                }
+                } //
             }
         }
     }
