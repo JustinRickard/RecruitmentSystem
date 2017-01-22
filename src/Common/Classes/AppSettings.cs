@@ -1,6 +1,6 @@
-using Core.Interfaces;
+using Common.Interfaces;
 
-namespace Core.Dtos
+namespace Common.Classes
 {
     public class AppSettings : IAppSettings
     {

@@ -12,6 +12,6 @@
   },
 
   "tooling": {
-    "defaultNamespace": "Core.Interfaces"
+    "defaultNamespace": "Common"
   }
 }

@@ -1,4 +1,5 @@
-using Core.Interfaces;
+using Common.Interfaces;
+using Common.Classes;
 
 namespace DAL.MongoDB
 {
@@ -6,12 +7,12 @@ namespace DAL.MongoDB
     {
         protected internal IAppSettings appSettings { get; set; }
 
-        public RepositoryBase(IAppSettings appSettings) {
-            this.appSettings = appSettings;
+        public RepositoryBase() {
+            this.appSettings = new AppSettings();
         }
 
         protected internal RsMongoContext GetContext() {
-            return new RsMongoContext(appSettings);
+            return new RsMongoContext();
         }
     }
 }

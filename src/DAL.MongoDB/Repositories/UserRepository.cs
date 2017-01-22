@@ -6,62 +6,62 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Dtos;
-using Core.Interfaces;
+using Common.Interfaces;
+using Common.Dto;
 using DAL.MongoDB;
-using DAL.MongoDB.Interfaces.Models;
+using DAL.MongoDB.Models;
 
 namespace DAL.MongoDB.Repositories
 {
     public class UserRepository : RepositoryBase
     {
-        public UserRepository(IAppSettings appSettings) : base(appSettings) {
+        // TODO: Return classes from Common
+        public UserRepository() : base() {
         }
 
-        public async Task<User> GetById (ObjectId id) {
+        public async Task<DbUser> GetById (ObjectId id) {
             using (var ctx = GetContext()) {
-                var user = ctx.Users.Find(x => x.Id == id);
-                return user.ToDto();
+                var user = await ctx.Users.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
+                return user; //.ToDto();
             };
         }
 
-        public async Task<IEnumerable<User>> GetAll() {
+        public async Task<IEnumerable<DbUser>> GetAll() {
             using (var ctx = GetContext()) {
                 var users = await ctx.Users.AsQueryable().ToListAsync();
-                return users.ToDto();
+                return users; //.ToDto();
             }
         }
 
-        public async Task Add(User user) {
-            var dbUser = user.ToDto();
+        public async Task Add(DbUser user) {
+            // var dbUser = user.ToDto();
             using (var ctx = GetContext()) {
-                await ctx.Users.InsertOneAsync(dbUser);
+                await ctx.Users.InsertOneAsync(user);
             }
         }
 
-        public async Task Update(User user) {
+        public async Task Update(DbUser user) {
             using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.Find(x => x.Id == user.Id);
+                var oldUser = ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                 if (oldUser != null) {
                     var filter = Builders<DbUser>.Filter.Eq(x => x.Id, user.Id);
                     var update = Builders<DbUser>.Update
                         .Set(x => x.Email, user.Email)
                         .Set(x => x.FirstName, user.FirstName)
-                        .Set(x => x.LastName, user.LastName)
-                        .Set(x => x.PhoneNumbers, user.PhoneNumbers);
+                        .Set(x => x.LastName, user.LastName);
 
                     await ctx.Users.UpdateOneAsync(filter, update);
                 }
             }
         }
 
-        public async Task Obliterate (User user) {
+        public async Task Obliterate (DbUser user) {
             using (var ctx = GetContext()) {
                 var oldUser = ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefault();
                 if (oldUser != null) {
-                    var filter = Builders<User>.Filter.Eq(x => x.Id, user.Id);
+                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, user.Id);
                     await ctx.Users.DeleteOneAsync(filter);
-                } //
+                }
             }
         }
     }

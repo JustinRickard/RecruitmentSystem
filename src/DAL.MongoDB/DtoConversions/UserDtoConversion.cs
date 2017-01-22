@@ -1,8 +1,9 @@
-using DAL.MongoDB.Interfaces.Models;
-using Core.Dtos;
+using DAL.MongoDB.Models;
+using Common.Dto;
 
 namespace DAL.MongoDB.DtoConversions
 {
+    /*
     public static class UserDtoConversion
     {
         public static Core.Dtos.User ToDto(this DbUser dbUser) 
@@ -12,4 +13,5 @@ namespace DAL.MongoDB.DtoConversions
             };
         }
     }
+    */
 }

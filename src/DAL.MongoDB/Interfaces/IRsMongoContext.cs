@@ -1,5 +1,5 @@
 using MongoDB.Driver;
-using DAL.MongoDB.Interfaces.Models;
+using DAL.MongoDB.Models;
 
 namespace DAL.MongoDB.Interfaces
 {

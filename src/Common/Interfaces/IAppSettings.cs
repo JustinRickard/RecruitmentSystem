@@ -1,4 +1,4 @@
-namespace Core.Interfaces
+namespace Common.Interfaces
 {
     public interface IAppSettings
     {

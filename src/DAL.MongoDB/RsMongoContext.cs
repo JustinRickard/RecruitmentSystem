@@ -2,11 +2,12 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core;
 using MongoDB.Driver.Linq;
-using Core.Dtos;
-using System;
-using Core.Interfaces;
+using Common.Dto;
+using Common.Interfaces;
+using Common.Classes;
 using DAL.MongoDB.Interfaces;
-using DAL.MongoDB.Interfaces.Models;
+using DAL.MongoDB.Models;
+using System;
 
 namespace DAL.MongoDB
 {
@@ -14,7 +15,10 @@ namespace DAL.MongoDB
     {
         public IMongoDatabase Database;
 
-        public RsMongoContext(IAppSettings appSettings) {
+        public RsMongoContext() {
+
+            // TODO: Get app settings here
+            IAppSettings appSettings = new AppSettings();
             var client = new MongoClient(appSettings.ConnectionString);
             this.Database = client.GetDatabase(appSettings.DatabaseName);
         }

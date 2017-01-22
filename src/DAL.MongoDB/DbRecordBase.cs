@@ -1,7 +1,7 @@
 using System;
 using MongoDB.Bson;
 
-namespace DAL.MongoDB.Interfaces
+namespace DAL.MongoDB
 {
     public abstract class DbRecordBase
     {
