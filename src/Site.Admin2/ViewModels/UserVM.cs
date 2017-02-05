@@ -2,6 +2,7 @@ namespace Site.Admin2.ViewModels
 {
     public class UserVM
     {
+        public UserVM(){}
         public UserVM(
             string id,
             string client,

@@ -17,7 +17,10 @@ namespace DAL.MongoDB.DtoConversions
         public static DbUser ToDb(this User user) 
         {
             return new DbUser {
-                FirstName = user.FirstName
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Username = user.Username
             };
         }
 

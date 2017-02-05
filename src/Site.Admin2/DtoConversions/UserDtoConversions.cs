@@ -21,5 +21,15 @@ namespace Site.Admin2.DtoConversions
         public static IEnumerable<UserVM> ToViewModel(this IEnumerable<User> users) {
             return users.Select(user => user.ToViewModel());
         }
+
+        public static User ToDto(this UserVM user) {
+            return new User(
+                user.Client, 
+                user.FirstName, 
+                user.LastName,
+                user.Email, 
+                user.Username
+            );
+        }
     }
 }

@@ -34,5 +34,18 @@ namespace Site.Admin2.Controllers
             };
             return View(viewModel);
         }
+
+        public IActionResult Create() 
+        {
+            return View(new UserVM());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(UserVM user) {
+            var userDto = user.ToDto();
+            await userService.Add(userDto);
+
+            return RedirectToAction("Index"); // TODO: Show user page
+        }
     }
 }

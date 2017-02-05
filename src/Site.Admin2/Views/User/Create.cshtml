@@ -1,0 +1,29 @@
+@model Site.Admin2.ViewModels.UserVM
+
+<h1>Create user</h1>
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Client, "Client:")
+        @Html.TextBoxFor(x => x.Client)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, "First name:")
+        @Html.TextBoxFor(x => x.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, "Last name:")
+        @Html.TextBoxFor(x => x.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, "Email:")
+        @Html.TextBoxFor(x => x.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, "Username:")
+        @Html.TextBoxFor(x => x.Username)
+    </div>
+
+    <input type="submit" value="Create">
+}

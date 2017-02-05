@@ -4,6 +4,8 @@
 
 <h1>Users</h1>
 
+@Html.ActionLink("Create","Create","User")
+
 <div>
 @foreach(var user in Model.Users) {
     <div>@user.Id</div>
@@ -14,3 +16,4 @@
     <div>@user.LastName</div>
 }
 </div>
+
