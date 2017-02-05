@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using Common.Interfaces;
 using Common.Interfaces.Repositories;
 using Common.Dto;
+using Common.Classes;
 using DAL.MongoDB.DtoConversions;
 using DAL.MongoDB;
 using DAL.MongoDB.Models;
@@ -19,7 +21,7 @@ namespace DAL.MongoDB.Repositories
     public class UserRepository : RepositoryBase, IUserRepository
     {
         // TODO: Return classes from Common
-        public UserRepository(IAppSettings appSettings) : base(appSettings) {
+        public UserRepository(IOptions<AppSettings> appSettings) : base(appSettings) {
 
         }
 
@@ -37,10 +39,10 @@ namespace DAL.MongoDB.Repositories
             */
         }
 
-        public async Task<IEnumerable<DbUser>> GetAll() {
+        public async Task<IEnumerable<User>> GetAll() {
             using (var ctx = GetContext()) {
                 var users = await ctx.Users.AsQueryable().ToListAsync();
-                return users; //.ToDto();
+                return users.ToDto();
             }
         }
 

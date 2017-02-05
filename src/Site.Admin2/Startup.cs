@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Common.Classes;
+using Common.Interfaces.Repositories;
+using Common.Interfaces.Services;
+using Common.Services;
+using DAL.MongoDB.Repositories;
 
 namespace Site.Admin2
 {
@@ -34,6 +38,9 @@ namespace Site.Admin2
             // Add framework services.
             services.AddMvc();
 
+            // Dependency bindings
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             
         }
 

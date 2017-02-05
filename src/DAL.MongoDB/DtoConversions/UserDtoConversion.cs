@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using DAL.MongoDB.Models;
 using Common.Dto;
 
@@ -17,6 +19,14 @@ namespace DAL.MongoDB.DtoConversions
             return new DbUser {
                 FirstName = user.FirstName
             };
+        }
+
+        public static IEnumerable<User> ToDto(this IEnumerable<DbUser> users) {
+            return users.Select(user => user.ToDto());
+        }
+
+        public static IEnumerable<DbUser> ToDto(this IEnumerable<User> users) {
+            return users.Select(user => user.ToDb());
         }
     }
 }

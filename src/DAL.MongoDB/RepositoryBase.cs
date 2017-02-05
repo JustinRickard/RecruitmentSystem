@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core;
@@ -17,8 +18,8 @@ namespace DAL.MongoDB
     {
         protected internal IAppSettings appSettings { get; set; }
 
-        public RepositoryBase(IAppSettings appSettings) {
-            this.appSettings = appSettings;
+        public RepositoryBase(IOptions<AppSettings> appSettings) {
+            this.appSettings = appSettings.Value;
         }
 
         protected internal RsMongoContext GetContext() {

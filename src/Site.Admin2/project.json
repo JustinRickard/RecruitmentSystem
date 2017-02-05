@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "Common": "1.0.0-*",
+    "DAL.MongoDB": "1.0.0-*",
     "Microsoft.NETCore.App": {
       "version": "1.1.0",
       "type": "platform"

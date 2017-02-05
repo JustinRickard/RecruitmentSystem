@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Common.Interfaces.Repositories;
+using Common.Interfaces.Services;
 using Common.Dto;
 
 namespace Common.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         IUserRepository userRepository;
 
@@ -18,6 +20,10 @@ namespace Common.Services
         public Task<User> GetById(string id) 
         {
             return userRepository.GetById(id);
+        }
+
+        public Task<IEnumerable<User>> GetAll() {
+            return userRepository.GetAll();
         }
 
         public Task Add(User user) 
