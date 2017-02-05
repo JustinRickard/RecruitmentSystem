@@ -15,18 +15,15 @@ namespace DAL.MongoDB
     {
         public IMongoDatabase Database;
 
-        public RsMongoContext() {
-
-            // TODO: Get app settings here
-            IAppSettings appSettings = new AppSettings();
+        public RsMongoContext(IAppSettings appSettings) 
+        {
             var client = new MongoClient(appSettings.ConnectionString);
             this.Database = client.GetDatabase(appSettings.DatabaseName);
         }
 
-        public IMongoCollection<DbUser> Users => Database.GetCollection<DbUser>("users");
+        public IMongoCollection<DbUser> Users => Database.GetCollection<DbUser>(Constants.Collections.Users);
 
         public void Dispose() {
-            // TODO: Check if we need to close connection;
             this.Database = null;
         }
     }

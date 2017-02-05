@@ -7,23 +7,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Interfaces;
+using Common.Interfaces.Repositories;
 using Common.Dto;
+using DAL.MongoDB.DtoConversions;
 using DAL.MongoDB;
 using DAL.MongoDB.Models;
+using DAL.MongoDB.Interfaces;
 
 namespace DAL.MongoDB.Repositories
 {
-    public class UserRepository : RepositoryBase
+    public class UserRepository : RepositoryBase, IUserRepository
     {
         // TODO: Return classes from Common
-        public UserRepository() : base() {
+        public UserRepository(IAppSettings appSettings) : base(appSettings) {
+
         }
 
-        public async Task<DbUser> GetById (ObjectId id) {
+        public async Task<User> GetById (string id) {
+            using (var ctx = GetContext()) {
+                var dbUser = (DbUser)await GetByIdGeneric(id, GetCollection((IMongoCollection<IDbRecord>)ctx.Users));
+                return dbUser.ToDto();
+            }
+
+            /*
             using (var ctx = GetContext()) {
                 var user = await ctx.Users.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
                 return user; //.ToDto();
             };
+            */
         }
 
         public async Task<IEnumerable<DbUser>> GetAll() {
@@ -33,10 +44,15 @@ namespace DAL.MongoDB.Repositories
             }
         }
 
-        public async Task Add(DbUser user) {
-            // var dbUser = user.ToDto();
+        public async Task Add(User user) {
+            /*
             using (var ctx = GetContext()) {
                 await ctx.Users.InsertOneAsync(user);
+            }
+            */
+            var dbUser = user.ToDb();
+            using (var ctx = GetContext()) {
+                await AddGeneric(dbUser, GetCollection((IMongoCollection<IDbRecord>)ctx.Users));
             }
         }
 
