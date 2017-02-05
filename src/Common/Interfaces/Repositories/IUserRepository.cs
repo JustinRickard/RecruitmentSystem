@@ -11,5 +11,11 @@ namespace Common.Interfaces.Repositories
          Task<IEnumerable<User>> GetAll();
 
          Task Add (User user);
+
+         Task<User> Update (User user);
+
+         Task Delete(string id);
+
+         Task Obliterate(string id);
     }
 }

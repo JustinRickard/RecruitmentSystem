@@ -6,14 +6,19 @@
 
 @Html.ActionLink("Create","Create","User")
 
-<div>
+<div class="container">
 @foreach(var user in Model.Users) {
-    <div>@user.Id</div>
-    <div>@user.Client</div>
-    <div>@user.Username</div>
-    <div>@user.Email</div>
-    <div>@user.FirstName</div>
-    <div>@user.LastName</div>
+    
+    <div class="row">
+        <div class="col-md-1">@user.Client</div>
+        <div class="col-md-1">@user.Username</div>
+        <div class="col-md-2">@user.Email</div>
+        <div class="col-md-1">@user.FirstName</div>
+        <div class="col-md-1">@user.LastName</div>
+        <div class="col-md-1">@Html.ActionLink("Details","Details","User", new { id=@user.Id })</div>
+        <div class="col-md-1">@Html.ActionLink("Edit","Edit","User", new { id=@user.Id })</div>
+        <div class="col-md-1">@Html.ActionLink("Delete","Delete","User", new { id=@user.Id })</div>
+    </div>
 }
 </div>
 

@@ -12,5 +12,11 @@ namespace Common.Interfaces.Services
 
          Task Add(User user);
 
+         Task<User> Update(User user);
+
+         Task Delete(string id);
+
+         Task Obliterate(string id);
+
     }
 }

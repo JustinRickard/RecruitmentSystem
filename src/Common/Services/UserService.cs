@@ -31,5 +31,18 @@ namespace Common.Services
             return userRepository.Add(user);
         }
 
+        public Task<User> Update(User user) 
+        {
+            return userRepository.Update(user);
+        }
+
+        public Task Delete(string id) {
+            return userRepository.Delete(id);
+        }
+
+        public Task Obliterate(string id) {
+            return userRepository.Obliterate(id);
+        }
+
     }
 }

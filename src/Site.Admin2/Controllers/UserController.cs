@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Common.Dto;
 using Common.Classes;
 using Common.Interfaces;
 using Common.Interfaces.Services;
@@ -46,6 +47,32 @@ namespace Site.Admin2.Controllers
             await userService.Add(userDto);
 
             return RedirectToAction("Index"); // TODO: Show user page
+        }
+
+        public async Task<IActionResult> Details(string id) 
+        {
+            var user = await userService.GetById(id);
+            return View(user.ToViewModel());
+        }
+
+        public async Task<IActionResult> Edit(string id) 
+        {
+            var user = await userService.GetById(id);
+            return View(user);
+        }
+
+        [HttpPost] 
+        public async Task<IActionResult> Edit(User user) {
+            var dbUser = await userService.Update(user);
+
+            return RedirectToAction("Details", dbUser.ToViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id) 
+        {
+            await userService.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

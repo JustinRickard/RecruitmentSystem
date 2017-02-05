@@ -10,7 +10,11 @@ namespace DAL.MongoDB.DtoConversions
         public static User ToDto(this DbUser dbUser) 
         {
             return new User {
-                FirstName = dbUser.FirstName
+                Id = dbUser.Id.ToString(),
+                Username = dbUser.Username,
+                Email = dbUser.Email,
+                FirstName = dbUser.FirstName,
+                LastName = dbUser.LastName
             };
         }
 

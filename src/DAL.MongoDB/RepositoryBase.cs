@@ -25,5 +25,17 @@ namespace DAL.MongoDB
         protected internal RsMongoContext GetContext() {
             return new RsMongoContext(appSettings);
         }
+
+        protected internal void UpdateLastModified(IDbRecord record) 
+        {
+            record.LastModified = DateTime.Now;
+        }
+
+        protected internal void UpdateDateCreated(IDbRecord record) 
+        {
+            var now = DateTime.Now;
+            record.DateCreated = now;
+            record.LastModified = now;
+        }
     }
 }

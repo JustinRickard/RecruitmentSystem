@@ -1,0 +1,27 @@
+@model Site.Admin2.ViewModels.UserVM
+
+<h1>User details</h1>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Client, "Client:")
+    @Html.Label(Model.Client)
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.FirstName, "First name:")
+    @Html.Label(Model.FirstName)
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.LastName, "Last name:")
+    @Html.Label(Model.LastName)
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Email, "Email:")
+    @Html.Label(Model.Email)
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Username, "Username:")
+    @Html.Label(Model.Username)
+</div>
+
+@Html.ActionLink("Back", "Details", "User")
+<input type="submit" value="Edit" class="btn-primary">
