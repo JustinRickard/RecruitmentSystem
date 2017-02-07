@@ -58,20 +58,35 @@ namespace Site.Admin2.Controllers
         public async Task<IActionResult> Edit(string id) 
         {
             var user = await userService.GetById(id);
-            return View(user);
+            var userVM = user.ToViewModel();
+            return View(userVM);
         }
 
         [HttpPost] 
-        public async Task<IActionResult> Edit(User user) {
-            var dbUser = await userService.Update(user);
+        public async Task<IActionResult> Edit(UserVM user) {
+            var userDto = user.ToDto();
+            var dbUser = await userService.Update(userDto);
 
             return RedirectToAction("Details", dbUser.ToViewModel());
         }
 
+        public async Task<IActionResult> Delete(string id) {
+            var user = await userService.GetById(id);
+            return View(user.ToViewModel());
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Delete(string id) 
+        public async Task<IActionResult> Delete(UserVM user) 
         {
-            await userService.Delete(id);
+            var userDto = await userService.GetById(user.Id);
+            if (userDto != null)
+            {
+                await userService.Delete(user.Id);
+                ViewBag.Message = string.Format("{0} has been deleted.", user.Username);
+                
+            } else {
+                ViewBag.Message = string.Format("User could not be found with the ID specified: {0}", user.Id);
+            }
             return RedirectToAction("Index");
         }
     }

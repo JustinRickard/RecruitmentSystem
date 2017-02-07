@@ -33,7 +33,10 @@ namespace DAL.MongoDB.Repositories
 
         public async Task<IEnumerable<User>> GetAll() {
             using (var ctx = GetContext()) {
-                var users = await ctx.Users.AsQueryable().ToListAsync();
+                var users = await ctx.Users.AsQueryable()
+                    .Where(x => x.Deleted == false)
+                    .ToListAsync();
+
                 return users.ToDto();
             }
         }

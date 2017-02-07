@@ -14,7 +14,8 @@ namespace Site.Admin2.DtoConversions
                 user.Username, 
                 user.Email, 
                 user.FirstName, 
-                user.LastName
+                user.LastName,
+                user.LastModified
             );
         }
 
@@ -24,11 +25,13 @@ namespace Site.Admin2.DtoConversions
 
         public static User ToDto(this UserVM user) {
             return new User(
+                user.Id,
                 user.Client, 
                 user.FirstName, 
                 user.LastName,
                 user.Email, 
-                user.Username
+                user.Username,
+                user.LastModified
             );
         }
     }

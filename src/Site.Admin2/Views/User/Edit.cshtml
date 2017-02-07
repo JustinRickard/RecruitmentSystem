@@ -1,0 +1,51 @@
+@model Site.Admin2.ViewModels.UserVM
+
+<div id="page-outer-container" class="col-md-12">
+
+    <div class="col-md-3"></div>
+    <div id="page-inner-container" class="col-md-6">
+
+    <h1>Edit user</h1>
+
+    @using (Html.BeginForm("Edit", "User", FormMethod.Post))
+    {
+    @Html.HiddenFor(x => x.Id)
+    <hr>
+
+    <h4>Client</h4>
+    @Html.TextBoxFor(x => x.Client)
+
+    <hr>
+
+    <h4>Username</h4>
+    @Html.TextBoxFor(x => x.Username)
+
+    <hr>
+
+    <h4>Email</h4>
+    @Html.TextBoxFor(x => x.Email)
+
+    <hr>
+
+    <h4>First name</h4>
+    @Html.TextBoxFor(x => x.FirstName)
+
+    <hr>
+
+    <h4>Last name</h4>
+    @Html.TextBoxFor(x => x.LastName)
+
+    <hr>
+
+    <div id="buttons-container" class="col-md-12">
+        @Html.ActionLink("Back", "Index", "User", new{}, new { @class = "btn"})
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    <hr>
+    
+    }
+    </div>
+    <div class="col-md-3"></div>
+</div>
+

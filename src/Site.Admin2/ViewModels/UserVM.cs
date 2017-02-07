@@ -1,3 +1,5 @@
+using System;
+
 namespace Site.Admin2.ViewModels
 {
     public class UserVM
@@ -9,7 +11,8 @@ namespace Site.Admin2.ViewModels
             string username,
             string email,
             string firstName,
-            string lastName
+            string lastName,
+            DateTimeOffset lastModified
         ) 
         {
             Id = id;
@@ -18,6 +21,7 @@ namespace Site.Admin2.ViewModels
             Email = email;
             FirstName = firstName;
             LastName = lastName;
+            LastModified = lastModified;
         }
 
         public string Id { get; set; }
@@ -31,5 +35,7 @@ namespace Site.Admin2.ViewModels
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public DateTimeOffset LastModified { get; set; }
     }
 }

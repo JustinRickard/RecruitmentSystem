@@ -14,7 +14,8 @@ namespace DAL.MongoDB.DtoConversions
                 Username = dbUser.Username,
                 Email = dbUser.Email,
                 FirstName = dbUser.FirstName,
-                LastName = dbUser.LastName
+                LastName = dbUser.LastName,
+                LastModified = dbUser.LastModified
             };
         }
 
