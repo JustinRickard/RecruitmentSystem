@@ -1,27 +1,43 @@
 @model Site.Admin2.ViewModels.UserVM
 
+<div id="page-outer-container" class="col-md-12">
+
+<div class="col-md-3"></div>
+<div id="page-inner-container" class="col-md-6">
 <h1>User details</h1>
+<hr>
 
-<div class="form-group">
-    @Html.LabelFor(model => model.Client, "Client:")
-    @Html.Label(Model.Client)
-</div>
-<div class="form-group">
-    @Html.LabelFor(model => model.FirstName, "First name:")
-    @Html.Label(Model.FirstName)
-</div>
-<div class="form-group">
-    @Html.LabelFor(model => model.LastName, "Last name:")
-    @Html.Label(Model.LastName)
-</div>
-<div class="form-group">
-    @Html.LabelFor(model => model.Email, "Email:")
-    @Html.Label(Model.Email)
-</div>
-<div class="form-group">
-    @Html.LabelFor(model => model.Username, "Username:")
-    @Html.Label(Model.Username)
+<h4>Client</h3>
+<p>@Model.Client</p>
+
+<hr>
+
+<h4>Username</h4>
+<p>@Model.Username</p>
+
+<hr>
+
+<h4>Email</h4>
+<p>@Model.Email</p>
+
+<hr>
+
+<h4>First name</h4>
+<p>@Model.FirstName</p>
+
+<hr>
+
+<h4>Last name</h4>
+<p>@Model.LastName</p>
+
+<hr>
+
+<div id="buttons-container" class="col-md-12">
+    @Html.ActionLink("Back", "Index", "User", new{}, new { @class = "btn"})
+    @Html.ActionLink("Edit", "Edit", "User", new{}, new { @class = "btn btn-primary"})
 </div>
 
-@Html.ActionLink("Back", "Details", "User")
-<input type="submit" value="Edit" class="btn-primary">
+<hr>
+</div>
+<div class="col-md-3"></div>
+</div>
