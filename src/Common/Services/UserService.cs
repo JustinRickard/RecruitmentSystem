@@ -22,6 +22,11 @@ namespace Common.Services
             return userRepository.GetById(id);
         }
 
+        public Task<User> GetByLoginCredentials(LoginCredentials credentials)
+        {
+            return userRepository.GetByLoginCredentials(credentials);
+        }
+
         public Task<IEnumerable<User>> GetAll() {
             return userRepository.GetAll();
         }

@@ -15,13 +15,19 @@ using DAL.MongoDB.DtoConversions;
 using DAL.MongoDB;
 using DAL.MongoDB.Models;
 using DAL.MongoDB.Interfaces;
+using Common.Interfaces.Helpers;
 
 namespace DAL.MongoDB.Repositories
 {
     public class UserRepository : RepositoryBase, IUserRepository
     {
-        public UserRepository(IOptions<AppSettings> appSettings) : base(appSettings) {
+        private IPasswordHelper passwordHelper;
 
+        public UserRepository(
+            IOptions<AppSettings> appSettings,
+            IPasswordHelper passwordHelper
+            ) : base(appSettings) {
+            this.passwordHelper = passwordHelper;
         }
 
         public async Task<User> GetById (string id) {
@@ -29,6 +35,18 @@ namespace DAL.MongoDB.Repositories
                 var user = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
                 return user.ToDto();
             };
+        }
+
+        public async Task<User> GetByLoginCredentials (LoginCredentials credentials) {
+            using (var ctx = GetContext()) {
+                var user = await ctx.Users.AsQueryable()
+                    .Where(x => x.Username == credentials.Username)
+                    .SingleOrDefaultAsync();
+
+                return user != null && passwordHelper.IsValid(credentials.Password, user.Password)
+                    ? user.ToDto()
+                    : null;             
+            }
         }
 
         public async Task<IEnumerable<User>> GetAll() {

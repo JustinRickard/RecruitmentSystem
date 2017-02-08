@@ -8,6 +8,8 @@ namespace Common.Interfaces.Repositories
     {
          Task<User> GetById (string id);
 
+         Task<User> GetByLoginCredentials (LoginCredentials credentials);
+
          Task<IEnumerable<User>> GetAll();
 
          Task Add (User user);

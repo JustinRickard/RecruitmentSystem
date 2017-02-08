@@ -12,6 +12,7 @@ using Common.Interfaces.Repositories;
 using Common.Interfaces.Services;
 using Common.Services;
 using DAL.MongoDB.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace Site.Admin2
 {
@@ -61,6 +62,16 @@ namespace Site.Admin2
             }
 
             app.UseStaticFiles();
+
+                        // Configure cookie middleware
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "MyCookieMiddlewareInstance",
+                LoginPath = new PathString("/Account/Login/"),
+                AccessDeniedPath = new PathString("/Account/Forbidden/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {

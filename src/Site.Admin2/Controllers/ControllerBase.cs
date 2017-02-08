@@ -7,8 +7,11 @@ using Microsoft.Extensions.Options;
 using Common.Classes;
 
 namespace Site.Admin2.Controllers
-{    public class ControllerBase : Controller
+{    
+    public class ControllerBase : Controller
     {
-        
+        internal protected void ShowMessage(string message) {
+            ViewBag.Message = message;
+        }
     }
 }
