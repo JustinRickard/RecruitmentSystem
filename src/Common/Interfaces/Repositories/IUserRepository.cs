@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.Classes;
 using Common.Dto;
 
 namespace Common.Interfaces.Repositories
 {
     public interface IUserRepository
     {
-         Task<User> GetById (string id);
+         Task<Maybe<User>> GetById (string id);
 
-         Task<User> GetByLoginCredentials (LoginCredentials credentials);
+         Task<Maybe<User>> GetByLoginCredentials (LoginCredentials credentials);
 
          Task<IEnumerable<User>> GetAll();
 
-         Task Add (User user);
+         Task<Maybe<User>> Add (User user);
 
-         Task<User> Update (User user);
+         Task<Maybe<User>> Update (User user);
 
          Task Delete(string id);
 

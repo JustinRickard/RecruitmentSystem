@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/<target-framework>/<project-name.dll>",
+            "program": "${workspaceRoot}/src/Site.Admin2/Site.Admin2/bin/Debug/netcoreapp1.1/Site.Admin2.dll",
             "args": [],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/Site.Admin2",
             "stopAtEntry": false,
             "externalConsole": false
         },
@@ -17,9 +17,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/<target-framework>/<project-name.dll>",
+            "program": "${workspaceRoot}/src/Site.Admin2/bin/Debug/netcoreapp1.1/Site.Admin2.dll",
             "args": [],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/src/Site.Admin2",
             "stopAtEntry": false,
             "launchBrowser": {
                 "enabled": true,
@@ -39,7 +39,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceRoot}/Views"
+                "/Views": "${workspaceRoot}/src/Site.Admin2/Views"
             }
         },
         {

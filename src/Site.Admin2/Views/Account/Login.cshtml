@@ -1,0 +1,27 @@
+@model Common.Dto.LoginCredentials
+
+<div id="page-outer-container" class="col-md-12">
+
+    <div class="col-md-3"></div>
+    <div id="page-inner-container" class="col-md-6">
+
+    <h1>Log in</h1>
+
+    <h4>Username</h4>
+    @Html.TextBoxFor(x => x.Username)
+
+    <hr>
+
+    <h4>Password</h4>
+    @Html.TextBoxFor(x => x.Password)
+
+    <hr>
+
+    <div id="buttons-container" class="col-md-12">
+        @Html.ActionLink("Log in", "Login", "Account", new{}, new { @class = "btn btn-primary"})
+    </div>
+
+    <hr>
+    </div>
+    <div class="col-md-3"></div>
+</div>

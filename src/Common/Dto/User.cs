@@ -1,8 +1,10 @@
 using System;
+using Common.Classes;
+using Common.Enums;
 
 namespace Common.Dto
 {
-    public class User
+    public class User : DbRecordBase
     {
         public User() {}
 
@@ -13,7 +15,9 @@ namespace Common.Dto
             string lastName,
             string email,
             string username,
-            DateTimeOffset lastModified
+            DateTimeOffset dateCreated,
+            DateTimeOffset lastModified,
+            bool deleted
         ) 
         {
             Id = id;
@@ -22,15 +26,16 @@ namespace Common.Dto
             LastName = lastName;
             Email = email;
             Username = username;
+            DateCreated = dateCreated;
             LastModified = lastModified;
+            Deleted = deleted;
         }
 
-        public string Id { get; set; }
         public string Client { get; set; }
         public string Username  { get; set; }
         public string FirstName { get; set; }
         public string LastName  { get; set; }
         public string Email     { get; set; }
-        public DateTimeOffset LastModified {get; set;}
+        public Gender Gender { get; set; }
     }
 }

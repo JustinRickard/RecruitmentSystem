@@ -16,6 +16,8 @@ using DAL.MongoDB;
 using DAL.MongoDB.Models;
 using DAL.MongoDB.Interfaces;
 using Common.Interfaces.Helpers;
+using Common.SearchFilters;
+using Common.ExtensionMethods;
 
 namespace DAL.MongoDB.Repositories
 {
@@ -30,22 +32,25 @@ namespace DAL.MongoDB.Repositories
             this.passwordHelper = passwordHelper;
         }
 
-        public async Task<User> GetById (string id) {
+        public async Task<Maybe<User>> GetById (string id) {
             using (var ctx = GetContext()) {
                 var user = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
-                return user.ToDto();
-            };
+
+                return user != null 
+                    ? new Maybe<User>(user.ToDto())
+                    : Maybe<User>.Fail;
+              };
         }
 
-        public async Task<User> GetByLoginCredentials (LoginCredentials credentials) {
+        public async Task<Maybe<User>> GetByLoginCredentials (LoginCredentials credentials) {
             using (var ctx = GetContext()) {
                 var user = await ctx.Users.AsQueryable()
                     .Where(x => x.Username == credentials.Username)
                     .SingleOrDefaultAsync();
 
                 return user != null && passwordHelper.IsValid(credentials.Password, user.Password)
-                    ? user.ToDto()
-                    : null;             
+                    ? new Maybe<User> (user.ToDto())
+                    : Maybe<User>.Fail;             
             }
         }
 
@@ -59,16 +64,22 @@ namespace DAL.MongoDB.Repositories
             }
         }
 
-        public async Task Add(User user) {
-            
+        public async Task<Maybe<User>> Add(User user) {
+            var dbUser = user.ToDb();
+            // Temporary until passwords can be set by user
+            dbUser.Password = "Password1"; // Ultra-secure password :)
+            SetInitialRecordValues(dbUser);
+
             using (var ctx = GetContext()) {
-                var dbUser = user.ToDb();
-                UpdateDateCreated(dbUser);
-                await ctx.Users.InsertOneAsync(dbUser);
+                 await ctx.Users.InsertOneAsync(dbUser);
+                 var newUser = ctx.Users.AsQueryable().Where(x => x.Username == user.Username).FirstOrDefault();
+                 return newUser != null
+                    ? new Maybe<User> (newUser.ToDto())
+                    : Maybe<User>.Fail;
             }
         }
 
-        public async Task<User> Update(User user) {
+        public async Task<Maybe<User>> Update(User user) {
             using (var ctx =  GetContext()) {
                 var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
                 if (oldUser != null) {
@@ -82,7 +93,10 @@ namespace DAL.MongoDB.Repositories
                     await ctx.Users.UpdateOneAsync(filter, update);
 
                     var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
-                    return newUser.ToDto();
+                    
+                    return newUser != null 
+                        ? new Maybe<User>(newUser.ToDto())
+                        : Maybe<User>.Fail;
                 }
                 throw new Exception(string.Format("User not found with id {0}", user.Id)); // TODO: Handle exceptions
             }
@@ -108,6 +122,36 @@ namespace DAL.MongoDB.Repositories
                     await ctx.Users.DeleteOneAsync(filter);
                 }
             }
+        }
+
+        private IMongoQueryable<DbUser> UserFilter (RsMongoContext ctx, UserFilter filter) {
+            var query = ctx.Users.AsQueryable();
+
+            if (filter.ClientId.NotEmpty()) {
+                query = query.Where(x => x.ClientId == filter.ClientId);
+            }
+
+            if (filter.FirstName.NotEmpty()) {
+                query = query.Where(x => x.FirstName.CaseInsensitiveEquals(filter.FirstName));
+            }
+
+            if (filter.LastName.NotEmpty()) {
+                query = query.Where(x => x.LastName.CaseInsensitiveEquals(filter.LastName));
+            }
+
+            if (filter.Email.NotEmpty()) {
+                query = query.Where(x => x.Email.CaseInsensitiveEquals(filter.Email));
+            }
+
+            if (filter.Username.NotEmpty()) {
+                query = query.Where(x => x.Username.CaseInsensitiveEquals(filter.Username));
+            }
+
+            if (filter.Gender.HasValue) {
+                query = query.Where(x => x.Gender == filter.Gender);
+            }
+
+            return query;
         }
     }
 }

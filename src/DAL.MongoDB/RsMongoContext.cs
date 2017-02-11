@@ -21,6 +21,8 @@ namespace DAL.MongoDB
             this.Database = client.GetDatabase(appSettings.DatabaseName);
         }
 
+        public IMongoCollection<DbAudit> AuditLogs => Database.GetCollection<DbAudit>(Constants.Collections.AuditLogs);
+
         public IMongoCollection<DbUser> Users => Database.GetCollection<DbUser>(Constants.Collections.Users);
 
         public void Dispose() {

@@ -10,9 +10,11 @@ using Microsoft.Extensions.Logging;
 using Common.Classes;
 using Common.Interfaces.Repositories;
 using Common.Interfaces.Services;
+using Common.Interfaces.Helpers;
 using Common.Services;
 using DAL.MongoDB.Repositories;
 using Microsoft.AspNetCore.Http;
+using Common.Helpers;
 
 namespace Site.Admin2
 {
@@ -42,7 +44,7 @@ namespace Site.Admin2
             // Dependency bindings
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
-            
+            services.AddScoped<IPasswordHelper, PasswordHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

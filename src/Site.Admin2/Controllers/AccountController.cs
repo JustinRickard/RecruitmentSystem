@@ -16,15 +16,17 @@ namespace Site.Admin2.Controllers
         }
 
         public IActionResult Login () {
-            return View();
+            return View(new LoginCredentials());
         }
-
+        
         [HttpPost]
         public IActionResult Login(LoginCredentials credentials) {
             var user = userService.GetByLoginCredentials(credentials);
             if (user!= null) {
-                // cookieAuthenticationHelper.Authenticate
+                return RedirectToAction("Index", "User"); // TODO: Log the user in
             }
+            return RedirectToAction("Index");
         }
+        
     }
 }

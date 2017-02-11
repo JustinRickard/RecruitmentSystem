@@ -28,14 +28,23 @@ namespace DAL.MongoDB
 
         protected internal void UpdateLastModified(IDbRecord record) 
         {
-            record.LastModified = DateTime.Now;
+            record.LastModified = Now;
         }
 
         protected internal void UpdateDateCreated(IDbRecord record) 
         {
-            var now = DateTime.Now;
+            var now = Now;
             record.DateCreated = now;
             record.LastModified = now;
         }
+
+        protected internal void SetInitialRecordValues(IDbRecord record) {
+            var now = Now;
+            record.DateCreated = now;
+            record.LastModified = now;
+            record.Deleted = false;
+        }
+
+        private DateTimeOffset Now => DateTimeOffset.Now;
     }
 }

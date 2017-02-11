@@ -19,12 +19,12 @@ namespace Common.Services
 
         public Task<User> GetById(string id) 
         {
-            return userRepository.GetById(id);
+            var user = userRepository.GetById(id);
         }
 
         public Task<User> GetByLoginCredentials(LoginCredentials credentials)
         {
-            return userRepository.GetByLoginCredentials(credentials);
+            var user = userRepository.GetByLoginCredentials(credentials);
         }
 
         public Task<IEnumerable<User>> GetAll() {
@@ -38,7 +38,7 @@ namespace Common.Services
 
         public Task<User> Update(User user) 
         {
-            return userRepository.Update(user);
+            var newUser = userRepository.Update(user);
         }
 
         public Task Delete(string id) {
