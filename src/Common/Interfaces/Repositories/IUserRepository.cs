@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Classes;
 using Common.Dto;
+using Common.SearchFilters;
 
 namespace Common.Interfaces.Repositories
 {
@@ -14,6 +15,8 @@ namespace Common.Interfaces.Repositories
          Task<Maybe<User>> GetByLoginCredentials (LoginCredentials credentials);
 
          Task<IEnumerable<User>> GetAll();
+
+         Task<IEnumerable<User>> Get(UserFilter filter);
 
          Task<Maybe<User>> Add (User user);
 

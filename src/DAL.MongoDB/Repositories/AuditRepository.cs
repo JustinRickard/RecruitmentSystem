@@ -6,6 +6,7 @@ using Common.Dto;
 using Common.Enums;
 using Common.Interfaces.Repositories;
 using Common.SearchFilters;
+using DAL.MongoDB.DtoConversions;
 using DAL.MongoDB.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -31,14 +32,14 @@ namespace DAL.MongoDB.Repositories
         public async Task<IEnumerable<Audit>> Get(AuditFilter filter) {
             using (var ctx = GetContext()) {
 
-                var auditLogs = await AuditFilter(ctx, filter)
+                var auditLogs = await Filter(ctx, filter)
                     .ToListAsync();
 
                 return auditLogs.ToDto();
             }
         }
 
-        private IMongoQueryable<DbAudit> AuditFilter (RsMongoContext ctx, AuditFilter filter) {
+        private IMongoQueryable<DbAudit> Filter (RsMongoContext ctx, AuditFilter filter) {
             var query = ctx.AuditLogs.AsQueryable();
 
             if (filter.From.HasValue) {
