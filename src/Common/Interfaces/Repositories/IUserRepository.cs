@@ -9,6 +9,8 @@ namespace Common.Interfaces.Repositories
     {
          Task<Maybe<User>> GetById (string id);
 
+         Task<Maybe<User>> GetByUsername(string username);
+
          Task<Maybe<User>> GetByLoginCredentials (LoginCredentials credentials);
 
          Task<IEnumerable<User>> GetAll();

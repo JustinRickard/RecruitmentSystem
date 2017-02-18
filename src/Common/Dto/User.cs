@@ -1,6 +1,7 @@
 using System;
 using Common.Classes;
 using Common.Enums;
+using Common.ExtensionMethods;
 
 namespace Common.Dto
 {
@@ -36,6 +37,11 @@ namespace Common.Dto
         public string FirstName { get; set; }
         public string LastName  { get; set; }
         public string Email     { get; set; }
-        public Gender Gender { get; set; }
+
+        public bool IsValid =>
+            FirstName.NotEmpty() &&
+            LastName.NotEmpty() &&
+            Email.NotEmpty() &&
+            Username.NotEmpty();
     }
 }

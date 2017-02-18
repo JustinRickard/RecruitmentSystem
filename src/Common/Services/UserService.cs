@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Common.Interfaces.Repositories;
 using Common.Interfaces.Services;
 using Common.Dto;
+using Common.Classes;
+using Common.Enums;
 
 namespace Common.Services
 {
@@ -17,36 +19,60 @@ namespace Common.Services
             this.userRepository = userRepository;
         }
 
-        public Task<User> GetById(string id) 
+        public async Task<Result<User>> GetById(string id) 
         {
-            var user = userRepository.GetById(id);
+            var user = await userRepository.GetById(id);
+            return ReturnMaybeUser(user);
         }
 
-        public Task<User> GetByLoginCredentials(LoginCredentials credentials)
+        public async Task<Result<User>> GetByLoginCredentials(LoginCredentials credentials)
         {
-            var user = userRepository.GetByLoginCredentials(credentials);
+            var user = await userRepository.GetByLoginCredentials(credentials);
+            return ReturnMaybeUser(user);
         }
 
-        public Task<IEnumerable<User>> GetAll() {
-            return userRepository.GetAll();
+        public async Task<IEnumerable<User>> GetAll() {
+            var users = await userRepository.GetAll();
+            return users;
         }
 
-        public Task Add(User user) 
+        public async Task<Result<User>> Add(User user) 
         {
-            return userRepository.Add(user);
+            // Validate user object
+
+            var existingUser = await userRepository.GetByUsername(user.Username);
+            if (existingUser.HasValue) {
+                return Result<User>.Fail(ResultCode.AlreadyExists, user.Username);
+            }
+
+            await userRepository.Add(user);
+            var newUser = await userRepository.GetByUsername(user.Username);
+            
+            return Result<User>.Succeed(newUser.Value);
         }
 
-        public Task<User> Update(User user) 
+        public async Task<Result<User>> Update(User user) 
         {
-            var newUser = userRepository.Update(user);
+            var newUser = await userRepository.Update(user);
+            return ReturnMaybeUser(newUser);
         }
 
-        public Task Delete(string id) {
-            return userRepository.Delete(id);
+        public async Task<Result> Delete(string id) {
+            await userRepository.Delete(id);
+            return Result.Succeed();
         }
 
-        public Task Obliterate(string id) {
-            return userRepository.Obliterate(id);
+        public async Task<Result> Obliterate(string id) {
+            await userRepository.Obliterate(id);
+            return Result.Succeed();
+        }
+
+        private Result<User> ReturnMaybeUser(Maybe<User> user) {
+            if (user.HasValue) {
+                return Result<User>.Succeed(user.Value);
+            }
+
+            return Result<User>.Fail(ResultCode.NotFound);
         }
 
     }
