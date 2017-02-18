@@ -15,7 +15,9 @@ namespace Site.Admin2.DtoConversions
                 user.Email, 
                 user.FirstName, 
                 user.LastName,
-                user.LastModified
+                user.DateCreated,
+                user.LastModified,
+                user.Deleted
             );
         }
 
@@ -31,7 +33,9 @@ namespace Site.Admin2.DtoConversions
                 user.LastName,
                 user.Email, 
                 user.Username,
-                user.LastModified
+                user.DateCreated,
+                user.LastModified,
+                user.Deleted
             );
         }
     }

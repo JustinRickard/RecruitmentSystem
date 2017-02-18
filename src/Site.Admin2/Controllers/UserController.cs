@@ -52,13 +52,13 @@ namespace Site.Admin2.Controllers
         public async Task<IActionResult> Details(string id) 
         {
             var user = await userService.GetById(id);
-            return View(user.ToViewModel());
+            return View(user.Value.ToViewModel());
         }
 
         public async Task<IActionResult> Edit(string id) 
         {
             var user = await userService.GetById(id);
-            var userVM = user.ToViewModel();
+            var userVM = user.Value.ToViewModel();
             return View(userVM);
         }
 
@@ -67,12 +67,12 @@ namespace Site.Admin2.Controllers
             var userDto = user.ToDto();
             var dbUser = await userService.Update(userDto);
 
-            return RedirectToAction("Details", dbUser.ToViewModel());
+            return RedirectToAction("Details", dbUser.Value.ToViewModel());
         }
 
         public async Task<IActionResult> Delete(string id) {
             var user = await userService.GetById(id);
-            return View(user.ToViewModel());
+            return View(user.Value.ToViewModel());
         }
 
         [HttpPost]

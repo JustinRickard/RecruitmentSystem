@@ -50,6 +50,12 @@ namespace Common.Classes
         public bool IsSuccess => value != null && ResultCode == ResultCode.Success;
         public bool IsFailure => !IsSuccess;
 
+        public T Value { 
+            get {
+                return value;
+            }
+        }
+
         private T value;
         public ResultCode ResultCode;
         public string[] ErrorParams;

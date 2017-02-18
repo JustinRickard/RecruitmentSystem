@@ -12,7 +12,9 @@ namespace Site.Admin2.ViewModels
             string email,
             string firstName,
             string lastName,
-            DateTimeOffset lastModified
+            DateTimeOffset dateCreated,
+            DateTimeOffset lastModified,
+            bool deleted
         ) 
         {
             Id = id;
@@ -21,21 +23,18 @@ namespace Site.Admin2.ViewModels
             Email = email;
             FirstName = firstName;
             LastName = lastName;
+            DateCreated = dateCreated;
             LastModified = lastModified;
         }
 
         public string Id { get; set; }
-
         public string Client { get; set; }
-
         public string Username { get; set; }
-
         public string Email { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public DateTimeOffset LastModified { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
+        public bool Deleted { get; set; }
     }
 }

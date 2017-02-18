@@ -4,6 +4,7 @@ namespace Common.Enums
     {
         Success,
         NotFound,
-        AlreadyExists
+        AlreadyExists,
+        
     }
 }
