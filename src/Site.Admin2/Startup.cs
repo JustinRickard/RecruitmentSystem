@@ -43,8 +43,13 @@ namespace Site.Admin2
 
             // Dependency bindings
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
+
             services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IJsonHelper, JsonHelper>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

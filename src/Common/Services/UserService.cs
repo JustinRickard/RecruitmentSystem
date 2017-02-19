@@ -5,16 +5,19 @@ using Common.Interfaces.Services;
 using Common.Dto;
 using Common.Classes;
 using Common.Enums;
+using Common.Interfaces.Helpers;
 
 namespace Common.Services
 {
-    public class UserService : IUserService
+    public class UserService : ServiceBase, IUserService
     {
         IUserRepository userRepository;
 
         public UserService (
-            IUserRepository userRepository
-        )
+            IUserRepository userRepository,
+            IAuditRepository auditRepository,
+            IJsonHelper jsonHelper
+        ) : base (auditRepository, jsonHelper)
         {
             this.userRepository = userRepository;
         }
@@ -38,6 +41,8 @@ namespace Common.Services
 
         public async Task<Result<User>> Add(User user) 
         {
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptAdd, user);
+
             // Validate user object
 
             var existingUser = await userRepository.GetByUsername(user.Username);
@@ -47,13 +52,18 @@ namespace Common.Services
 
             await userRepository.Add(user);
             var newUser = await userRepository.GetByUsername(user.Username);
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AddComplete, newUser.Value);
             
             return Result<User>.Succeed(newUser.Value);
         }
 
         public async Task<Result<User>> Update(User user) 
         {
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEdit, user);
+
             var newUser = await userRepository.Update(user);
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditComplete, newUser.Value);
+
             return ReturnMaybeUser(newUser);
         }
 
