@@ -7,7 +7,7 @@ using Common.ExtensionMethods;
 
 namespace Common.Security
 {
-    public class UserStore : IUserStore<User>, IUserPasswordStore<User>
+    public class UserStore : IUserStore<User>, IUserPasswordStore<User> //, IUserLoginStore<User>
     {
         private IUserService userService;
 
@@ -119,7 +119,12 @@ namespace Common.Security
         {
             await userService.UpdatePassword(user, passwordHash, cancellationToken);
         }
-        
+
+        public async Task RemoveLoginAsync(User user, string loginProvider, string providerKey, CancellationToken cancellationToken)
+        {
+            await userService.Delete(user.Id);
+        }
+
         public void Dispose () {
             this.userService = null;
         }

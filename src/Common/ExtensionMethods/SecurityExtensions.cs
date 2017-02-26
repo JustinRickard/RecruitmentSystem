@@ -31,5 +31,23 @@ namespace Common.ExtensionMethods
         {
             return new List<IdentityError> { result.ToIdentityError() }.ToArray();
         }
+
+        public static IdentityResult ToIdentityResult(this Result result) {
+            if (result.IsFailure)
+            {
+                return IdentityResult.Failed(result.ToIdentityErrors());
+            }
+
+            return IdentityResult.Success;
+        }
+
+        public static IdentityResult ToIdentityResult<T>(this Result<T> result) {
+            if (result.IsFailure)
+            {
+                return IdentityResult.Failed(result.ToIdentityErrors());
+            }
+
+            return IdentityResult.Success;
+        }
     }
 }
