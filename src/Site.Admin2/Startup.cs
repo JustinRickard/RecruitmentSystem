@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -15,6 +16,8 @@ using Common.Services;
 using DAL.MongoDB.Repositories;
 using Microsoft.AspNetCore.Http;
 using Common.Helpers;
+using Microsoft.AspNetCore.Identity;
+using Common.Dto;
 
 namespace Site.Admin2
 {
@@ -35,6 +38,17 @@ namespace Site.Admin2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IUserStore<User> userStore = new UserStore();
+            IRoleStore<Role> roleStore = new RoleStore();
+            IUserClaimsPrincipalFactory<User> userPrincipalFactory = new UserPrincipalFactory();
+            services.AddInstance<IUserStore<User>>(userStore);
+            services.AddInstance<IRoleStore<ApplicationRole>>(roleStore);
+            services.AddInstance<IUserClaimsPrincipalFactory<ApplicationUser>>(userPrincipalFactory);
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddDefaultTokenProviders();
+
+
             // Configure settings
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
