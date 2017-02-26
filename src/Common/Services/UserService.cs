@@ -6,6 +6,7 @@ using Common.Dto;
 using Common.Classes;
 using Common.Enums;
 using Common.Interfaces.Helpers;
+using System.Threading;
 
 namespace Common.Services
 {
@@ -25,6 +26,12 @@ namespace Common.Services
         public async Task<Result<User>> GetById(string id) 
         {
             var user = await userRepository.GetById(id);
+            return ReturnMaybeUser(user);
+        }
+
+        public async Task<Result<User>> GetByUsername(string username)
+        {
+            var user = await userRepository.GetByUsername(username);
             return ReturnMaybeUser(user);
         }
 
@@ -57,6 +64,20 @@ namespace Common.Services
             return Result<User>.Succeed(newUser.Value);
         }
 
+        public async Task<Result<string>> GetPasswordHash(string userId, CancellationToken cancellationToken)
+        {
+            var dbUserResult = await userRepository.GetById(userId);
+
+            if (dbUserResult.HasValue) {
+                return Result<string>.Fail(ResultCode.NotFound, userId.ToString());
+            }
+
+            var password = await userRepository.GetPasswordHash(userId);
+
+            return dbUser.HasValue
+                ? Result.Succeed(dbUser.Value.)
+        }
+
         public async Task<Result<User>> Update(User user) 
         {
             Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEdit, user);
@@ -65,6 +86,17 @@ namespace Common.Services
             Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditComplete, newUser.Value);
 
             return ReturnMaybeUser(newUser);
+        }
+
+        public async Task<Result<User>> SetUsername(User user, string username, CancellationToken cancellationToken)
+        {
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEditUsername, user);
+
+            var result = await userRepository.UpdateUsername(user, username, cancellationToken);
+
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditUsernameComplete, user);
+
+
         }
 
         public async Task<Result> Delete(string id) {

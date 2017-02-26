@@ -14,6 +14,8 @@ namespace Common
                     public const string AddComplete = "AddComplete";
                     public const string AttemptEdit = "UserAttemptEdit";
                     public const string  EditComplete = "UserEditComplete";
+                    public const string AttemptEditUsername = "AttemptEditUsername";
+                    public const string EditUsernameComplete = "EditUsernameComplete";
 
                 }
             }

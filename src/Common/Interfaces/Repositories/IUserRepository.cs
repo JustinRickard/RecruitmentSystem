@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Common.Classes;
 using Common.Dto;
@@ -14,6 +15,8 @@ namespace Common.Interfaces.Repositories
 
          Task<Maybe<User>> GetByLoginCredentials (LoginCredentials credentials);
 
+         Task<Maybe<string>> GetPasswordHash (string userId);
+
          Task<IEnumerable<User>> GetAll();
 
          Task<IEnumerable<User>> Get(UserFilter filter);
@@ -21,6 +24,8 @@ namespace Common.Interfaces.Repositories
          Task<Maybe<User>> Add (User user);
 
          Task<Maybe<User>> Update (User user);
+
+         Task<Maybe<User>> UpdateUsername (User user, string username, CancellationToken cancellationToken);
 
          Task Delete(string id);
 

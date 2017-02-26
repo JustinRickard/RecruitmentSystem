@@ -27,6 +27,8 @@ namespace Common.Classes
             }
         }
 
+        public bool NotHasValue => !HasValue;
+
         public static Maybe<T> Fail => new Maybe<T> ();
 
         /*

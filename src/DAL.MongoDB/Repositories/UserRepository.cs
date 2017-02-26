@@ -17,6 +17,7 @@ using DAL.MongoDB.Interfaces;
 using Common.Interfaces.Helpers;
 using Common.SearchFilters;
 using Common.ExtensionMethods;
+using System.Threading;
 
 namespace DAL.MongoDB.Repositories
 {
@@ -59,6 +60,17 @@ namespace DAL.MongoDB.Repositories
                 return user != null && passwordHelper.IsValid(credentials.Password, user.Password)
                     ? new Maybe<User> (user.ToDto())
                     : Maybe<User>.Fail;             
+            }
+        }
+
+        public async Task<Maybe<string>> GetPasswordHash (string userId) {
+            using (var ctx = GetContext()) 
+            {
+                var user = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(userId)).SingleOrDefaultAsync();
+                
+                return user != null
+                    ? new Maybe<string> (user.Password)
+                    : Maybe<string>.Fail;
             }
         }
 
@@ -116,7 +128,25 @@ namespace DAL.MongoDB.Repositories
                     
                     return ReturnMaybeUser(newUser);
                 }
-                throw new Exception(string.Format("User not found with id {0}", user.Id)); // TODO: Handle exceptions
+                return null;
+            }
+        }
+
+        public async Task<Maybe<User>> UpdateUsername (User user, string username, CancellationToken cancellationToken)
+        {
+            using (var ctx =  GetContext()) {
+                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                if (oldUser != null) {
+                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
+                    var update = Builders<DbUser>.Update
+                        .Set(x => x.Username, username);
+                    
+                    await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
+
+                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                    return ReturnMaybeUser(newUser);
+                }
+                return null;
             }
         }
 

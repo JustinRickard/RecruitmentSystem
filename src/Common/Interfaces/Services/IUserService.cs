@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Common.Classes;
 using Common.Dto;
@@ -9,13 +10,19 @@ namespace Common.Interfaces.Services
     {
          Task<Result<User>> GetById(string id);
 
+         Task<Result<User>> GetByUsername(string username);
+
          Task<Result<User>> GetByLoginCredentials(LoginCredentials credentials);
+
+         Task<Result<string>> GetPasswordHash(string userId, CancellationToken cancellationToken);
 
          Task<IEnumerable<User>> GetAll();
 
          Task<Result<User>> Add(User user);
 
          Task<Result<User>> Update(User user);
+
+         Task<Result<User>> SetUsername(User user, string username, CancellationToken cancellationToken);
 
          Task<Result> Delete(string id);
 
