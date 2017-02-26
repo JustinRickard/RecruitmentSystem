@@ -22,6 +22,8 @@ namespace Common.Interfaces.Services
 
          Task<Result<User>> Update(User user);
 
+         Task<Result> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken);
+
          Task<Result<User>> SetUsername(User user, string username, CancellationToken cancellationToken);
 
          Task<Result> Delete(string id);

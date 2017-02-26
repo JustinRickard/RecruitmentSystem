@@ -72,10 +72,11 @@ namespace Common.Services
                 return Result<string>.Fail(ResultCode.NotFound, userId.ToString());
             }
 
-            var password = await userRepository.GetPasswordHash(userId);
+            var passwordResult = await userRepository.GetPasswordHash(userId);
 
-            return dbUser.HasValue
-                ? Result.Succeed(dbUser.Value.)
+            return passwordResult.HasValue
+                ? Result<string>.Succeed(passwordResult.Value)
+                : Result<string>.Fail(ResultCode.NotFound);
         }
 
         public async Task<Result<User>> Update(User user) 
@@ -83,9 +84,24 @@ namespace Common.Services
             Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEdit, user);
 
             var newUser = await userRepository.Update(user);
+
             Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditComplete, newUser.Value);
 
             return ReturnMaybeUser(newUser);
+        }
+
+        public async Task<Result> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken)
+        {
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptUpdatePassword, user);
+
+            var result = await userRepository.UpdatePassword(user, passwordHash, cancellationToken);    
+            if (result.HasNoValue)
+            {
+                return Result.Fail(ResultCode.NotFound);
+            }
+
+            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.UpdatePasswordComplete, user);
+            return Result.Succeed();
         }
 
         public async Task<Result<User>> SetUsername(User user, string username, CancellationToken cancellationToken)
@@ -94,9 +110,13 @@ namespace Common.Services
 
             var result = await userRepository.UpdateUsername(user, username, cancellationToken);
 
+            if (result.HasNoValue)
+            {
+                return Result<User>.Fail(ResultCode.NotFound);
+            }
+
             Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditUsernameComplete, user);
-
-
+            return Result<User>.Succeed(result.Value);
         }
 
         public async Task<Result> Delete(string id) {

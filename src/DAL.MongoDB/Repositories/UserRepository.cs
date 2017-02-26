@@ -150,6 +150,24 @@ namespace DAL.MongoDB.Repositories
             }
         }
 
+        public async Task<Maybe<User>> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken)
+        {
+            using (var ctx =  GetContext()) {
+                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                if (oldUser != null) {
+                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
+                    var update = Builders<DbUser>.Update
+                        .Set(x => x.Password, passwordHash);
+                    
+                    await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
+
+                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                    return ReturnMaybeUser(newUser);
+                }
+                return null;
+            }
+        }
+
         public async Task Delete(string id) 
         {
             using (var ctx = GetContext()) {

@@ -3,8 +3,6 @@ using Common.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Threading;
 using Common.Dto;
-using Common.Classes;
-using System.Collections.Generic;
 using Common.ExtensionMethods;
 
 namespace Common.Security
@@ -63,7 +61,6 @@ namespace Common.Security
             return dbUserResult.IsSuccess 
                 ? dbUserResult.Value.Username
                 : string.Empty;
-
         }
 
         public Task<string> GetUserIdAsync(User user, CancellationToken cancellationToken)
@@ -102,23 +99,27 @@ namespace Common.Security
                 : IdentityResult.Failed(updateUserResult.ToIdentityErrors());            
         }
 
-        Task<string> GetPasswordHashAsync(User user, CancellationToken cancellationToken) 
+        public async Task<string> GetPasswordHashAsync(User user, CancellationToken cancellationToken) 
         {
-            return userService.GetPasswordHash(user, cancellationToken);
+            var passwordResult = await userService.GetPasswordHash(user.Id, cancellationToken);           
+
+            return passwordResult.IsSuccess
+                ? passwordResult.Value
+                : string.Empty;
         }
 
-        Task<bool> HasPasswordAsync(TUser user, CancellationToken cancellationToken)
+        public async Task<bool> HasPasswordAsync(User user, CancellationToken cancellationToken)
         {
+            var password = await GetPasswordHashAsync(user, cancellationToken);
 
+            return password.NotEmpty();
         }
 
-        Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken cancellationToken)
+        public async Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken)
         {
-
+            await userService.UpdatePassword(user, passwordHash, cancellationToken);
         }
-
         
-
         public void Dispose () {
             this.userService = null;
         }

@@ -27,6 +27,8 @@ namespace Common.Interfaces.Repositories
 
          Task<Maybe<User>> UpdateUsername (User user, string username, CancellationToken cancellationToken);
 
+         Task<Maybe<User>> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken);
+
          Task Delete(string id);
 
          Task Obliterate(string id);
