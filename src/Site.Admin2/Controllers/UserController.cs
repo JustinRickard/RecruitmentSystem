@@ -10,6 +10,7 @@ using Common.Interfaces;
 using Common.Interfaces.Services;
 using Site.Admin2.DtoConversions;
 using Site.Admin2.ViewModels;
+using Common.Interfaces.Repositories;
 
 namespace Site.Admin2.Controllers
 {
@@ -20,8 +21,9 @@ namespace Site.Admin2.Controllers
 
         public UserController(
             IOptions<AppSettings> appSettings,
-            IUserService userService
-        )
+            IUserService userService,
+            IAuditRepository auditRepository
+        ) : base (auditRepository)
         {
             this.appSettings = appSettings.Value;
             this.userService = userService;

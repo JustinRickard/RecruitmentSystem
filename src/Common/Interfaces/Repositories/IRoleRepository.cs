@@ -9,6 +9,8 @@ namespace Common.Interfaces.Repositories
     {
         Task<Maybe<Role>> GetById (string id);
 
+        Task<Maybe<Role>> GetByName (string name);
+
         Task<IEnumerable<Role>> GetAll();
 
         Task<Maybe<Role>> Add (Role role);

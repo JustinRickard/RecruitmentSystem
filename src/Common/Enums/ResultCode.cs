@@ -6,7 +6,9 @@ namespace Common.Enums
         NotFound,
         AlreadyExists,
         CouldNotSerialize,
-        CouldNotDeserialize
+        CouldNotDeserialize,
+        CouldNotAdd,
+        CouldNotUpdate
         
     }
 }

@@ -59,8 +59,8 @@ namespace Site.Admin2
             services.AddIdentity<User, Role>()
                 .AddUserStore<UserStore>()
                 .AddRoleStore<RoleStore>()
-                .AddUserManager<UserManager>()
-                .AddRoleManager<RoleManager>()
+                // .AddUserManager<UserManager>()
+                // .AddRoleManager<RoleManager>()
                 .AddDefaultTokenProviders();
 
             // Configure settings

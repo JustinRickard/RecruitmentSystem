@@ -13,14 +13,12 @@ namespace Site.Admin2.Controllers
     public class AuditController : ControllerBase
     {
         IAppSettings appSettings;
-        IAuditRepository auditRepository;
         public AuditController(
             IOptions<AppSettings> appSettings,
             IAuditRepository auditRepository
-        )
+        ) : base (auditRepository)
         {
             this.appSettings = appSettings.Value;
-            this.auditRepository = auditRepository;
         }
 
         public async Task<IActionResult> Index()

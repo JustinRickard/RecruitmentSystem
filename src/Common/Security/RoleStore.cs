@@ -87,7 +87,7 @@ namespace Common.Security
             return result.ToIdentityResult();
         }
 
-        public void Dipose() 
+        public void Dispose() 
         {
             this.roleService = null;
         }
