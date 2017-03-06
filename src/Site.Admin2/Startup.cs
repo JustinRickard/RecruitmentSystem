@@ -72,8 +72,10 @@ namespace Site.Admin2
             // Dependency bindings
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuditRepository, AuditRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
 
             services.AddScoped<IJsonHelper, JsonHelper>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();

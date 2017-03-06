@@ -177,6 +177,8 @@ namespace DAL.MongoDB.Repositories
                     var update = Builders<DbUser>.Update
                         .Set(x => x.Deleted, true)
                         .Set(x => x.LastModified, DateTimeOffset.Now);
+                    
+                    await ctx.Users.UpdateOneAsync(filter, update);
                 }
             }
         }

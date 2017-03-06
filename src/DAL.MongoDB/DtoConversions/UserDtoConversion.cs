@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DAL.MongoDB.Models;
 using Common.Dto;
+using MongoDB.Bson;
 
 namespace DAL.MongoDB.DtoConversions
 {
@@ -22,6 +23,7 @@ namespace DAL.MongoDB.DtoConversions
         public static DbUser ToDb(this User user) 
         {
             return new DbUser {
+                Id = new ObjectId(user.Id),
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,

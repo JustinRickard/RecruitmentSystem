@@ -22,7 +22,7 @@ namespace DAL.MongoDB
         }
 
         public IMongoCollection<DbAudit> AuditLogs => Database.GetCollection<DbAudit>(Constants.Collections.AuditLogs);
-
+        public IMongoCollection<DbRole> Roles => Database.GetCollection<DbRole>(Constants.Collections.Roles);
         public IMongoCollection<DbUser> Users => Database.GetCollection<DbUser>(Constants.Collections.Users);
 
         public void Dispose() {
