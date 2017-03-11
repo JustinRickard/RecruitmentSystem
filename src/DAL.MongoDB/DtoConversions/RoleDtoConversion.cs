@@ -24,7 +24,7 @@ namespace DAL.MongoDB.DtoConversions
 
         public static DbRole ToDb(this Role role) {
             return new DbRole {
-                Id = new ObjectId(role.Id),
+                // Id = new ObjectId(role.Id),
                 Name = role.Name
             };
         }

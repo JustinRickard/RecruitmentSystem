@@ -4,6 +4,8 @@ namespace Common.Enums
     {
         AdminLogin,
         AssessmentLogin,
-        UserRecord
+        UserRecord,
+        UserStore,
+        PasswordStore
     }
 }
