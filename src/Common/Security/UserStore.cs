@@ -105,13 +105,16 @@ namespace Common.Security
             return Task.FromResult(user.Username);
         }
 
-        public async Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
+        public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
         {
             Audit<User, object>(Keycodes.AttemptSetNormalizedUserNameAsync, user, new { normalizedName = normalizedName});
 
-            var result = await userService.SetUsername(user, normalizedName, cancellationToken);
+            // var result = await userService.SetUsername(user, normalizedName, cancellationToken);
 
-            Audit<Result<User>>(Keycodes.SetNormalizedUserNameAsyncComplete, result);
+            // Audit<Result<User>>(Keycodes.SetNormalizedUserNameAsyncComplete, result);
+
+            user.NormalizedUserName = normalizedName;
+            return Task.CompletedTask;
         }
 
         public async Task SetUserNameAsync(User user, string userName, CancellationToken cancellationToken)
@@ -168,13 +171,15 @@ namespace Common.Security
             return password.NotEmpty();
         }
 
-        public async Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken)
+        public Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken)
         {
             Audit<User, object>(Keycodes.AttemptSetPasswordHashAsync, user, new { passwordHash = passwordHash });
 
-            var result = await userService.UpdatePassword(user, passwordHash, cancellationToken);
-
-            Audit<Result>(Keycodes.SetPasswordHashAsyncComplete, result);
+            // var result = await userService.UpdatePassword(user, passwordHash, cancellationToken);
+            user.PasswordHash = passwordHash;
+            
+            // Audit<Result>(Keycodes.SetPasswordHashAsyncComplete, result);
+            return Task.CompletedTask;
         }
 
         public async Task RemoveLoginAsync(User user, string loginProvider, string providerKey, CancellationToken cancellationToken)

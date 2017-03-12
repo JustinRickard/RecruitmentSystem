@@ -51,12 +51,17 @@ namespace Site.Admin2.Controllers
                 return View();
             }
 
+            /*
+
             var emailConfirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(newUser);
             var tokenVerificationUrl = Url.Action("VerifyEmail", "Account", new {id = newUser.Id, token = emailConfirmationToken}, Request.Scheme);
 
             // await messageService.Send(email, "Verify your email", $"Click <a href=\"{tokenVerificationUrl}\">here</a> to verify your email");
 
             return Content("Check your email for a verification link");
+            */
+
+            return View("RegisterComplete");
         }         
     }
 }

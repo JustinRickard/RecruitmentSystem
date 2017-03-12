@@ -99,8 +99,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<User>> Add(User user) 
         {
             var dbUser = user.ToDb();
-            // Temporary until passwords can be set by user
-            dbUser.Password = "Password1"; // Ultra-secure password :)
+            dbUser.Password = user.PasswordHash;
             SetInitialRecordValues(dbUser);
 
             using (var ctx = GetContext()) {

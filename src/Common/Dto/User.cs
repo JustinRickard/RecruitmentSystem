@@ -34,9 +34,12 @@ namespace Common.Dto
 
         public string Client { get; set; }
         public string Username  { get; set; }
+        public string NormalizedUserName { get; set; }
+        public string PasswordHash { get; set; }
         public string FirstName { get; set; }
         public string LastName  { get; set; }
         public string Email     { get; set; }
+        public bool EmailConfirmed { get; set; }
 
         public bool IsValid =>
             FirstName.NotEmpty() &&
