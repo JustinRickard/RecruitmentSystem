@@ -27,6 +27,17 @@ namespace Site.Admin2.Controllers
             return View();
         }
 
+        [HttpPost] 
+        public async Task<IActionResult> Logout() { 
+            await signInManager.SignOutAsync(); 
+            return RedirectToAction("Index", "Home"); 
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         
         [HttpPost]
         public async Task<IActionResult> Register(string email, string password, string repassword)
