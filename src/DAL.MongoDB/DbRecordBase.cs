@@ -1,12 +1,14 @@
 using System;
 using MongoDB.Bson;
 using DAL.MongoDB.Interfaces;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace DAL.MongoDB
 {
     public abstract class DbRecordBase : IDbRecord
     {
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         public DateTimeOffset DateCreated { get; set; }
 

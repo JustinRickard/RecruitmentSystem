@@ -26,7 +26,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<Role>> GetById (string id)
         {
             using (var ctx = GetContext()) {
-                var role = await ctx.Roles.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
+                var role = await ctx.Roles.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
                 return ReturnMaybeRole(role);
             }
         }
@@ -60,7 +60,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<Role>> Update (Role role)
         {
             using (var ctx = GetContext()) {
-                var oldRole = await ctx.Roles.AsQueryable().Where(x => x.Id == new ObjectId(role.Id)).SingleOrDefaultAsync();
+                var oldRole = await ctx.Roles.AsQueryable().Where(x => x.Id == role.Id).SingleOrDefaultAsync();
                 if (oldRole != null) {
                     var filter = Builders<DbRole>.Filter.Eq(x => x.Id, oldRole.Id);
                     var update = Builders<DbRole>.Update
@@ -68,7 +68,7 @@ namespace DAL.MongoDB.Repositories
 
                     await ctx.Roles.UpdateOneAsync(filter, update);
 
-                    var newRole = await ctx.Roles.AsQueryable().Where(x => x.Id == new ObjectId(role.Id)).SingleOrDefaultAsync();                    
+                    var newRole = await ctx.Roles.AsQueryable().Where(x => x.Id == role.Id).SingleOrDefaultAsync();                    
                     return ReturnMaybeRole(newRole);
                 }
                 return null;
@@ -78,7 +78,7 @@ namespace DAL.MongoDB.Repositories
         public async Task Delete (string id)
         {
             using (var ctx = GetContext()) {
-                var role = await ctx.Roles.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
+                var role = await ctx.Roles.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
                 if (role != null) {
                     var filter = Builders<DbRole>.Filter.Eq(x => x.Id, role.Id);
                     var update = Builders<DbRole>.Update
@@ -93,7 +93,7 @@ namespace DAL.MongoDB.Repositories
         public async Task Obliterate(string id)
         {
             using (var ctx = GetContext()) {
-                var role = await ctx.Roles.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
+                var role = await ctx.Roles.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
                 if (role != null) {
                     var filter = Builders<DbRole>.Filter.Eq(x => x.Id, role.Id);
                     await ctx.Roles.DeleteOneAsync(filter);

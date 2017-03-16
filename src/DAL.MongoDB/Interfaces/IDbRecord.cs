@@ -11,7 +11,7 @@ namespace DAL.MongoDB.Interfaces
 {
     public interface IDbRecord
     {
-        ObjectId Id { get; set; }
+        string Id { get; set; }
 
         DateTimeOffset DateCreated { get; set; }
 

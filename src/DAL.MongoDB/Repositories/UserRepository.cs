@@ -34,11 +34,8 @@ namespace DAL.MongoDB.Repositories
 
         public async Task<Maybe<User>> GetById (string id) 
         {
-            using (var ctx = GetContext()) {
-                var user = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
-
-                return ReturnMaybeUser(user);
-              };
+                var dbUser = await GetOne<DbUser>(id);
+                return ReturnMaybeUser(dbUser);
         }
 
         public async Task<Maybe<User>> GetByUsername (string username) 
@@ -66,7 +63,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<string>> GetPasswordHash (string userId) {
             using (var ctx = GetContext()) 
             {
-                var user = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(userId)).SingleOrDefaultAsync();
+                var user = await ctx.Users.AsQueryable().Where(x => x.Id == userId).SingleOrDefaultAsync();
                 
                 return user != null
                     ? new Maybe<string> (user.Password)
@@ -112,7 +109,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<User>> Update(User user) 
         {
             using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                 if (oldUser != null) {
                     var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
                     var update = Builders<DbUser>.Update
@@ -123,7 +120,7 @@ namespace DAL.MongoDB.Repositories
 
                     await ctx.Users.UpdateOneAsync(filter, update);
 
-                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                     
                     return ReturnMaybeUser(newUser);
                 }
@@ -134,7 +131,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<User>> UpdateUsername (User user, string username, CancellationToken cancellationToken)
         {
             using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                 if (oldUser != null) {
                     var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
                     var update = Builders<DbUser>.Update
@@ -142,7 +139,7 @@ namespace DAL.MongoDB.Repositories
                     
                     await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
 
-                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                     return ReturnMaybeUser(newUser);
                 }
                 return null;
@@ -152,7 +149,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<User>> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken)
         {
             using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                 if (oldUser != null) {
                     var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
                     var update = Builders<DbUser>.Update
@@ -160,7 +157,7 @@ namespace DAL.MongoDB.Repositories
                     
                     await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
 
-                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(user.Id)).SingleOrDefaultAsync();
+                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                     return ReturnMaybeUser(newUser);
                 }
                 return null;
@@ -170,7 +167,7 @@ namespace DAL.MongoDB.Repositories
         public async Task Delete(string id) 
         {
             using (var ctx = GetContext()) {
-                var user = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
+                var user = await ctx.Users.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
                 if (user != null) {
                     var filter = Builders<DbUser>.Filter.Eq(x => x.Id, user.Id);
                     var update = Builders<DbUser>.Update
@@ -185,12 +182,19 @@ namespace DAL.MongoDB.Repositories
         public async Task Obliterate (string id) 
         {
             using (var ctx = GetContext()) {
-                var user = await ctx.Users.AsQueryable().Where(x => x.Id == new ObjectId(id)).SingleOrDefaultAsync();
+                var user = await ctx.Users.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
                 if (user != null) {
                     var filter = Builders<DbUser>.Filter.Eq(x => x.Id, user.Id);
                     await ctx.Users.DeleteOneAsync(filter);
                 }
             }
+        }
+
+        private Maybe<User> ReturnMaybeUser(Maybe<DbUser> user) 
+        {
+            return user.HasValue
+                    ? ReturnMaybeUser(user.Value)
+                    : Maybe<User>.Fail;
         }
 
         private Maybe<User> ReturnMaybeUser(DbUser user) 
