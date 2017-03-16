@@ -32,6 +32,24 @@ namespace DAL.MongoDB.Repositories
             this.passwordHelper = passwordHelper;
         }
 
+        // GET        
+        public async Task<IEnumerable<User>> GetAll() 
+        {
+            var dbUsers = await GetAllNotDeleted<DbUser>();
+            return dbUsers.ToDto();
+        }
+
+        public async Task<IEnumerable<User>> Get(UserFilter filter)
+        {
+            using (var ctx = GetContext()) {
+
+                var users = await Filter(ctx, filter)
+                    .ToListAsync();
+
+                return users.ToDto();
+            }
+        }
+
         public async Task<Maybe<User>> GetById (string id) 
         {
                 var dbUser = await GetOne<DbUser>(id);
@@ -71,28 +89,7 @@ namespace DAL.MongoDB.Repositories
             }
         }
 
-        public async Task<IEnumerable<User>> GetAll() 
-        {
-            using (var ctx = GetContext()) {
-                var users = await ctx.Users.AsQueryable()
-                    .Where(x => x.Deleted == false)
-                    .ToListAsync();
-
-                return users.ToDto();
-            }
-        }
-
-        public async Task<IEnumerable<User>> Get(UserFilter filter)
-        {
-            using (var ctx = GetContext()) {
-
-                var users = await Filter(ctx, filter)
-                    .ToListAsync();
-
-                return users.ToDto();
-            }
-        }
-
+        // ADD
         public async Task<Maybe<User>> Add(User user) 
         {
             var dbUser = user.ToDb();
@@ -106,6 +103,7 @@ namespace DAL.MongoDB.Repositories
             }
         }
 
+        // UPDATE
         public async Task<Maybe<User>> Update(User user) 
         {
             using (var ctx =  GetContext()) {
@@ -164,6 +162,7 @@ namespace DAL.MongoDB.Repositories
             }
         }
 
+        // DELETE
         public async Task Delete(string id) 
         {
             using (var ctx = GetContext()) {
@@ -189,6 +188,8 @@ namespace DAL.MongoDB.Repositories
                 }
             }
         }
+
+        // HELPER METHODS
 
         private Maybe<User> ReturnMaybeUser(Maybe<DbUser> user) 
         {

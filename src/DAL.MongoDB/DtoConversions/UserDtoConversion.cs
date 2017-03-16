@@ -32,11 +32,15 @@ namespace DAL.MongoDB.DtoConversions
         }
 
         public static IEnumerable<User> ToDto(this IEnumerable<DbUser> users) {
-            return users.Select(user => user.ToDto());
+            return users != null 
+                ? users.Select(user => user.ToDto())
+                : new List<User>();
         }
 
         public static IEnumerable<DbUser> ToDto(this IEnumerable<User> users) {
-            return users.Select(user => user.ToDb());
+            return users != null
+                ? users.Select(user => user.ToDb())
+                : new List<DbUser>();
         }
     }
 }

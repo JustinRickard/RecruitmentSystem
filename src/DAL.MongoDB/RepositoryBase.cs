@@ -46,13 +46,13 @@ namespace DAL.MongoDB
             record.Deleted = false;
         }
 
-        public async Task<Maybe<TEntity>> GetOne<TEntity>(string id) where TEntity : class, new()
+        internal protected async Task<Maybe<TEntity>> GetOne<TEntity>(string id) where TEntity : class, new()
         {            
                 var filter = Builders<TEntity>.Filter.Eq("Id", id);
                 return await GetOne<TEntity>(filter);            
         }
 
-        private async Task<Maybe<TEntity>> GetOne<TEntity>(FilterDefinition<TEntity> filter) where TEntity : class, new()
+        internal protected async Task<Maybe<TEntity>> GetOne<TEntity>(FilterDefinition<TEntity> filter) where TEntity : class, new()
         {
             using (var ctx = GetContext())
             {
@@ -63,6 +63,27 @@ namespace DAL.MongoDB
                     ? new Maybe<TEntity>(entity)
                     : Maybe<TEntity>.Fail;
             }
+        }
+
+        internal protected async Task<IEnumerable<TEntity>> GetMany<TEntity>(FilterDefinition<TEntity> filter) where TEntity : class, new()
+        {
+            using (var ctx = GetContext())
+            {
+                var collection = ctx.GetCollection<TEntity>();
+                var entities = await collection.Find(filter).ToListAsync();
+                return entities;
+            }
+        }
+
+        internal protected async Task<IEnumerable<TEntity>> GetAll<TEntity>() where TEntity : class, new()
+        {
+            return await GetMany<TEntity>(null);
+        }
+
+        internal protected async Task<IEnumerable<TEntity>> GetAllNotDeleted<TEntity>() where TEntity : class, new()
+        {
+            var filter = Builders<TEntity>.Filter.Eq("Deleted", false);
+            return await GetMany<TEntity>(filter);
         }
 
         private DateTimeOffset Now => DateTimeOffset.Now;
