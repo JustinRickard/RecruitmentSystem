@@ -21,6 +21,11 @@ namespace Site.Admin2.Controllers
             this.auditRepository = auditRepository;
         }
 
+        internal protected IActionResult RedirectToHome()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         internal protected void ShowMessage(string message) {
             ViewBag.Message = message;
         }

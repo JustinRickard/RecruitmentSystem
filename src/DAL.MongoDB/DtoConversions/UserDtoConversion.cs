@@ -23,11 +23,14 @@ namespace DAL.MongoDB.DtoConversions
         public static DbUser ToDb(this User user) 
         {
             return new DbUser {
-                // Id = new ObjectId(user.Id),
+                Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                Username = user.Username
+                Username = user.Username,
+                NormalizedUserName = user.NormalizedUserName,
+                PasswordHash = user.PasswordHash,
+                Token = user.Token
             };
         }
 

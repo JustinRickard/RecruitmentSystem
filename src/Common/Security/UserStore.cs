@@ -155,6 +155,7 @@ namespace Common.Security
 
             Audit<Result<string>>(Keycodes.GetPasswordHashAsyncComplete, result);        
 
+            
             return result.IsSuccess
                 ? result.Value
                 : string.Empty;

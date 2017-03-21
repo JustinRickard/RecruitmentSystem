@@ -12,7 +12,7 @@
             <th>Message</th>   
         </thead>
         <tbody>
-            @foreach(var log in Model.Logs) {
+            @foreach(var log in Model.Logs.OrderByDescending(x => x.DateCreated)) {
             <tr>
                     <td>@log.DateCreated</td>
                     <td>@log.Type</td>

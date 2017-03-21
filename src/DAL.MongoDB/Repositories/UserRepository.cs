@@ -72,7 +72,7 @@ namespace DAL.MongoDB.Repositories
                     .Where(x => x.Username == credentials.Username)
                     .SingleOrDefaultAsync();
 
-                return user != null && passwordHelper.IsValid(credentials.Password, user.Password)
+                return user != null && passwordHelper.IsValid(credentials.Password, user.PasswordHash)
                     ? new Maybe<User> (user.ToDto())
                     : Maybe<User>.Fail;             
             }
@@ -84,7 +84,7 @@ namespace DAL.MongoDB.Repositories
                 var user = await ctx.Users.AsQueryable().Where(x => x.Id == userId).SingleOrDefaultAsync();
                 
                 return user != null
-                    ? new Maybe<string> (user.Password)
+                    ? new Maybe<string> (user.PasswordHash)
                     : Maybe<string>.Fail;
             }
         }
@@ -93,7 +93,6 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<User>> Add(User user) 
         {
             var dbUser = user.ToDb();
-            dbUser.Password = user.PasswordHash;
             SetInitialRecordValues(dbUser);
 
             using (var ctx = GetContext()) {
@@ -151,7 +150,7 @@ namespace DAL.MongoDB.Repositories
                 if (oldUser != null) {
                     var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
                     var update = Builders<DbUser>.Update
-                        .Set(x => x.Password, passwordHash);
+                        .Set(x => x.PasswordHash, passwordHash);
                     
                     await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
 
