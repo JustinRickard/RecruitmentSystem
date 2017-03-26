@@ -5,21 +5,24 @@
     <div class="col-md-3"></div>
     <div id="page-inner-container" class="col-md-6">
 
-    <h1>Log in</h1>
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        <h1>Log in</h1>
 
-    <h4>Username</h4>
-    @Html.TextBoxFor(x => x.Username)
+        <h4>Username</h4>
+        @Html.TextBoxFor(x => x.Username)
 
-    <hr>
+        <hr>
 
-    <h4>Password</h4>
-    @Html.TextBoxFor(x => x.Password)
+        <h4>Password</h4>
+        @Html.TextBoxFor(x => x.Password)
 
-    <hr>
+        <hr>
 
-    <div id="buttons-container" class="col-md-12">
-        @Html.ActionLink("Log in", "Login", "Account", new{}, new { @class = "btn btn-primary"})
-    </div>
+        <div id="buttons-container" class="col-md-12">
+            <input type="submit" value="Log in" class="btn-primary">
+        </div>
+    }
 
     <hr>
     </div>

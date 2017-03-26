@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Common.Enums;
 using Common.Interfaces.Helpers;
@@ -18,39 +19,27 @@ namespace Common.Services
             this.jsonHelper = jsonHelper;
         }
 
-        protected internal void Audit<T>(AuditType type, string prefix, T objectToSerialize) 
+        protected internal async Task Audit<T>(AuditType type, string prefix, T objectToSerialize) 
         {
-            SaveAudit(type, prefix, objectToSerialize, new {});
-
-            /*
-            var jsonResult = jsonHelper.Serialize(objectToSerialize);
-            if (jsonResult.IsSuccess) 
-            {
-                auditRepository.Add(type, string.Format("{0}: {1}", prefix, jsonResult.Value));
-            }
-            else
-            {
-                // log error
-                // alert
-            }
-             */
+            await SaveAudit(type, prefix, objectToSerialize, new {});
         }
 
-        protected internal void Audit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
+        protected internal async Task Audit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
         {
-            SaveAudit(type, prefix, objectToSerialize, parameters);
+            await SaveAudit(type, prefix, objectToSerialize, parameters);
         }
 
-        private void SaveAudit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
+        private async Task SaveAudit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
         {
             var jsonResultObject = jsonHelper.Serialize(objectToSerialize);
             var jsonResultParameters = jsonHelper.Serialize(parameters);
             if (jsonResultObject.IsSuccess && jsonResultParameters.IsSuccess) 
             {
-                auditRepository.Add(type, string.Format("{0}: {1}, {2}: {3}", prefix, jsonResultObject.Value, "Parameters", jsonResultParameters.Value));
+                await auditRepository.Add(type, string.Format("{0}: {1}, {2}: {3}", prefix, jsonResultObject.Value, "Parameters", jsonResultParameters.Value));
             }
             else
             {
+                throw new Exception("Failed to add audit for service.");
                 // log error
                 // alert
             }

@@ -7,6 +7,7 @@ using Common.Classes;
 using Common.Enums;
 using Common.Interfaces.Helpers;
 using System.Threading;
+using Common.ExtensionMethods;
 
 namespace Common.Services
 {
@@ -35,6 +36,14 @@ namespace Common.Services
             return ReturnMaybeUser(user);
         }
 
+        public async Task<Result<User>> GetByNormalizedUsername(string normalizedUsername)
+        {
+            await Audit(AuditType.UserRecord, "GetByNormalizedUsername", normalizedUsername);
+            var user = await userRepository.GetByNormalizedUsername(normalizedUsername);
+            await Audit(AuditType.UserRecord, "GetByNormalizedUsername2", user);
+            return ReturnMaybeUser(user);
+        }        
+
         public async Task<Result<User>> GetByLoginCredentials(LoginCredentials credentials)
         {
             var user = await userRepository.GetByLoginCredentials(credentials);
@@ -48,7 +57,7 @@ namespace Common.Services
 
         public async Task<Result<User>> Add(User user) 
         {
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptAdd, user);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptAdd, user);
 
             // Validate user object
 
@@ -59,7 +68,7 @@ namespace Common.Services
 
             await userRepository.Add(user);
             var newUser = await userRepository.GetByUsername(user.Username);
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AddComplete, newUser.Value);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AddComplete, newUser.Value);
             
             return Result<User>.Succeed(newUser.Value);
         }
@@ -68,31 +77,31 @@ namespace Common.Services
         {
             var dbUserResult = await userRepository.GetById(userId);
 
-            if (dbUserResult.HasValue) {
+            if (dbUserResult.HasNoValue) {
                 return Result<string>.Fail(ResultCode.NotFound, userId.ToString());
             }
 
-            var passwordResult = await userRepository.GetPasswordHash(userId);
+            var passwordHash = dbUserResult.Value.PasswordHash;
 
-            return passwordResult.HasValue
-                ? Result<string>.Succeed(passwordResult.Value)
+            return passwordHash.NotEmpty()
+                ? Result<string>.Succeed(passwordHash)
                 : Result<string>.Fail(ResultCode.NotFound);
         }
 
         public async Task<Result<User>> Update(User user) 
         {
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEdit, user);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEdit, user);
 
             var newUser = await userRepository.Update(user);
 
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditComplete, newUser.Value);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditComplete, newUser.Value);
 
             return ReturnMaybeUser(newUser);
         }
 
         public async Task<Result> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken)
         {
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptUpdatePassword, user);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptUpdatePassword, user);
 
             var result = await userRepository.UpdatePassword(user, passwordHash, cancellationToken);    
             if (result.HasNoValue)
@@ -100,13 +109,13 @@ namespace Common.Services
                 return Result.Fail(ResultCode.NotFound);
             }
 
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.UpdatePasswordComplete, user);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.UpdatePasswordComplete, user);
             return Result.Succeed();
         }
 
         public async Task<Result<User>> SetUsername(User user, string username, CancellationToken cancellationToken)
         {
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEditUsername, user);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEditUsername, user);
 
             var result = await userRepository.UpdateUsername(user, username, cancellationToken);
 
@@ -115,25 +124,25 @@ namespace Common.Services
                 return Result<User>.Fail(ResultCode.NotFound);
             }
 
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditUsernameComplete, user);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditUsernameComplete, user);
             return Result<User>.Succeed(result.Value);
         }
 
         public async Task<Result<User>> SetNormalizedUsername(User user, string normalizedUsername, CancellationToken cancellationToken)
         {
-            Audit<User, object>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEditNormalizedUsername, user, new { NormalizedUsername = normalizedUsername });
+            await Audit<User, object>(AuditType.UserRecord, Constants.Resources.Keycodes.User.AttemptEditNormalizedUsername, user, new { NormalizedUsername = normalizedUsername });
 
             var result = await userRepository.UpdateNormalizedUsername(user, normalizedUsername, cancellationToken);
 
             // JR Temp 
-            Audit<Maybe<User>>(AuditType.UserRecord, "Update normalized username response", result);
+            await Audit<Maybe<User>>(AuditType.UserRecord, "Update normalized username response", result);
 
             if (result.HasNoValue)
             {
                 return Result<User>.Fail(ResultCode.NotFound);
             }
 
-            Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditNormalizedUsernameComplete, user);
+            await Audit<User>(AuditType.UserRecord, Constants.Resources.Keycodes.User.EditNormalizedUsernameComplete, user);
             return Result<User>.Succeed(result.Value);
         }
 

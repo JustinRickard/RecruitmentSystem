@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using Common.Interfaces.Repositories;
 // using DAL.MongoDB.Classes;
 
 namespace DAL.MongoDB
@@ -19,7 +20,9 @@ namespace DAL.MongoDB
     {
         protected internal IAppSettings appSettings { get; set; }
 
-        public RepositoryBase(IOptions<AppSettings> appSettings) {
+        public RepositoryBase(
+            IOptions<AppSettings> appSettings
+        ) {
             this.appSettings = appSettings.Value;
         }
 

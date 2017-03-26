@@ -30,8 +30,8 @@ namespace Site.Admin2.Controllers
             ViewBag.Message = message;
         }
 
-        internal protected void Audit(AuditType type, string message) {
-            auditRepository.Add(type, message);
+        internal protected async Task Audit(AuditType type, string message) {
+            await auditRepository.Add(type, message);
         }
     }
 }

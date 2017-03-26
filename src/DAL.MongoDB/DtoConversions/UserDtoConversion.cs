@@ -11,12 +11,18 @@ namespace DAL.MongoDB.DtoConversions
         public static User ToDto(this DbUser dbUser) 
         {
             return new User {
-                Id = dbUser.Id.ToString(),
+                Id = dbUser.Id,
                 Username = dbUser.Username,
+                NormalizedUserName = dbUser.NormalizedUserName,
                 Email = dbUser.Email,
                 FirstName = dbUser.FirstName,
                 LastName = dbUser.LastName,
-                LastModified = dbUser.LastModified
+                PasswordHash = dbUser.PasswordHash,
+                DateCreated = dbUser.DateCreated,
+                LastModified = dbUser.LastModified,
+                Deleted = dbUser.Deleted,
+                EmailConfirmed = dbUser.EmailConfirmed,
+                Token = dbUser.Token
             };
         }
 
@@ -24,13 +30,15 @@ namespace DAL.MongoDB.DtoConversions
         {
             return new DbUser {
                 Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
                 Username = user.Username,
                 NormalizedUserName = user.NormalizedUserName,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 PasswordHash = user.PasswordHash,
-                Token = user.Token
+                Deleted = user.Deleted,
+                EmailConfirmed = user.EmailConfirmed,
+                Token = user.Token,
             };
         }
 

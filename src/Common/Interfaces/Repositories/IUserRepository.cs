@@ -13,6 +13,8 @@ namespace Common.Interfaces.Repositories
 
          Task<Maybe<User>> GetByUsername(string username);
 
+         Task<Maybe<User>> GetByNormalizedUsername(string username);
+
          Task<Maybe<User>> GetByLoginCredentials (LoginCredentials credentials);
 
          Task<Maybe<string>> GetPasswordHash (string userId);

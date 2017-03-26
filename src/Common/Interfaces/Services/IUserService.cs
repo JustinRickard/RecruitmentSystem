@@ -12,6 +12,8 @@ namespace Common.Interfaces.Services
 
          Task<Result<User>> GetByUsername(string username);
 
+         Task<Result<User>> GetByNormalizedUsername(string normalizedUsername);
+
          Task<Result<User>> GetByLoginCredentials(LoginCredentials credentials);
 
          Task<Result<string>> GetPasswordHash(string userId, CancellationToken cancellationToken);

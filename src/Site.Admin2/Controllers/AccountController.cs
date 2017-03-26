@@ -27,9 +27,9 @@ namespace Site.Admin2.Controllers
         }
 
         // TEMPORARY: REMOVE ONCE AUTHENTICATION WORKS
-        public async Task<IActionResult> TempAddAdmin() {
-            
-            var user = new User 
+        public async Task<IActionResult> TempAddAdmin() {          
+
+            var user = new User
             {
                 Username = "admin",
                 FirstName = "admin",
@@ -39,10 +39,12 @@ namespace Site.Admin2.Controllers
             
             await userManager.CreateAsync(user);
             var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            
+            await auditRepository.Add(AuditType.AdminLogin, token);
+
             var dbUserResult = await userService.GetByUsername(user.Username);
             var dbUser = dbUserResult.Value;
-            await userManager.ResetPasswordAsync(dbUser, dbUser.Token, "admin");
-            // await userManager.AddPasswordAsync(dbUserResult.Value, "admin");
+            await userManager.AddPasswordAsync(dbUserResult.Value, "Admin$2017");
 
             return View("Login");
         }
@@ -59,7 +61,7 @@ namespace Site.Admin2.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -67,26 +69,30 @@ namespace Site.Admin2.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginCredentials model, string returnUrl = null)
         {
+            await Audit(AuditType.AdminLogin, string.Format("Attempting to log in with username {0}", model.Username));
+
             var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, true, false);
+
+            await Audit(AuditType.AdminLogin, string.Format("Log in with username {0} completed.", model.Username));
 
             if (result.Succeeded)
             {
-                Audit(AuditType.AdminLogin, string.Format("Successful login for user with username {0}", model.Username));
+                await Audit(AuditType.AdminLogin, string.Format("Successful login for user with username {0}", model.Username));
                 return RedirectToHome();
             }
             else if (result.RequiresTwoFactor)
             {
-                Audit(AuditType.AdminLogin, string.Format("Login failure for user with username {0} - requires two factor authentication", model.Username));
+                await Audit(AuditType.AdminLogin, string.Format("Login failure for user with username {0} - requires two factor authentication", model.Username));
                 ModelState.AddModelError(string.Empty, "User requires two factor authentication");
             }
             else if (result.IsLockedOut)
             {
-                Audit(AuditType.AdminLogin, string.Format("Login failure for user with username {0} - user is locked out", model.Username));
+                await Audit(AuditType.AdminLogin, string.Format("Login failure for user with username {0} - user is locked out", model.Username));
                 ModelState.AddModelError(string.Empty, "Your user is locked out.");
             }
             else
             {
-                Audit(AuditType.AdminLogin, string.Format("Login failure for user with username {0} - incorrect credentials entered", model.Username));
+                await Audit(AuditType.AdminLogin, string.Format("Login failure for user with username {0} - incorrect credentials entered", model.Username));
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
 

@@ -18,6 +18,7 @@ using Common.Interfaces.Helpers;
 using Common.SearchFilters;
 using Common.ExtensionMethods;
 using System.Threading;
+using Common.Enums;
 
 namespace DAL.MongoDB.Repositories
 {
@@ -60,9 +61,18 @@ namespace DAL.MongoDB.Repositories
         {
             using (var ctx = GetContext()) {
                 var user = await ctx.Users.AsQueryable().Where(x => x.Username == username).SingleOrDefaultAsync();
+                return ReturnMaybeUser(user);
+            };
+        }
+
+        public async Task<Maybe<User>> GetByNormalizedUsername(string normalizedUsername)
+        {
+            using (var ctx = GetContext()) {
+                var user = await ctx.Users.AsQueryable().Where(x => x.NormalizedUserName == normalizedUsername).SingleOrDefaultAsync();
+                await ctx.AuditLogs.InsertOneAsync(new DbAudit { Type = AuditType.UserRepository, Message = user.ToString() });
 
                 return ReturnMaybeUser(user);
-              };
+            };
         }
 
         public async Task<Maybe<User>> GetByLoginCredentials (LoginCredentials credentials) 
