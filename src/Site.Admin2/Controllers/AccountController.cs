@@ -36,9 +36,9 @@ namespace Site.Admin2.Controllers
                 LastName = "admin",
                 Email = "admin@example.org"
             };
-
-            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            
             await userManager.CreateAsync(user);
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
             var dbUserResult = await userService.GetByUsername(user.Username);
             var dbUser = dbUserResult.Value;
             await userManager.ResetPasswordAsync(dbUser, dbUser.Token, "admin");

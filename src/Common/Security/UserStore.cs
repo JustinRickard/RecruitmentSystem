@@ -10,6 +10,7 @@ using Common.Services;
 using Common.Enums;
 using Common.Classes;
 using Keycodes = Common.Constants.Resources.Keycodes.UserStore;
+using System;
 
 namespace Common.Security
 {
@@ -82,39 +83,63 @@ namespace Common.Security
         {
             Audit<User>(Keycodes.AttemptGetNormalizedUserNameAsync, user);
 
-            var result = await userService.GetById(user.Id);
+            var result = user.Id.NotEmpty() 
+                ? await userService.GetById(user.Id)
+                : await userService.GetByUsername(user.Username);
 
-            Audit<Result<User>>(Keycodes.GetNormalizedUserNameAsyncComplete, result);
+            if (result.IsFailure)
+            {
+                throw new Exception(string.Format("GetNormalizedUserName: Failed to get user from DB. User: {0}", user));
+            }
 
-            return result.IsSuccess 
-                ? result.Value.Username
-                : string.Empty;
+            Audit<Result<User>>(Keycodes.GetNormalizedUserNameAsyncComplete, result);          
+            return result.Value.NormalizedUserName;             
         }
 
-        public Task<string> GetUserIdAsync(User user, CancellationToken cancellationToken)
+        public async Task<string> GetUserIdAsync(User user, CancellationToken cancellationToken)
         {
             Audit<User>(Keycodes.AttemptGetUserIdAsync, user);
 
-            return Task.FromResult(user.Id);
+            if(user.Id.NotEmpty())
+            {
+                return user.Id;
+            }
+                
+            var dbUserResult = await userService.GetByUsername(user.Username);
+            if (dbUserResult.IsFailure)
+            {
+                throw new Exception(string.Format("GetUserIdAsync: Failed to get user from DB. User: {0}", user));
+            };
+
+            return dbUserResult.Value.Id;
         }
 
-        public Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
+        public async Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
         {
             Audit<User>(Keycodes.AttemptGetUserNameAsync, user);
 
-            return Task.FromResult(user.Username);
+            if (user.Username.NotEmpty())
+            {
+                return user.Username;
+            }
+
+            var dbUserResult = await userService.GetById(user.Id);
+            if (dbUserResult.IsFailure)
+            {
+                throw new Exception(string.Format("GetUserNameAsync: Failed to get user from DB. User: {0}", user));
+            }
+
+            return dbUserResult.Value.Username;
         }
 
-        public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
+        public async Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
         {
             Audit<User, object>(Keycodes.AttemptSetNormalizedUserNameAsync, user, new { normalizedName = normalizedName});
 
-            // var result = await userService.SetUsername(user, normalizedName, cancellationToken);
-
-            // Audit<Result<User>>(Keycodes.SetNormalizedUserNameAsyncComplete, result);
-
+            var result = await userService.SetNormalizedUsername(user, normalizedName, cancellationToken);
             user.NormalizedUserName = normalizedName;
-            return Task.CompletedTask;
+
+            Audit<Result<User>>(Keycodes.SetNormalizedUserNameAsyncComplete, result);
         }
 
         public async Task SetUserNameAsync(User user, string userName, CancellationToken cancellationToken)
@@ -122,6 +147,7 @@ namespace Common.Security
             Audit<User, object>(Keycodes.AttemptSetUserNameAsync, user, new { userName = userName});
 
             var result = await userService.SetUsername(user, userName, cancellationToken);
+            user.Username = userName;
 
             Audit<Result<User>>(Keycodes.SetUserNameAsyncComplete, result);
         }
@@ -151,19 +177,30 @@ namespace Common.Security
         {
             Audit<User>(Keycodes.AttemptGetPasswordHashAsync, user);
 
-            var result = await userService.GetPasswordHash(user.Id, cancellationToken);   
+            if (user.PasswordHash.NotEmpty())
+            {
+                return user.PasswordHash;
+            }
+
+            var result = await userService.GetPasswordHash(user.Id, cancellationToken);
+            if (result.IsFailure)
+            {
+                throw new Exception(string.Format("GetPasswordHashAsync: Failed to get password hash from DB. User: {0}", user));
+            }
 
             Audit<Result<string>>(Keycodes.GetPasswordHashAsyncComplete, result);        
-
             
-            return result.IsSuccess
-                ? result.Value
-                : string.Empty;
+            return result.Value;
         }
 
         public async Task<bool> HasPasswordAsync(User user, CancellationToken cancellationToken)
         {
             Audit<User>(Keycodes.AttemptHasPasswordAsync, user);
+
+            if (user.PasswordHash.NotEmpty())
+            {
+                return true;
+            }
 
             var password = await GetPasswordHashAsync(user, cancellationToken);
 
@@ -172,15 +209,14 @@ namespace Common.Security
             return password.NotEmpty();
         }
 
-        public Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken)
+        public async Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken)
         {
             Audit<User, object>(Keycodes.AttemptSetPasswordHashAsync, user, new { passwordHash = passwordHash });
 
-            // var result = await userService.UpdatePassword(user, passwordHash, cancellationToken);
+            var result = await userService.UpdatePassword(user, passwordHash, cancellationToken);
             user.PasswordHash = passwordHash;
             
-            // Audit<Result>(Keycodes.SetPasswordHashAsyncComplete, result);
-            return Task.CompletedTask;
+            Audit<Result>(Keycodes.SetPasswordHashAsyncComplete, result);
         }
 
         public async Task RemoveLoginAsync(User user, string loginProvider, string providerKey, CancellationToken cancellationToken)
@@ -188,6 +224,10 @@ namespace Common.Security
             Audit<User, object>(Keycodes.AttemptRemoveLoginAsync, user, new { loginProvider =  loginProvider, providerKey = providerKey });
 
             var result = await userService.Delete(user.Id);
+            if (result.IsFailure)
+            {
+                throw new Exception(string.Format("RemoveLoginAsync: Failed to delete user. User: {0}", user));
+            }
 
             Audit<Result>(Keycodes.RemoveLoginAsyncComplete, result);
         }

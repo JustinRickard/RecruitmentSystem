@@ -46,19 +46,19 @@ namespace Common.Security
                 : null;            
         }
 
-        public async Task<string> GetNormalizedRoleNameAsync(Role role, CancellationToken cancellationToken)
+        public Task<string> GetNormalizedRoleNameAsync(Role role, CancellationToken cancellationToken)
         {
-            return role.Name;
+            return Task.FromResult(role.Name);
         }
         
-        public async Task<string> GetRoleIdAsync(Role role, CancellationToken cancellationToken)
+        public Task<string> GetRoleIdAsync(Role role, CancellationToken cancellationToken)
         {
-            return role.Id;
+            return Task.FromResult(role.Id);
         }
         
-        public async Task<string> GetRoleNameAsync(Role role, CancellationToken cancellationToken)
+        public Task<string> GetRoleNameAsync(Role role, CancellationToken cancellationToken)
         {
-            return role.Name;
+            return Task.FromResult(role.Name);
         }
         
         public async Task SetNormalizedRoleNameAsync(Role role, string normalizedName, CancellationToken cancellationToken)

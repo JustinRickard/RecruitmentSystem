@@ -15,7 +15,9 @@ namespace Common
                     public const string AttemptEdit = "UserAttemptEdit";
                     public const string  EditComplete = "UserEditComplete";
                     public const string AttemptEditUsername = "AttemptEditUsername";
+                    public const string AttemptEditNormalizedUsername = "AttemptEditNormalizedUsername";
                     public const string EditUsernameComplete = "EditUsernameComplete";
+                    public const string EditNormalizedUsernameComplete = "EditNormalizedUsernameComplete";
                     public const string AttemptUpdatePassword = "AttemptUpdatePassword";
                     public const string UpdatePasswordComplete = "UpdatePasswordComplete";
 

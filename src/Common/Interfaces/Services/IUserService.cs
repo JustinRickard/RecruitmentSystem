@@ -26,6 +26,8 @@ namespace Common.Interfaces.Services
 
          Task<Result<User>> SetUsername(User user, string username, CancellationToken cancellationToken);
 
+         Task<Result<User>> SetNormalizedUsername(User user, string normalizedUsername, CancellationToken cancellationToken);
+
          Task<Result> Delete(string id);
 
          Task<Result> Obliterate(string id);

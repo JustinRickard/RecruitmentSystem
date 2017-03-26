@@ -121,7 +121,7 @@ namespace DAL.MongoDB.Repositories
                     
                     return ReturnMaybeUser(newUser);
                 }
-                return null;
+                return Maybe<User>.Fail;
             }
         }
 
@@ -139,9 +139,28 @@ namespace DAL.MongoDB.Repositories
                     var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                     return ReturnMaybeUser(newUser);
                 }
-                return null;
+                return Maybe<User>.Fail;
             }
         }
+
+        public async Task<Maybe<User>> UpdateNormalizedUsername (User user, string normalizedUsername, CancellationToken cancellationToken)
+        {
+            using (var ctx =  GetContext()) {
+                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
+                if (oldUser != null) {
+                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
+                    var update = Builders<DbUser>.Update
+                        .Set(x => x.NormalizedUserName, normalizedUsername);
+                    
+                    await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
+
+                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
+                    return ReturnMaybeUser(newUser);
+                }
+                return Maybe<User>.Fail;
+            }
+        }
+    
 
         public async Task<Maybe<User>> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken)
         {
@@ -157,7 +176,7 @@ namespace DAL.MongoDB.Repositories
                     var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
                     return ReturnMaybeUser(newUser);
                 }
-                return null;
+                return Maybe<User>.Fail;
             }
         }
 
@@ -173,7 +192,7 @@ namespace DAL.MongoDB.Repositories
                         .Set(x => x.LastModified, DateTimeOffset.Now);
                     
                     await ctx.Users.UpdateOneAsync(filter, update);
-                }
+                }           
             }
         }
 
