@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Common.Classes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Site.Admin2.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly AppSettings appSettings;

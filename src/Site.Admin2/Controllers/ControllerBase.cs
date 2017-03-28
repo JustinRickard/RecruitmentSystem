@@ -21,6 +21,18 @@ namespace Site.Admin2.Controllers
             this.auditRepository = auditRepository;
         }
 
+        internal protected IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToHome();
+            }
+        }
+
         internal protected IActionResult RedirectToHome()
         {
             return RedirectToAction("Index", "Home");

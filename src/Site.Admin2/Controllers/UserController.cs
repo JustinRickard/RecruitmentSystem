@@ -11,9 +11,11 @@ using Common.Interfaces.Services;
 using Site.Admin2.DtoConversions;
 using Site.Admin2.ViewModels;
 using Common.Interfaces.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Site.Admin2.Controllers
 {
+    [Authorize]
     public class UserController : ControllerBase
     {
         IAppSettings appSettings;

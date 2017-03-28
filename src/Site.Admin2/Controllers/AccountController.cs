@@ -57,12 +57,13 @@ namespace Site.Admin2.Controllers
         [HttpPost] 
         public async Task<IActionResult> Logout() { 
             await signInManager.SignOutAsync(); 
-            return RedirectToAction("Index", "Home"); 
+            return RedirectToAction("Login", "Account"); 
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -77,8 +78,8 @@ namespace Site.Admin2.Controllers
 
             if (result.Succeeded)
             {
-                await Audit(AuditType.AdminLogin, string.Format("Successful login for user with username {0}", model.Username));
-                return RedirectToHome();
+                await Audit(AuditType.AdminLogin, string.Format("Successful login for user with username {0}. returnUrl {1}.", model.Username, returnUrl));
+                return RedirectToLocal(returnUrl);
             }
             else if (result.RequiresTwoFactor)
             {
