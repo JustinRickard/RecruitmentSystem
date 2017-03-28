@@ -8,20 +8,17 @@
     @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { ReturnUrl = ViewBag.ReturnUrl }))
     {
         <h1>Log in</h1>
+        <br />
 
         <h4>Username</h4>
-        @Html.TextBoxFor(x => x.Username)
+        @Html.TextBoxFor(x => x.Username, new { @class="form-control" })
 
-        <hr>
 
         <h4>Password</h4>
-        @Html.TextBoxFor(x => x.Password)
+        @Html.TextBoxFor(x => x.Password, new { @class="form-control" })
 
-        <hr>
-
-        <div id="buttons-container" class="col-md-12">
-            <input type="submit" value="Log in" class="btn-primary">
-        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Log in</button>
     }
 
     <hr>
