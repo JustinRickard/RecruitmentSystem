@@ -112,6 +112,8 @@ namespace Site.Admin2
                 AutomaticChallenge = true
             });
 
+            app.UseIdentity();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
