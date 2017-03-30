@@ -20,9 +20,8 @@ namespace Common.Security
 
         public UserStore (
             IUserService userService,
-            IAuditRepository auditRepository,
-            IJsonHelper jsonHelper
-        ) : base (auditRepository, jsonHelper)
+            IAuditHelper auditHelper
+        ) : base (auditHelper)
         {
             this.userService = userService;
         }

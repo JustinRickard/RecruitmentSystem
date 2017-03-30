@@ -7,18 +7,19 @@ using Microsoft.Extensions.Options;
 using Common.Classes;
 using Common.Interfaces.Repositories;
 using Common.Enums;
+using Common.Interfaces.Helpers;
 
 namespace Site.Admin2.Controllers
 {    
     public class ControllerBase : Controller
     {
-        protected internal IAuditRepository auditRepository;
+        protected internal IAuditHelper auditHelper;
 
         public ControllerBase (
-            IAuditRepository auditRepository
+            IAuditHelper auditHelper
         )
         {
-            this.auditRepository = auditRepository;
+            this.auditHelper = auditHelper;
         }
 
         internal protected IActionResult RedirectToLocal(string returnUrl)
@@ -42,8 +43,19 @@ namespace Site.Admin2.Controllers
             ViewBag.Message = message;
         }
 
-        internal protected async Task Audit(AuditType type, string message) {
-            await auditRepository.Add(type, message);
+        public async Task Audit(AuditType type, string message)
+        {
+            await auditHelper.Audit(type, message);
+        }
+
+        public async Task Audit<T>(AuditType type, string prefix, T objectToSerialize)
+        {
+            await auditHelper.Audit<T>(type, prefix, objectToSerialize);
+        }
+
+        public async Task Audit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
+        {
+            await auditHelper.Audit<T1,T2>(type, prefix, objectToSerialize, parameters);
         }
     }
 }

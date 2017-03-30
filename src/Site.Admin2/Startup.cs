@@ -78,6 +78,7 @@ namespace Site.Admin2
             services.AddScoped<IRoleService, RoleService>();
 
             services.AddScoped<IJsonHelper, JsonHelper>();
+            services.AddScoped<IAuditHelper, AuditHelper>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();
 
             // services.AddInstance<IUserStore, UserStore>();

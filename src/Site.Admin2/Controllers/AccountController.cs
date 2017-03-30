@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
 using Common.Dto;
 using Common.Enums;
+using Common.Interfaces.Helpers;
 using Common.Interfaces.Repositories;
 using Common.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Site.Admin2.ViewModels.Account;
 
 namespace Site.Admin2.Controllers
 {
@@ -17,9 +19,9 @@ namespace Site.Admin2.Controllers
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IAuditRepository auditRepository,
+            IAuditHelper auditHelper,
             IUserService userService
-        ) : base (auditRepository)
+        ) : base (auditHelper)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -40,7 +42,7 @@ namespace Site.Admin2.Controllers
             await userManager.CreateAsync(user);
             var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
             
-            await auditRepository.Add(AuditType.AdminLogin, token);
+            await Audit(AuditType.AdminLogin, token);
 
             var dbUserResult = await userService.GetByUsername(user.Username);
             var dbUser = dbUserResult.Value;
@@ -49,12 +51,7 @@ namespace Site.Admin2.Controllers
             return View("Login");
         }
 
-        public IActionResult Register()
-        {                                    
-            return View();
-        }
-
-        [HttpPost] 
+        //[HttpPost] 
         public async Task<IActionResult> Logout() { 
             await signInManager.SignOutAsync(); 
             return RedirectToAction("Login", "Account"); 
@@ -100,39 +97,47 @@ namespace Site.Admin2.Controllers
             return View(model);
         }
 
+        public IActionResult Register()
+        {                                    
+            return View(new RegisterUserVM());
+        }
         
         [HttpPost]
-        public async Task<IActionResult> Register(string email, string password, string repassword)
+        public async Task<IActionResult> Register(RegisterUserVM model)
         {
-            if (password != repassword)
+            Audit(AuditType.AdminLogin, "Attempting to register user: {0}");
+            var existingUserResult = await userService.GetByUsername(model.Username);
+            if (existingUserResult.IsSuccess)
             {
-                ModelState.AddModelError(string.Empty, "Passwords don't match");
-                return View();
+                ModelState.AddModelError(nameof(model.Username), "This username already exists");
             }
 
-            var newUser = new User 
+            if (model.Password != model.RePassword)
             {
-                Username = email,
-                Email = email
+                ModelState.AddModelError(string.Empty, "Passwords don't match");
+                return View(model);
+            }
+
+            var user = new User 
+            {
+                Username = model.Username,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName
             };
 
-            var userCreationResult = await userManager.CreateAsync(newUser, password);
+            var userCreationResult = await userManager.CreateAsync(user, model.Password);
             if (!userCreationResult.Succeeded)
             {
                 foreach(var error in userCreationResult.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
-                return View();
+                return View(model);
             }
 
-            /*
-
-            var emailConfirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(newUser);
-            var tokenVerificationUrl = Url.Action("VerifyEmail", "Account", new {id = newUser.Id, token = emailConfirmationToken}, Request.Scheme);
-
-            // await messageService.Send(email, "Verify your email", $"Click <a href=\"{tokenVerificationUrl}\">here</a> to verify your email");
-
-            return Content("Check your email for a verification link");
-            */
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            await Audit(AuditType.AdminLogin, token);
+            var dbUserResult = await userService.GetByUsername(user.Username);
+            await userManager.AddPasswordAsync(dbUserResult.Value, model.Password);
 
             return View("RegisterComplete");
         }         

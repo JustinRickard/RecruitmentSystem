@@ -8,41 +8,27 @@ namespace Common.Services
 {
     public class ServiceBase
     {
-        IAuditRepository auditRepository;
-        IJsonHelper jsonHelper;
+        IAuditHelper auditHelper;
 
         public ServiceBase (
-            IAuditRepository auditRepository,
-            IJsonHelper jsonHelper
+            IAuditHelper auditHelper
         ) {
-            this.auditRepository = auditRepository;
-            this.jsonHelper = jsonHelper;
+            this.auditHelper = auditHelper;
         }
 
-        protected internal async Task Audit<T>(AuditType type, string prefix, T objectToSerialize) 
+        public async Task Audit(AuditType type, string message)
         {
-            await SaveAudit(type, prefix, objectToSerialize, new {});
+            await auditHelper.Audit(type, message);
         }
 
-        protected internal async Task Audit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
+        public async Task Audit<T>(AuditType type, string prefix, T objectToSerialize)
         {
-            await SaveAudit(type, prefix, objectToSerialize, parameters);
+            await auditHelper.Audit<T>(type, prefix, objectToSerialize);
         }
 
-        private async Task SaveAudit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
+        public async Task Audit<T1,T2>(AuditType type, string prefix, T1 objectToSerialize, T2 parameters)
         {
-            var jsonResultObject = jsonHelper.Serialize(objectToSerialize);
-            var jsonResultParameters = jsonHelper.Serialize(parameters);
-            if (jsonResultObject.IsSuccess && jsonResultParameters.IsSuccess) 
-            {
-                await auditRepository.Add(type, string.Format("{0}: {1}, {2}: {3}", prefix, jsonResultObject.Value, "Parameters", jsonResultParameters.Value));
-            }
-            else
-            {
-                throw new Exception("Failed to add audit for service.");
-                // log error
-                // alert
-            }
+            await auditHelper.Audit<T1,T2>(type, prefix, objectToSerialize, parameters);
         }
     }
 }

@@ -42,11 +42,13 @@
                         <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
                         <li><a asp-area="" asp-controller="Audit" asp-action="Index">Audit</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Log out</a></li>
                     } else {
                         <li><a asp-controller="Account" asp-action="Login">Login</a></li>
                         <li><a asp-controller="Account" asp-action="Register">Register</a></li>
                     }
                 </ul>
+                @*
                 @if (SignInManager.IsSignedIn(User)) { 
                 <div>
                 
@@ -55,15 +57,14 @@
                     </form>
                 </div> 
                 }
+                *@
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2017 - Recruitment System</p>
-        </footer>
+        
     </div>
 
     <environment names="Development">
@@ -85,4 +86,9 @@
 
     @RenderSection("scripts", required: false)
 </body>
+    <footer class="footer navbar-fixed-bottom bg-info">
+        <div class="container">
+            <p>&copy; 2017 - Recruitment System</p>
+        </div>
+    </footer>
 </html>

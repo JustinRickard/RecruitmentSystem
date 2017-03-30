@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Common.Classes;
 using Common.Interfaces;
+using Common.Interfaces.Helpers;
 using Common.Interfaces.Repositories;
 using Common.SearchFilters;
 using Microsoft.AspNetCore.Authorization;
@@ -15,12 +16,16 @@ namespace Site.Admin2.Controllers
     public class AuditController : ControllerBase
     {
         IAppSettings appSettings;
+        IAuditRepository auditRepository;
+        
         public AuditController(
             IOptions<AppSettings> appSettings,
+            IAuditHelper auditHelper,
             IAuditRepository auditRepository
-        ) : base (auditRepository)
+        ) : base (auditHelper)
         {
             this.appSettings = appSettings.Value;
+            this.auditRepository = auditRepository;
         }
 
         public async Task<IActionResult> Index()

@@ -12,6 +12,7 @@ using Site.Admin2.DtoConversions;
 using Site.Admin2.ViewModels;
 using Common.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Common.Interfaces.Helpers;
 
 namespace Site.Admin2.Controllers
 {
@@ -24,8 +25,8 @@ namespace Site.Admin2.Controllers
         public UserController(
             IOptions<AppSettings> appSettings,
             IUserService userService,
-            IAuditRepository auditRepository
-        ) : base (auditRepository)
+            IAuditHelper auditHelper
+        ) : base (auditHelper)
         {
             this.appSettings = appSettings.Value;
             this.userService = userService;

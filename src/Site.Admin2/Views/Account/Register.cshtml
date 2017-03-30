@@ -1,20 +1,39 @@
-<form method="POST">
-    <div>
-        <label >Email</label>
-        <input type="email" name="email"/>
+@model Site.Admin2.ViewModels.Account.RegisterUserVM
+
+<div id="page-outer-container" class="col-md-12">
+
+    <div class="col-md-3"></div>
+    <div id="page-inner-container" class="col-md-6">
+
+    <div asp-validation-summary="All"></div>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+        <h1>Register</h1>
+        <br />
+
+        <h4>First Name</h4>
+        @Html.TextBoxFor(x => x.FirstName, new { @class="form-control" })
+
+        <h4>Last Name</h4>
+        @Html.TextBoxFor(x => x.LastName, new { @class="form-control" })
+
+        <h4>Email</h4>
+        @Html.TextBoxFor(x => x.Email, new { @class="form-control" })
+
+        <h4>Username</h4>
+        @Html.TextBoxFor(x => x.Username, new { @class="form-control" })
+
+        <h4>Password</h4>
+        @Html.TextBoxFor(x => x.Password, new { @class="form-control" })
+
+        <h4>Retype Password</h4>
+        @Html.TextBoxFor(x => x.RePassword, new { @class="form-control" })
+
+        <br />
+        <button type="submit" class="btn btn-primary">Register</button>
+    }
+
     </div>
-
-    <div>
-        <label>Password</label>
-        <input type="password" name="password"/>
-    </div>
-
-    <div>
-        <label>Retype password</label>
-        <input type="password" name="repassword"/>
-    </div>
-
-    <input type="submit"/>
-</form>
-
-<div asp-validation-summary="All"></div>
+    <div class="col-md-3"></div>
+</div>

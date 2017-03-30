@@ -68,9 +68,7 @@ namespace DAL.MongoDB.Repositories
         public async Task<Maybe<User>> GetByNormalizedUsername(string normalizedUsername)
         {
             using (var ctx = GetContext()) {
-                var user = await ctx.Users.AsQueryable().Where(x => x.NormalizedUserName == normalizedUsername).SingleOrDefaultAsync();
-                await ctx.AuditLogs.InsertOneAsync(new DbAudit { Type = AuditType.UserRepository, Message = user.ToString() });
-
+                var user = await ctx.Users.AsQueryable().Where(x => x.NormalizedUserName == normalizedUsername).SingleOrDefaultAsync();                
                 return ReturnMaybeUser(user);
             };
         }

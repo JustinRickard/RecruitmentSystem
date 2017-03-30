@@ -17,9 +17,8 @@ namespace Common.Services
 
         public UserService (
             IUserRepository userRepository,
-            IAuditRepository auditRepository,
-            IJsonHelper jsonHelper
-        ) : base (auditRepository, jsonHelper)
+            IAuditHelper auditHelper
+        ) : base (auditHelper)
         {
             this.userRepository = userRepository;
         }
