@@ -40,28 +40,25 @@ namespace DAL.MongoDB.Repositories
             return dbUsers.ToDto();
         }
 
-        public async Task<IEnumerable<User>> Get(UserFilter filter)
-        {
-            using (var ctx = GetContext()) {
-
-                var users = await Filter(ctx, filter)
-                    .ToListAsync();
-
-                return users.ToDto();
-            }
-        }
-
         public async Task<Maybe<User>> GetById (string id) 
         {
                 var dbUser = await GetOne<DbUser>(id);
-                return ReturnMaybeUser(dbUser);
+                return MaybeUser(dbUser);
         }
+
+        public async Task<IEnumerable<User>> Get(UserFilter filter)
+        {
+            using (var ctx = GetContext()) {
+                var users = await Filter(ctx, filter).ToListAsync();
+                return users.ToDto();
+            }
+        }        
 
         public async Task<Maybe<User>> GetByUsername (string username) 
         {
             using (var ctx = GetContext()) {
                 var user = await ctx.Users.AsQueryable().Where(x => x.Username == username).SingleOrDefaultAsync();
-                return ReturnMaybeUser(user);
+                return MaybeUser(user);
             };
         }
 
@@ -69,7 +66,7 @@ namespace DAL.MongoDB.Repositories
         {
             using (var ctx = GetContext()) {
                 var user = await ctx.Users.AsQueryable().Where(x => x.NormalizedUserName == normalizedUsername).SingleOrDefaultAsync();                
-                return ReturnMaybeUser(user);
+                return MaybeUser(user);
             };
         }
 
@@ -87,150 +84,85 @@ namespace DAL.MongoDB.Repositories
         }
 
         public async Task<Maybe<string>> GetPasswordHash (string userId) {
-            using (var ctx = GetContext()) 
-            {
-                var user = await ctx.Users.AsQueryable().Where(x => x.Id == userId).SingleOrDefaultAsync();
-                
-                return user != null
-                    ? new Maybe<string> (user.PasswordHash)
-                    : Maybe<string>.Fail;
-            }
+            var maybeUser = await GetOne<DbUser>(userId);
+
+            return  maybeUser.HasValue && maybeUser.Value.PasswordHash.NotEmpty()
+                ? new Maybe<string>(maybeUser.Value.PasswordHash)
+                : Maybe<string>.Fail;
         }
 
         // ADD
         public async Task<Maybe<User>> Add(User user) 
         {
             var addedUser = await Add<DbUser>(user.ToDb());
-            return ReturnMaybeUser(addedUser);
-
-            /*
-            using (var ctx = GetContext()) {
-                 await ctx.Users.InsertOneAsync(dbUser);
-                 var newUser = ctx.Users.AsQueryable().Where(x => x.Username == user.Username).FirstOrDefault();
-                 return ReturnMaybeUser(newUser);
-            }
-             */
+            return MaybeUser(addedUser);
         }
 
         // UPDATE
         public async Task<Maybe<User>> Update(User user) 
         {
-            using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                if (oldUser != null) {
-                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
-                    var update = Builders<DbUser>.Update
-                        .Set(x => x.Email, user.Email)
-                        .Set(x => x.FirstName, user.FirstName)
-                        .Set(x => x.LastName, user.LastName)
-                        .Set(x => x.LastModified, DateTime.Now);
+            var update = Builders<DbUser>.Update
+                .Set(x => x.Email, user.Email)
+                .Set(x => x.FirstName, user.FirstName)
+                .Set(x => x.LastName, user.LastName)
+                .Set(x => x.EmailConfirmed, user.EmailConfirmed);
 
-                    await ctx.Users.UpdateOneAsync(filter, update);
-
-                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                    
-                    return ReturnMaybeUser(newUser);
-                }
-                return Maybe<User>.Fail;
-            }
+            return await UpdateAndReturn<DbUser>(user.Id, update);           
         }
 
         public async Task<Maybe<User>> UpdateUsername (User user, string username, CancellationToken cancellationToken)
         {
-            using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                if (oldUser != null) {
-                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
-                    var update = Builders<DbUser>.Update
+            var update = Builders<DbUser>.Update
                         .Set(x => x.Username, username);
-                    
-                    await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
-
-                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                    return ReturnMaybeUser(newUser);
-                }
-                return Maybe<User>.Fail;
-            }
+            return await UpdateAndReturn<DbUser>(user.Id, update);
         }
 
         public async Task<Maybe<User>> UpdateNormalizedUsername (User user, string normalizedUsername, CancellationToken cancellationToken)
         {
-            using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                if (oldUser != null) {
-                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
-                    var update = Builders<DbUser>.Update
-                        .Set(x => x.NormalizedUserName, normalizedUsername);
-                    
-                    await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
-
-                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                    return ReturnMaybeUser(newUser);
-                }
-                return Maybe<User>.Fail;
-            }
+            var update = Builders<DbUser>.Update
+                .Set(x => x.NormalizedUserName, normalizedUsername);
+            return await UpdateAndReturn<DbUser>(user.Id, update);
         }
     
 
         public async Task<Maybe<User>> UpdatePassword(User user, string passwordHash, CancellationToken cancellationToken)
         {
-            using (var ctx =  GetContext()) {
-                var oldUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                if (oldUser != null) {
-                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, oldUser.Id);
-                    var update = Builders<DbUser>.Update
+            var update = Builders<DbUser>.Update
                         .Set(x => x.PasswordHash, passwordHash);
-                    
-                    await ctx.Users.UpdateOneAsync(filter, update, null, cancellationToken);
-
-                    var newUser = await ctx.Users.AsQueryable().Where(x => x.Id == user.Id).SingleOrDefaultAsync();
-                    return ReturnMaybeUser(newUser);
-                }
-                return Maybe<User>.Fail;
-            }
+            return await UpdateAndReturn<DbUser>(user.Id, update);
         }
 
         // DELETE
         public async Task Delete(string id) 
         {
-            using (var ctx = GetContext()) {
-                var user = await ctx.Users.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
-                if (user != null) {
-                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, user.Id);
-                    var update = Builders<DbUser>.Update
-                        .Set(x => x.Deleted, true)
-                        .Set(x => x.LastModified, DateTimeOffset.Now);
-                    
-                    await ctx.Users.UpdateOneAsync(filter, update);
-                }           
-            }
+            await Delete<DbUser>(id);
         }
-
+        
         public async Task Obliterate (string id) 
         {
-            using (var ctx = GetContext()) {
-                var user = await ctx.Users.AsQueryable().Where(x => x.Id == id).SingleOrDefaultAsync();
-                if (user != null) {
-                    var filter = Builders<DbUser>.Filter.Eq(x => x.Id, user.Id);
-                    await ctx.Users.DeleteOneAsync(filter);
-                }
-            }
+            await Obliterate<DbUser>(id);
         }
 
         // HELPER METHODS
 
-        private Maybe<User> ReturnMaybeUser(Maybe<DbUser> user) 
+        private Maybe<User> MaybeUser(Maybe<DbUser> user) 
         {
             return user.HasValue
-                    ? ReturnMaybeUser(user.Value)
+                    ? MaybeUser(user.Value)
                     : Maybe<User>.Fail;
         }
 
-        private Maybe<User> ReturnMaybeUser(DbUser user) 
+        private Maybe<User> MaybeUser(DbUser user) 
         {
             return user != null 
                     ? new Maybe<User>(user.ToDto())
                     : Maybe<User>.Fail;
+        }
+
+        private async Task<Maybe<User>> UpdateAndReturn<TEntity>(string id, UpdateDefinition<DbUser> update)
+        {
+            var updatedUser = await Update<DbUser>(id, update);
+            return MaybeUser(updatedUser);
         }
 
         private IMongoQueryable<DbUser> Filter (RsMongoContext ctx, UserFilter filter) 
@@ -255,10 +187,6 @@ namespace DAL.MongoDB.Repositories
 
             if (filter.Username.NotEmpty()) {
                 query = query.Where(x => x.Username.CaseInsensitiveEquals(filter.Username));
-            }
-
-            if (filter.Gender.HasValue) {
-                query = query.Where(x => x.Gender == filter.Gender);
             }
 
             return query;

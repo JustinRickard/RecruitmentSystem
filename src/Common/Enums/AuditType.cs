@@ -7,6 +7,7 @@ namespace Common.Enums
         UserRecord,
         UserRepository,
         UserStore,
-        PasswordStore
+        PasswordStore,
+        RepositoryBase
     }
 }
