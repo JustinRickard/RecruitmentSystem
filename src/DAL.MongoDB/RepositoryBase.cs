@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using Common.Interfaces.Repositories;
-// using DAL.MongoDB.Classes;
 
 namespace DAL.MongoDB
 {
@@ -49,10 +48,16 @@ namespace DAL.MongoDB
             record.Deleted = false;
         }
 
+        // Generic CRUD operations
+        private FilterDefinition<TEntity> GetByIdFilter<TEntity> (string id)
+        {
+            return Builders<TEntity>.Filter.Eq("Id", id);
+        }
+
+        // GET
         internal protected async Task<Maybe<TEntity>> GetOne<TEntity>(string id) where TEntity : class, new()
         {            
-                var filter = Builders<TEntity>.Filter.Eq("Id", id);
-                return await GetOne<TEntity>(filter);            
+                return await GetOne<TEntity>(GetByIdFilter<TEntity>(id));
         }
 
         internal protected async Task<Maybe<TEntity>> GetOne<TEntity>(FilterDefinition<TEntity> filter) where TEntity : class, new()
@@ -87,6 +92,27 @@ namespace DAL.MongoDB
         {
             var filter = Builders<TEntity>.Filter.Eq("Deleted", false);
             return await GetMany<TEntity>(filter);
+        }
+
+        // ADD
+        public async Task<Maybe<TEntity>> Add<TEntity>(TEntity dbRecord) where TEntity : IDbRecord
+        {
+            SetInitialRecordValues(dbRecord);
+
+            using (var ctx = GetContext()) {
+                var collection = ctx.GetCollection<TEntity>();
+                await collection.InsertOneAsync(dbRecord);
+                var filter = GetByIdFilter<TEntity>(dbRecord.Id);
+                var newRecord = await collection.Find(filter).SingleOrDefaultAsync(); 
+                return ReturnMaybe(newRecord);
+            }
+        }
+
+        private Maybe<TEntity> ReturnMaybe<TEntity>(TEntity entity)
+        {
+            return entity != null
+                ? new Maybe<TEntity>(entity)
+                : Maybe<TEntity>.Fail;
         }
 
         private DateTimeOffset Now => DateTimeOffset.Now;

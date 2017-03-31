@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Common.Dto;
 using Common.Enums;
 using Common.Interfaces.Helpers;
-using Common.Interfaces.Repositories;
 using Common.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,30 +27,6 @@ namespace Site.Admin2.Controllers
             this.userService = userService;
         }
 
-        // TEMPORARY: REMOVE ONCE AUTHENTICATION WORKS
-        public async Task<IActionResult> TempAddAdmin() {          
-
-            var user = new User
-            {
-                Username = "admin",
-                FirstName = "admin",
-                LastName = "admin",
-                Email = "admin@example.org"
-            };
-            
-            await userManager.CreateAsync(user);
-            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            
-            await Audit(AuditType.AdminLogin, token);
-
-            var dbUserResult = await userService.GetByUsername(user.Username);
-            var dbUser = dbUserResult.Value;
-            await userManager.AddPasswordAsync(dbUserResult.Value, "Admin$2017");
-
-            return View("Login");
-        }
-
-        //[HttpPost] 
         public async Task<IActionResult> Logout() { 
             await signInManager.SignOutAsync(); 
             return RedirectToAction("Login", "Account"); 
@@ -105,7 +80,7 @@ namespace Site.Admin2.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserVM model)
         {
-            Audit(AuditType.AdminLogin, "Attempting to register user: {0}");
+            await Audit(AuditType.AdminLogin, "Attempting to register user: {0}");
             var existingUserResult = await userService.GetByUsername(model.Username);
             if (existingUserResult.IsSuccess)
             {

@@ -100,14 +100,16 @@ namespace DAL.MongoDB.Repositories
         // ADD
         public async Task<Maybe<User>> Add(User user) 
         {
-            var dbUser = user.ToDb();
-            SetInitialRecordValues(dbUser);
+            var addedUser = await Add<DbUser>(user.ToDb());
+            return ReturnMaybeUser(addedUser);
 
+            /*
             using (var ctx = GetContext()) {
                  await ctx.Users.InsertOneAsync(dbUser);
                  var newUser = ctx.Users.AsQueryable().Where(x => x.Username == user.Username).FirstOrDefault();
                  return ReturnMaybeUser(newUser);
             }
+             */
         }
 
         // UPDATE
