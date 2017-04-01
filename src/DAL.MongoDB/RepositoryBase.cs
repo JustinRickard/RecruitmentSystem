@@ -39,10 +39,6 @@ namespace DAL.MongoDB
         }
 
         // Generic CRUD operations
-        private FilterDefinition<TEntity> GetByIdFilter<TEntity> (string id) where TEntity : IDbRecord
-        {
-            return Builders<TEntity>.Filter.Eq(x => x.Id, id);
-        }
 
         // GET
         internal protected async Task<Maybe<TEntity>> GetOne<TEntity>(string id) where TEntity : DbRecordBase, new()
@@ -142,13 +138,6 @@ namespace DAL.MongoDB
 
         // Helper methods
 
-        private Maybe<TEntity> ReturnMaybe<TEntity>(TEntity entity)
-        {
-            return entity != null
-                ? new Maybe<TEntity>(entity)
-                : Maybe<TEntity>.Fail;
-        }
-
         internal protected async Task<TEntity> GetById<TEntity>(IRsMongoContext ctx, string id) where TEntity : IDbRecord
         {
             var collection = ctx.GetCollection<TEntity>();
@@ -156,6 +145,20 @@ namespace DAL.MongoDB
             var record = await collection.Find(filter).SingleOrDefaultAsync();
             return record;
         }
+
+        private Maybe<TEntity> ReturnMaybe<TEntity>(TEntity entity)
+        {
+            return entity != null
+                ? new Maybe<TEntity>(entity)
+                : Maybe<TEntity>.Fail;
+        }
+
+        private FilterDefinition<TEntity> GetByIdFilter<TEntity> (string id) where TEntity : IDbRecord
+        {
+            return Builders<TEntity>.Filter.Eq(x => x.Id, id);
+        }
+
+        
         private DateTimeOffset Now => DateTimeOffset.Now;
     }
 }

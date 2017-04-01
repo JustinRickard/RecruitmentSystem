@@ -1,4 +1,5 @@
 using System;
+using Common.Dto;
 using Common.Enums;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -16,8 +17,10 @@ namespace DAL.MongoDB.Models
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
         public string Token { get; set; }
-        
+        public UserSettings Settings { get; set; }
+        /*
         [BsonRepresentation(BsonType.String)] 
         public Gender Gender { get; set; }
+         */
     }
 }
