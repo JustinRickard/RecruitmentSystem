@@ -1,0 +1,62 @@
+{
+  "name": "recruitment-system-app-react",
+  "version": "1.0.0",
+  "description": "Front end application for Justin Rickard's Recruitment System written in React.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustinRickard/RecruitmentSystem.git"
+  },
+  "keywords": [
+    "Recruitment",
+    "Justin",
+    "Rickard",
+    "React",
+    "ReactJS",
+    "React.js",
+    "Redux",
+    "React-Redux",
+    "Javascript"
+  ],
+  "author": "Justin Rickard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustinRickard/RecruitmentSystem/issues"
+  },
+  "homepage": "https://github.com/JustinRickard/RecruitmentSystem#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-redux": "^5.0.0-alpha.6",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "toastr": "^2.1.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-react-display-name": "^2.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-register": "^6.24.1",
+    "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-watch": "^3.1.0",
+    "expect": "^1.20.2",
+    "mocha": "^3.2.0",
+    "react-addons-test-utils": "^15.5.1",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2"
+  }
+}
