@@ -16054,8 +16054,7 @@ var AssessmentPage = function (_React$Component) {
     _createClass(AssessmentPage, [{
         key: 'render',
         value: function render() {
-            return;
-            _react2.default.createElement(
+            return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(
