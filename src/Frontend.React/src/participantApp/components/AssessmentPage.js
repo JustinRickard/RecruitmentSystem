@@ -6,8 +6,14 @@ class AssessmentPage extends React.Component {
             <div>
                 <h1>Assessment page</h1>
                 <p>Temporary assessment page text</p>
+                <Button text="Back" />
+                <Button text="Next" />
             </div>
         );
+    }
+
+    onNext() {
+        alert("Button next clicked")
     }
 }
 

@@ -24,7 +24,7 @@ module.exports = {
         ]
     },
     devServer: {
-        publicPath: "/",
+        publicPath: "./",
         contentBase: "./",
         hot: true
     },
