@@ -8,7 +8,11 @@ class WorkflowPage extends React.Component {
             <div>
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
-                        <h1>Workflows</h1>
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><a href="">Home</a></li>
+                        <li className="breadcrumb-item active">Workflows</li>
+                    </ol>
+                    <h1>Workflows</h1>
                 </div>
                 <div className="col-md-3"></div>
             </div>

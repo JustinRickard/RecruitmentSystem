@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-class UserPage extends React.Component {
+class LogoutPage extends React.Component {
 
     render() {
         return (
@@ -10,9 +10,9 @@ class UserPage extends React.Component {
                 <div className="col-md-6">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><a href="">Home</a></li>
-                        <li className="breadcrumb-item active">Users</li>
+                        <li className="breadcrumb-item active">Logout</li>
                     </ol>
-                    <h1>Users</h1>
+                    <h1>You are now logged out</h1>
                 </div>
                 <div className="col-md-3"></div>
             </div>
@@ -20,4 +20,4 @@ class UserPage extends React.Component {
     }
 }
 
-export default UserPage;
+export default LogoutPage;

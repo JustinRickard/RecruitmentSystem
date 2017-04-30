@@ -2,6 +2,16 @@ import React from 'react';
 import { Link, IndexLink } from 'react-router';
 
 class Header extends React.Component{
+
+    componentDidMount() {
+        $(".navbar-nav").find("li").on("click", function() {
+            if ($( window ).width() <= 767) {
+                console.log("width is less than 767m running");
+                $(".navbar").find(".navbar-toggle").click(); 
+            }
+        }); 
+    }
+
     render() {
         
         return (
@@ -19,11 +29,11 @@ class Header extends React.Component{
                     <div className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
                             <li><IndexLink to="/">Home</IndexLink></li>
-                            <li><Link to="Client">Clients</Link></li>
-                            <li><Link to="User">Users</Link></li>
-                            <li><Link to="Project">Projects</Link></li>
-                            <li><Link to="Workflow">Workflows</Link></li>
-                            <li><Link to="Audit">Audit</Link></li>
+                            <li><Link to="Clients">Clients</Link></li>
+                            <li><Link to="Users">Users</Link></li>
+                            <li><Link to="Projects">Projects</Link></li>
+                            <li><Link to="Workflows">Workflows</Link></li>
+                            <li><Link to="Audits">Audit</Link></li>
                             <li><Link to="Logout">Log out</Link></li>
                         </ul>
                     </div>

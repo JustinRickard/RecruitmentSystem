@@ -7,14 +7,16 @@ import ClientPage from './components/ClientPage';
 import ProjectPage from './components/ProjectPage';
 import WorkflowPage from './components/WorkflowPage';
 import AuditPage from './components/AuditPage';
+import LogoutPage from './components/LogoutPage';
 
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
-        <Route path="/user" component={UserPage} />
-        <Route path="/client" component={ClientPage} />
-        <Route path="/project" component={ProjectPage} />
-        <Route path="/workflow" component={WorkflowPage} />
-        <Route path="/audit" component={AuditPage} />
+        <Route path="/users" component={UserPage} />
+        <Route path="/clients" component={ClientPage} />
+        <Route path="/projects" component={ProjectPage} />
+        <Route path="/workflows" component={WorkflowPage} />
+        <Route path="/audits" component={AuditPage} />
+        <Route path="/logout" component={LogoutPage} />
     </Route>
 );

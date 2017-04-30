@@ -35783,17 +35783,22 @@ var _AuditPage = __webpack_require__(540);
 
 var _AuditPage2 = _interopRequireDefault(_AuditPage);
 
+var _LogoutPage = __webpack_require__(553);
+
+var _LogoutPage2 = _interopRequireDefault(_LogoutPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _react2.default.createElement(
     _reactRouter.Route,
     { path: '/', component: _App2.default },
     _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/user', component: _UserPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/client', component: _ClientPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/project', component: _ProjectPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/workflow', component: _WorkflowPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/audit', component: _AuditPage2.default })
+    _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _UserPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/clients', component: _ClientPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/projects', component: _ProjectPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/workflows', component: _WorkflowPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/audits', component: _AuditPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _LogoutPage2.default })
 );
 
 /***/ }),
@@ -35907,6 +35912,24 @@ var AuditPage = function (_React$Component) {
                     'div',
                     { className: 'col-md-6' },
                     _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Audits'
+                        )
+                    ),
+                    _react2.default.createElement(
                         'h1',
                         null,
                         'Audit logs'
@@ -35969,6 +35992,24 @@ var ClientPage = function (_React$Component) {
                     'div',
                     { className: 'col-md-6' },
                     _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Clients'
+                        )
+                    ),
+                    _react2.default.createElement(
                         'h1',
                         null,
                         'Clients'
@@ -36021,6 +36062,16 @@ var Header = function (_React$Component) {
     }
 
     _createClass(Header, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            $(".navbar-nav").find("li").on("click", function () {
+                if ($(window).width() <= 767) {
+                    console.log("width is less than 767m running");
+                    $(".navbar").find(".navbar-toggle").click();
+                }
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -36071,7 +36122,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: 'Client' },
+                                    { to: 'Clients' },
                                     'Clients'
                                 )
                             ),
@@ -36080,7 +36131,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: 'User' },
+                                    { to: 'Users' },
                                     'Users'
                                 )
                             ),
@@ -36089,7 +36140,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: 'Project' },
+                                    { to: 'Projects' },
                                     'Projects'
                                 )
                             ),
@@ -36098,7 +36149,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: 'Workflow' },
+                                    { to: 'Workflows' },
                                     'Workflows'
                                 )
                             ),
@@ -36107,7 +36158,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: 'Audit' },
+                                    { to: 'Audits' },
                                     'Audit'
                                 )
                             ),
@@ -36192,6 +36243,19 @@ var HomePage = function (_React$Component) {
                     'div',
                     { className: 'col-md-6' },
                     _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
                         'h1',
                         null,
                         'Home'
@@ -36253,6 +36317,24 @@ var ProjectPage = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'col-md-6' },
+                    _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Projects'
+                        )
+                    ),
                     _react2.default.createElement(
                         'h1',
                         null,
@@ -36316,6 +36398,24 @@ var UserPage = function (_React$Component) {
                     'div',
                     { className: 'col-md-6' },
                     _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Users'
+                        )
+                    ),
+                    _react2.default.createElement(
                         'h1',
                         null,
                         'Users'
@@ -36378,6 +36478,24 @@ var WorkflowPage = function (_React$Component) {
                     'div',
                     { className: 'col-md-6' },
                     _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Workflows'
+                        )
+                    ),
+                    _react2.default.createElement(
                         'h1',
                         null,
                         'Workflows'
@@ -36418,6 +36536,91 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Use browserHistory for production. Use hashHistory for initial development
 (0, _reactDom.render)(_react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: _routes2.default }), document.getElementById('app'));
+
+/***/ }),
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(16);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = __webpack_require__(64);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LogoutPage = function (_React$Component) {
+    _inherits(LogoutPage, _React$Component);
+
+    function LogoutPage() {
+        _classCallCheck(this, LogoutPage);
+
+        return _possibleConstructorReturn(this, (LogoutPage.__proto__ || Object.getPrototypeOf(LogoutPage)).apply(this, arguments));
+    }
+
+    _createClass(LogoutPage, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('div', { className: 'col-md-3' }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-6' },
+                    _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Logout'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'You are now logged out'
+                    )
+                ),
+                _react2.default.createElement('div', { className: 'col-md-3' })
+            );
+        }
+    }]);
+
+    return LogoutPage;
+}(_react2.default.Component);
+
+exports.default = LogoutPage;
 
 /***/ })
 /******/ ]);
