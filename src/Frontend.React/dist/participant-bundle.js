@@ -16057,19 +16057,42 @@ var AssessmentPage = function (_React$Component) {
             return _react2.default.createElement(
                 "div",
                 null,
+                _react2.default.createElement("div", { className: "col-md-3" }),
                 _react2.default.createElement(
-                    "h1",
-                    null,
-                    "Assessment page"
+                    "div",
+                    { className: "col-md-6" },
+                    _react2.default.createElement(
+                        "h1",
+                        null,
+                        "Assessment page"
+                    ),
+                    _react2.default.createElement(
+                        "p",
+                        null,
+                        "Temporary assessment page text"
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "btn-toolbar text-center" },
+                        _react2.default.createElement(
+                            "button",
+                            { className: "btn btn-lg", onClick: this.onBack.bind(this) },
+                            "Back"
+                        ),
+                        _react2.default.createElement(
+                            "button",
+                            { className: "btn btn-primary btn-lg", onClick: this.onNext.bind(this) },
+                            "Next"
+                        )
+                    )
                 ),
-                _react2.default.createElement(
-                    "p",
-                    null,
-                    "Temporary assessment page text"
-                ),
-                _react2.default.createElement(Button, { text: "Back" }),
-                _react2.default.createElement(Button, { text: "Next" })
+                _react2.default.createElement("div", { className: "col-md-3" })
             );
+        }
+    }, {
+        key: "onBack",
+        value: function onBack() {
+            alert("Button back clicked");
         }
     }, {
         key: "onNext",
@@ -16123,7 +16146,7 @@ var Header = function (_React$Component) {
 
             return _react2.default.createElement(
                 "div",
-                { className: "navbar navbar-default navbar-fixed-top" },
+                { className: "navbar navbar-default" },
                 _react2.default.createElement(
                     "div",
                     { className: "container-fluid" },
@@ -16192,16 +16215,17 @@ var HomePage = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement('div', { className: 'col-md-3' }),
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'Home page'
+                    'div',
+                    { className: 'col-md-6' },
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'Home page'
+                    )
                 ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    'Temporary home page text'
-                )
+                _react2.default.createElement('div', { className: 'col-md-3' })
             );
         }
     }]);

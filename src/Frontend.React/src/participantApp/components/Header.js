@@ -4,7 +4,7 @@ class Header extends React.Component{
     render() {
         
         return (
-            <div className="navbar navbar-default navbar-fixed-top">
+            <div className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
                         <div>
