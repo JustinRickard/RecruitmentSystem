@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, IndexLink } from 'react-router';
 
 class Header extends React.Component{
     render() {
@@ -17,13 +18,13 @@ class Header extends React.Component{
                     </div>
                     <div className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
-                            <li><a href="./#/">Home</a></li>
-                            <li><a href="./#/Client">Clients</a></li>
-                            <li><a href="./#/User">Users</a></li>
-                            <li><a href="./#/Project">Projects</a></li>
-                            <li><a href="./#/Workflow">Workflows</a></li>
-                            <li><a href="./#/Audit">Audit</a></li>
-                            <li><a href="./#/Logout">Log out</a></li>
+                            <li><IndexLink to="/">Home</IndexLink></li>
+                            <li><Link to="Client">Clients</Link></li>
+                            <li><Link to="User">Users</Link></li>
+                            <li><Link to="Project">Projects</Link></li>
+                            <li><Link to="Workflow">Workflows</Link></li>
+                            <li><Link to="Audit">Audit</Link></li>
+                            <li><Link to="Logout">Log out</Link></li>
                         </ul>
                     </div>
                 </div>

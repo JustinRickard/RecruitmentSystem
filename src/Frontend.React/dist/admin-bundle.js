@@ -36001,6 +36001,8 @@ var _react = __webpack_require__(16);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = __webpack_require__(64);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36019,103 +36021,103 @@ var Header = function (_React$Component) {
     }
 
     _createClass(Header, [{
-        key: "render",
+        key: 'render',
         value: function render() {
 
             return _react2.default.createElement(
-                "nav",
-                { className: "navbar navbar-inverse" },
+                'nav',
+                { className: 'navbar navbar-inverse' },
                 _react2.default.createElement(
-                    "div",
-                    { className: "container" },
+                    'div',
+                    { className: 'container' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "navbar-header" },
+                        'div',
+                        { className: 'navbar-header' },
                         _react2.default.createElement(
-                            "a",
-                            { className: "navbar-brand" },
-                            "Admin site"
+                            'a',
+                            { className: 'navbar-brand' },
+                            'Admin site'
                         ),
                         _react2.default.createElement(
-                            "button",
-                            { type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": ".navbar-collapse" },
+                            'button',
+                            { type: 'button', className: 'navbar-toggle', 'data-toggle': 'collapse', 'data-target': '.navbar-collapse' },
                             _react2.default.createElement(
-                                "span",
-                                { className: "sr-only" },
-                                "Toggle navigation"
+                                'span',
+                                { className: 'sr-only' },
+                                'Toggle navigation'
                             ),
-                            _react2.default.createElement("span", { className: "icon-bar" }),
-                            _react2.default.createElement("span", { className: "icon-bar" }),
-                            _react2.default.createElement("span", { className: "icon-bar" })
+                            _react2.default.createElement('span', { className: 'icon-bar' }),
+                            _react2.default.createElement('span', { className: 'icon-bar' }),
+                            _react2.default.createElement('span', { className: 'icon-bar' })
                         )
                     ),
                     _react2.default.createElement(
-                        "div",
-                        { className: "navbar-collapse collapse" },
+                        'div',
+                        { className: 'navbar-collapse collapse' },
                         _react2.default.createElement(
-                            "ul",
-                            { className: "nav navbar-nav" },
+                            'ul',
+                            { className: 'nav navbar-nav' },
                             _react2.default.createElement(
-                                "li",
+                                'li',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "./#/" },
-                                    "Home"
+                                    _reactRouter.IndexLink,
+                                    { to: '/' },
+                                    'Home'
                                 )
                             ),
                             _react2.default.createElement(
-                                "li",
+                                'li',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "./#/Client" },
-                                    "Clients"
+                                    _reactRouter.Link,
+                                    { to: 'Client' },
+                                    'Clients'
                                 )
                             ),
                             _react2.default.createElement(
-                                "li",
+                                'li',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "./#/User" },
-                                    "Users"
+                                    _reactRouter.Link,
+                                    { to: 'User' },
+                                    'Users'
                                 )
                             ),
                             _react2.default.createElement(
-                                "li",
+                                'li',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "./#/Project" },
-                                    "Projects"
+                                    _reactRouter.Link,
+                                    { to: 'Project' },
+                                    'Projects'
                                 )
                             ),
                             _react2.default.createElement(
-                                "li",
+                                'li',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "./#/Workflow" },
-                                    "Workflows"
+                                    _reactRouter.Link,
+                                    { to: 'Workflow' },
+                                    'Workflows'
                                 )
                             ),
                             _react2.default.createElement(
-                                "li",
+                                'li',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "./#/Audit" },
-                                    "Audit"
+                                    _reactRouter.Link,
+                                    { to: 'Audit' },
+                                    'Audit'
                                 )
                             ),
                             _react2.default.createElement(
-                                "li",
+                                'li',
                                 null,
                                 _react2.default.createElement(
-                                    "a",
-                                    { href: "./#/Logout" },
-                                    "Log out"
+                                    _reactRouter.Link,
+                                    { to: 'Logout' },
+                                    'Log out'
                                 )
                             )
                         )
