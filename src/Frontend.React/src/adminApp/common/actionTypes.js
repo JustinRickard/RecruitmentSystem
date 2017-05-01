@@ -1,0 +1,26 @@
+const actionTypes = {
+    ClientCreate: "CLIENT_CREATE",
+    ClientDelete: "CLIENT_DELETE",
+    ClientEdit: "CLIENT_EDIT",
+    ClientObliterate: "CLIENT_OBLITERATE",
+    ProjectCreate: "PROJECT_CREATE",
+    ProjectDelete: "PROJECT_DELETE",
+    ProjectEdit: "PROJECT_EDIT",
+    ProjectObliterate: "PROJECT_OBLITERATE",
+    ProjectAddUsers: "PROJECT_ADD_USERS",
+    ProjectRemoveUsers: "PROJECT_REMOVE_USERS",
+    UserCreate: "USER_CREATE",
+    UserDelete: "USER_DELETE",
+    UserEdit: "USER_EDIT",
+    UserObliterate: "USER_OBLITERATE",
+    WorkflowCreate: "WORKFLOW_CREATE",
+    WorkflowDelete: "WORKFLOW_DELETE",
+    WorkflowEdit: "WORKFLOW_EDIT",
+    WorkflowObliterate: "WORKFLOW_OBLITERATE",
+    WorkflowStepCreate: "WORKFLOW_STEP_CREATE",
+    WorkflowStepUserDelete: "WORKFLOW_STEP_DELETE",
+    WorkflowStepUserEdit: "WORKFLOW_STEP_EDIT",
+    WorkflowStepUserObliterate: "WORKFLOW_STEP_OBLITERATE",
+};
+
+export default actionTypes

@@ -4,9 +4,9 @@ import { Link, IndexLink } from 'react-router';
 class Header extends React.Component{
 
     componentDidMount() {
+        // Fix bug with mobile menu not collapsing after selecting page
         $(".navbar-nav").find("li").on("click", function() {
             if ($( window ).width() <= 767) {
-                console.log("width is less than 767m running");
                 $(".navbar").find(".navbar-toggle").click(); 
             }
         }); 
