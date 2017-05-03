@@ -1,16 +1,16 @@
 import {combineReducers} from 'redux'
-import clientReducer from './clientReducer';
-import userReducer from './userReducer';
-import projectReducer from './projectReducer';
-import workflowReducer from './workflowReducer';
-import workflowStepReducer from './workflowStepReducer';
+import clients from './clientReducer';
+import users from './userReducer';
+import projects from './projectReducer';
+import workflows from './workflowReducer';
+import workflowSteps from './workflowStepReducer';
 
 const rootReducer = combineReducers({
-    clientReducer,
-    userReducer,
-    projectReducer,
-    workflowReducer,
-    workflowStepReducer
+    clients,
+    users,
+    projects,
+    workflows,
+    workflowSteps
 });
 
 export default rootReducer;

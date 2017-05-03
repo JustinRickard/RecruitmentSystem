@@ -11,7 +11,7 @@ export default function clientReducer(state = [], action) {
             // Filter list?
         
 
-        default:
+        default: 
             return state;
     }
 }

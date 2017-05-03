@@ -20,4 +20,4 @@ class LogoutPage extends React.Component {
     }
 }
 
-export default LogoutPage;
+export default connect(mapStateToProps, mapDispatchToProps)(LogoutPage);

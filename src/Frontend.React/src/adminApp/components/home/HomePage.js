@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
 class HomePage extends React.Component {
 
@@ -18,5 +19,3 @@ class HomePage extends React.Component {
         );
     }
 }
-
-export default HomePage;

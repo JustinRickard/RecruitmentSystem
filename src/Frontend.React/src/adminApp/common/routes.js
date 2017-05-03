@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute }  from 'react-router';
 import App from '../components/App'
-import HomePage from '../components/HomePage';
-import UserPage from '../components/UserPage';
-import ClientPage from '../components/ClientPage';
-import ProjectPage from '../components/ProjectPage';
-import WorkflowPage from '../components/WorkflowPage';
-import AuditPage from '../components/AuditPage';
+import HomePage from '../components/home/HomePage';
+import UserPage from '../components/user/UserPage';
+import ClientPage from '../components/client/ClientPage';
+import ProjectPage from '../components/project/ProjectPage';
+import WorkflowPage from '../components/workflow/WorkflowPage';
+import AuditPage from '../components/audit/AuditPage';
 import LogoutPage from '../components/LogoutPage';
 
 export default (

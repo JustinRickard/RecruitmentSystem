@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
-class ProjectPage extends React.Component {
+class ClientPage extends React.Component {
 
     render() {
         return (
@@ -10,9 +11,9 @@ class ProjectPage extends React.Component {
                 <div className="col-md-6">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href="">Home</a></li>
-                            <li className="breadcrumb-item active">Projects</li>
+                            <li className="breadcrumb-item active">Clients</li>
                         </ol>
-                        <h1>Projects</h1>
+                        <h1>Clients</h1>
                 </div>
                 <div className="col-md-3"></div>
             </div>
@@ -20,4 +21,4 @@ class ProjectPage extends React.Component {
     }
 }
 
-export default ProjectPage;
+export default connect(mapStateToProps, mapDispatchToProps)(ClientPage);
