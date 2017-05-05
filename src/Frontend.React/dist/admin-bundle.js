@@ -37593,9 +37593,9 @@ var _reactRouter = __webpack_require__(52);
 
 var _reactRedux = __webpack_require__(105);
 
-var _panel = __webpack_require__(604);
+var _PanelLink = __webpack_require__(606);
 
-var _panel2 = _interopRequireDefault(_panel);
+var _PanelLink2 = _interopRequireDefault(_PanelLink);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37624,34 +37624,20 @@ var HomePage = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'col-md-6' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'col-xs-12 col-sm-6 col-md-6 col-lg-6' },
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { to: '/clients' },
-                            _react2.default.createElement(_panel2.default, {
-                                headerClass: 'panel-primary text-center',
-                                headerText: 'Clients',
-                                footerText: 'Manage clients, create new ones, etc...',
-                                iconClass: 'fa-address-card'
-                            })
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'col-xs-12 col-sm-6 col-md-6 col-lg-6' },
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { to: '/users' },
-                            _react2.default.createElement(_panel2.default, {
-                                headerClass: 'panel-info text-center',
-                                headerText: 'Users',
-                                footerText: 'Manage users, create new ones, etc...',
-                                iconClass: 'fa-user-circle'
-                            })
-                        )
-                    )
+                    _react2.default.createElement(_PanelLink2.default, {
+                        link: '/clients',
+                        headerClass: 'panel-primary text-center',
+                        headerText: 'Clients',
+                        footerText: 'Manage clients, create new ones, etc...',
+                        iconClass: 'fa-address-card'
+                    }),
+                    _react2.default.createElement(_PanelLink2.default, {
+                        link: '/users',
+                        headerClass: 'panel-info text-center',
+                        headerText: 'Users',
+                        footerText: 'Manage users, create new ones, etc...',
+                        iconClass: 'fa-user-circle'
+                    })
                 ),
                 _react2.default.createElement('div', { className: 'col-md-3' })
             );
@@ -39426,7 +39412,8 @@ function getAuditLogs(filter) {
 
 /***/ }),
 /* 603 */,
-/* 604 */
+/* 604 */,
+/* 605 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39492,6 +39479,74 @@ var Panel = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Panel;
+
+/***/ }),
+/* 606 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(14);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Panel = __webpack_require__(605);
+
+var _Panel2 = _interopRequireDefault(_Panel);
+
+var _reactRouter = __webpack_require__(52);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PanelLink = function (_React$Component) {
+    _inherits(PanelLink, _React$Component);
+
+    function PanelLink() {
+        _classCallCheck(this, PanelLink);
+
+        return _possibleConstructorReturn(this, (PanelLink.__proto__ || Object.getPrototypeOf(PanelLink)).apply(this, arguments));
+    }
+
+    _createClass(PanelLink, [{
+        key: 'render',
+        value: function render() {
+
+            var headerClass = this.props.headerClass + ' text-center';
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'col-xs-12 col-sm-6 col-md-6 col-lg-6' },
+                _react2.default.createElement(
+                    _reactRouter.Link,
+                    { to: this.props.link },
+                    _react2.default.createElement(_Panel2.default, {
+                        headerClass: headerClass,
+                        headerText: this.props.headerText,
+                        footerText: this.props.footerText,
+                        iconClass: this.props.iconClass
+                    })
+                )
+            );
+        }
+    }]);
+
+    return PanelLink;
+}(_react2.default.Component);
+
+exports.default = PanelLink;
 
 /***/ })
 /******/ ]);
