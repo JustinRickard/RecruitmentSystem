@@ -6,6 +6,7 @@ import UserPage from '../components/user/UserPage';
 import ClientPage from '../components/client/ClientPage';
 import ProjectPage from '../components/project/ProjectPage';
 import WorkflowPage from '../components/workflow/WorkflowPage';
+import WorkflowStepPage from '../components/workflowStep/WorkflowStepPage';
 import AuditPage from '../components/audit/AuditPage';
 import LogoutPage from '../components/LogoutPage';
 
@@ -16,6 +17,7 @@ export default (
             <Route path="/clients" component={ClientPage} />
             <Route path="/projects" component={ProjectPage} />
             <Route path="/workflows" component={WorkflowPage} />
+            <Route path="/workflowSteps" component={WorkflowStepPage} />
             <Route path="/audits" component={AuditPage} />
             <Route path="/logout" component={LogoutPage} />
         </Route>

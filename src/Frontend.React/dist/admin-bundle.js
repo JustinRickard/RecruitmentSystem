@@ -36722,6 +36722,10 @@ var _WorkflowPage = __webpack_require__(565);
 
 var _WorkflowPage2 = _interopRequireDefault(_WorkflowPage);
 
+var _WorkflowStepPage = __webpack_require__(608);
+
+var _WorkflowStepPage2 = _interopRequireDefault(_WorkflowStepPage);
+
 var _AuditPage = __webpack_require__(560);
 
 var _AuditPage2 = _interopRequireDefault(_AuditPage);
@@ -36740,6 +36744,7 @@ exports.default = _react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: '/clients', component: _ClientPage2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: '/projects', component: _ProjectPage2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: '/workflows', component: _WorkflowPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/workflowSteps', component: _WorkflowStepPage2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: '/audits', component: _AuditPage2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _LogoutPage2.default })
 );
@@ -37623,20 +37628,48 @@ var HomePage = function (_React$Component) {
                 _react2.default.createElement('div', { className: 'col-md-3' }),
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-md-6' },
+                    { className: 'col-xs-12 col-sm-12 col-md-8' },
                     _react2.default.createElement(_PanelLink2.default, {
                         link: '/clients',
-                        headerClass: 'panel-primary text-center',
+                        headerClass: 'panel-primary',
                         headerText: 'Clients',
                         footerText: 'Manage clients, create new ones, etc...',
                         iconClass: 'fa-address-card'
                     }),
                     _react2.default.createElement(_PanelLink2.default, {
                         link: '/users',
-                        headerClass: 'panel-info text-center',
+                        headerClass: 'panel-primary',
                         headerText: 'Users',
                         footerText: 'Manage users, create new ones, etc...',
                         iconClass: 'fa-user-circle'
+                    }),
+                    _react2.default.createElement(_PanelLink2.default, {
+                        link: '/projects',
+                        headerClass: 'panel-primary',
+                        headerText: 'Projects',
+                        footerText: 'Administer projects, add participants, etc...',
+                        iconClass: 'fa-tasks'
+                    }),
+                    _react2.default.createElement(_PanelLink2.default, {
+                        link: '/audits',
+                        headerClass: 'panel-warning',
+                        headerText: 'Audit Logs',
+                        footerText: 'View audit logs of recent activity and filter by various criteria.',
+                        iconClass: 'fa-history'
+                    }),
+                    _react2.default.createElement(_PanelLink2.default, {
+                        link: '/workflows',
+                        headerClass: 'panel-info',
+                        headerText: 'Workflows',
+                        footerText: 'Create new workflows and modify existing ones, etc...',
+                        iconClass: 'fa-briefcase'
+                    }),
+                    _react2.default.createElement(_PanelLink2.default, {
+                        link: '/workflowSteps',
+                        headerClass: 'panel-info',
+                        headerText: 'Workflow Steps',
+                        footerText: 'Create new workflow steps, modify existing ones, etc',
+                        iconClass: 'fa-code-fork'
                     })
                 ),
                 _react2.default.createElement('div', { className: 'col-md-3' })
@@ -39547,6 +39580,203 @@ var PanelLink = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = PanelLink;
+
+/***/ }),
+/* 607 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.createWorkflowStep = createWorkflowStep;
+exports.editWorkflowStep = editWorkflowStep;
+exports.deleteWorkflowStep = deleteWorkflowStep;
+exports.obliterateWorkflowStep = obliterateWorkflowStep;
+
+var _actionTypes = __webpack_require__(160);
+
+var _actionTypes2 = _interopRequireDefault(_actionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function createWorkflowStep(workflowStep) {
+    return {
+        type: _actionTypes2.default.WorkflowStepCreate,
+        workflowStep: workflowStep
+    };
+}
+
+function editWorkflowStep(workflowStep) {
+    return {
+        type: _actionTypes2.default.workflowStepEdit,
+        workflowStep: workflowStep
+    };
+}
+
+function deleteWorkflowStep(workflowStep) {
+    return {
+        type: _actionTypes2.default.workflowStepDelete,
+        workflowStep: workflowStep
+    };
+}
+
+function obliterateWorkflowStep(workflowStep) {
+    return {
+        type: _actionTypes2.default.workflowStepObliterate,
+        workflowStep: workflowStep
+    };
+}
+
+/***/ }),
+/* 608 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(14);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(29);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRouter = __webpack_require__(52);
+
+var _reactRedux = __webpack_require__(105);
+
+var _redux = __webpack_require__(106);
+
+var _workflowStepActions = __webpack_require__(607);
+
+var workflowStepActions = _interopRequireWildcard(_workflowStepActions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WorkflowStepPage = function (_React$Component) {
+    _inherits(WorkflowStepPage, _React$Component);
+
+    function WorkflowStepPage(props, context) {
+        _classCallCheck(this, WorkflowStepPage);
+
+        var _this = _possibleConstructorReturn(this, (WorkflowStepPage.__proto__ || Object.getPrototypeOf(WorkflowStepPage)).call(this, props, context));
+
+        _this.state = {
+            workflowStep: {
+                title: "",
+                cultureCode: "",
+                type: ""
+            }
+        };
+
+        _this.onCreateClick = _this.onCreateClick.bind(_this);
+        _this.onDeleteClick = _this.onDeleteClick.bind(_this);
+        _this.onEditClick = _this.onEditClick.bind(_this);
+        return _this;
+    }
+
+    _createClass(WorkflowStepPage, [{
+        key: 'onCreateClick',
+        value: function onCreateClick() {
+            this.props.actions.createWorkflowStep(this.state.workflowStep);
+        }
+    }, {
+        key: 'onDeleteClick',
+        value: function onDeleteClick() {
+            this.props.actions.deleteWorkflowStep(this.state.workflowStep);
+        }
+    }, {
+        key: 'onEditClick',
+        value: function onEditClick() {
+            this.props.actions.editWorkflowStep(this.state.workflowStep);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('div', { className: 'col-md-3' }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'col-md-6' },
+                    _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '/workflows' },
+                                'Workflows'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Workflow Steps'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'Workflows'
+                    )
+                ),
+                _react2.default.createElement('div', { className: 'col-md-3' })
+            );
+        }
+    }]);
+
+    return WorkflowStepPage;
+}(_react2.default.Component);
+
+WorkflowStepPage.propTypes = {
+    workflowSteps: _propTypes2.default.array.isRequired,
+    actions: _propTypes2.default.object.isRequired
+};
+
+function mapStateToProps(state, ownProps) {
+    return {
+        workflowSteps: state.workflowSteps
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: (0, _redux.bindActionCreators)(workflowStepActions, dispatch)
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WorkflowStepPage);
 
 /***/ })
 /******/ ]);
