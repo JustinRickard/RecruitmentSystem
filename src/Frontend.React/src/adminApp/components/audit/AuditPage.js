@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as auditActions from '../../actions/auditActions';
 
 class AuditPage extends React.Component {
 
@@ -20,3 +23,21 @@ class AuditPage extends React.Component {
         );
     }
 }
+
+AuditPage.propTypes = {
+    auditLogs: PropTypes.array.isRequired
+}
+
+function mapStateToProps(state, ownProps) {
+    return {
+        projects: state.auditLogs
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(auditActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuditPage);

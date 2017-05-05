@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -51,6 +52,7 @@ class WorkflowPage extends React.Component {
 
 WorkflowPage.propTypes = {
     workflows: PropTypes.array.isRequired,
+    workflowSteps: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 }
 

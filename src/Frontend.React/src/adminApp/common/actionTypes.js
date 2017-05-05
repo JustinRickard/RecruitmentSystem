@@ -1,8 +1,10 @@
 const actionTypes = {
+    AuditLogsGet: "AUDIT_LOG_GET",
     ClientCreate: "CLIENT_CREATE",
     ClientDelete: "CLIENT_DELETE",
     ClientEdit: "CLIENT_EDIT",
     ClientObliterate: "CLIENT_OBLITERATE",
+    LogoutLogin: "LOGOUT_LOGIN",
     ProjectCreate: "PROJECT_CREATE",
     ProjectDelete: "PROJECT_DELETE",
     ProjectEdit: "PROJECT_EDIT",

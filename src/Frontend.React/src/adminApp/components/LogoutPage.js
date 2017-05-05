@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class LogoutPage extends React.Component {
 
@@ -18,6 +21,19 @@ class LogoutPage extends React.Component {
             </div>
         );
     }
+}
+
+LogoutPage.propTypes = {
+}
+
+function mapStateToProps(state, ownProps) {
+    return {
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogoutPage);

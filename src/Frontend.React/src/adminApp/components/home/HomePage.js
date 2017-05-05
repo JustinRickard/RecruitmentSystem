@@ -19,3 +19,18 @@ class HomePage extends React.Component {
         );
     }
 }
+
+HomePage.propTypes = {
+}
+
+function mapStateToProps(state, ownProps) {
+    return {
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
