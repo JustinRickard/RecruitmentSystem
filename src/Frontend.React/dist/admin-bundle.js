@@ -37552,6 +37552,18 @@ var _stubApi = __webpack_require__(611);
 
 var api = _interopRequireWildcard(_stubApi);
 
+var _PanelTable = __webpack_require__(612);
+
+var _PanelTable2 = _interopRequireDefault(_PanelTable);
+
+var _ClientTableHead = __webpack_require__(608);
+
+var _ClientTableHead2 = _interopRequireDefault(_ClientTableHead);
+
+var _ClientTableBody = __webpack_require__(610);
+
+var _ClientTableBody2 = _interopRequireDefault(_ClientTableBody);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -37607,31 +37619,22 @@ var ClientPage = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement('div', { className: 'col-md-3' }),
+                _react2.default.createElement('div', { className: 'col-md-2' }),
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-md-6' },
+                    { className: 'col-md-8' },
                     _react2.default.createElement(
-                        'ol',
-                        { className: 'breadcrumb' },
-                        _react2.default.createElement(
-                            'li',
-                            { className: 'breadcrumb-item' },
-                            _react2.default.createElement(
-                                'a',
-                                { href: '' },
-                                'Home'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'li',
-                            { className: 'breadcrumb-item active' },
-                            'Clients'
-                        )
-                    ),
-                    _react2.default.createElement(_ClientTable2.default, { rows: clients })
+                        _PanelTable2.default,
+                        {
+                            panelClass: 'panel-primary',
+                            panelHeaderText: 'Clients',
+                            panelBodyText: 'Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.'
+                        },
+                        _react2.default.createElement(_ClientTableHead2.default, null),
+                        _react2.default.createElement(_ClientTableBody2.default, { rows: clients })
+                    )
                 ),
-                _react2.default.createElement('div', { className: 'col-md-3' })
+                _react2.default.createElement('div', { className: 'col-md-2' })
             );
         }
     }]);
@@ -39973,7 +39976,7 @@ var ClientTableRow = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     "td",
-                    null,
+                    { className: "align-middle" },
                     this.props.row.name
                 ),
                 _react2.default.createElement(
@@ -40111,6 +40114,77 @@ function getClients() {
         parentName: "Main Client account"
     }];
 }
+
+/***/ }),
+/* 612 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(14);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PanelTable = function (_React$Component) {
+    _inherits(PanelTable, _React$Component);
+
+    function PanelTable() {
+        _classCallCheck(this, PanelTable);
+
+        return _possibleConstructorReturn(this, (PanelTable.__proto__ || Object.getPrototypeOf(PanelTable)).apply(this, arguments));
+    }
+
+    _createClass(PanelTable, [{
+        key: 'render',
+        value: function render() {
+
+            var panelClass = 'panel ' + this.props.panelClass;
+
+            return _react2.default.createElement(
+                'div',
+                { className: panelClass },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'panel-heading' },
+                    this.props.panelHeaderText
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'panel-body' },
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        this.props.panelBodyText
+                    )
+                ),
+                _react2.default.createElement(
+                    'table',
+                    { className: 'table table-striped table-responsive table-hover' },
+                    this.props.children
+                )
+            );
+        }
+    }]);
+
+    return PanelTable;
+}(_react2.default.Component);
+
+exports.default = PanelTable;
 
 /***/ })
 /******/ ]);

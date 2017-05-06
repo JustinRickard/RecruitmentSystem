@@ -6,6 +6,9 @@ import {bindActionCreators} from 'redux';
 import * as clientActions from '../../actions/clientActions';
 import ClientTable from './ClientTable';
 import * as api from '../../common/stubApi';
+import PanelTable from '../../../common/components/PanelTable';
+import ClientTableHead from './ClientTableHead';
+import ClientTableBody from './ClientTableBody';
 
 class ClientPage extends React.Component {
 
@@ -42,16 +45,20 @@ class ClientPage extends React.Component {
 
         return (
             <div>
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="">Home</a></li>
-                            <li className="breadcrumb-item active">Clients</li>
-                        </ol>
-                        
-                        <ClientTable rows={clients} />
+                <div className="col-md-2"></div>
+
+                <div className="col-md-8">
+                    <PanelTable
+                        panelClass="panel-primary"
+                        panelHeaderText="Clients"
+                        panelBodyText="Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details."
+                    >
+                        <ClientTableHead />
+                        <ClientTableBody rows={clients} />
+                    </PanelTable>
                 </div>
-                <div className="col-md-3"></div>
+
+                <div className="col-md-2"></div>
             </div>
         );
     }

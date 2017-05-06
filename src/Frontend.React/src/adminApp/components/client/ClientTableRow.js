@@ -5,7 +5,7 @@ class ClientTableRow extends React.Component {
 
         return (
             <tr>
-                <td>{this.props.row.name}</td>
+                <td className="align-middle">{this.props.row.name}</td>
                 <td>{this.props.row.parentName}</td>
                 <td><button className="btn btn-default">Details</button></td>
                 <td><button className="btn btn-primary">Edit</button></td>
