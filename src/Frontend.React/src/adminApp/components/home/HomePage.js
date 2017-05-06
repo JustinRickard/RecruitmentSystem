@@ -8,7 +8,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <div>
-                <div className="col-md-3"></div>
+                <div className="col-md-2"></div>
                 <div className="col-xs-12 col-sm-12 col-md-8">
 
                     <PanelLink
@@ -61,7 +61,7 @@ class HomePage extends React.Component {
 
 
                 </div>               
-                <div className="col-md-3"></div>
+                <div className="col-md-2"></div>
             </div>
         );
     }

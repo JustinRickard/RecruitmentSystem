@@ -4,6 +4,8 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as clientActions from '../../actions/clientActions';
+import ClientTable from './ClientTable';
+import * as api from '../../common/stubApi';
 
 class ClientPage extends React.Component {
 
@@ -35,6 +37,9 @@ class ClientPage extends React.Component {
     }
 
     render() {
+
+        const clients = api.getClients();
+
         return (
             <div>
                 <div className="col-md-3"></div>
@@ -43,7 +48,8 @@ class ClientPage extends React.Component {
                             <li className="breadcrumb-item"><a href="">Home</a></li>
                             <li className="breadcrumb-item active">Clients</li>
                         </ol>
-                        <h1>Clients</h1>
+                        
+                        <ClientTable rows={clients} />
                 </div>
                 <div className="col-md-3"></div>
             </div>
