@@ -8,6 +8,7 @@ import * as api from '../../common/stubApi';
 import PanelTable from '../../../common/components/PanelTable';
 import UserTableHead from './UserTableHead';
 import UserTableBody from './UserTableBody';
+import icons from '../../../common/icons';
 
 class UserPage extends React.Component {
 
@@ -51,6 +52,7 @@ class UserPage extends React.Component {
                 <div className="col-md-8">
                     <PanelTable
                         panelClass="panel-primary"
+                        iconClass={icons.User}
                         panelHeaderText="Users"
                         panelBodyText="Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records."
                     >

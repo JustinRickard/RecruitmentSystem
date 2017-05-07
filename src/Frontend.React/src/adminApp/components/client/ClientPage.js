@@ -9,6 +9,7 @@ import * as api from '../../common/stubApi';
 import PanelTable from '../../../common/components/PanelTable';
 import ClientTableHead from './ClientTableHead';
 import ClientTableBody from './ClientTableBody';
+import icons from '../../../common/icons';
 
 class ClientPage extends React.Component {
 
@@ -50,6 +51,7 @@ class ClientPage extends React.Component {
                 <div className="col-md-8">
                     <PanelTable
                         panelClass="panel-primary"
+                        iconClass={icons.Client}
                         panelHeaderText="Clients"
                         panelBodyText="Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details."
                     >

@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import PanelLink from './PanelLink';
+import icons from '../../../common/icons';
 
 class HomePage extends React.Component {
 
@@ -16,7 +17,7 @@ class HomePage extends React.Component {
                         headerClass="panel-primary"
                         headerText="Clients" 
                         footerText="Manage clients, create new ones, etc..."
-                        iconClass="fa-address-card"
+                        iconClass={icons.Client}
                     />
 
                     <PanelLink
@@ -24,7 +25,7 @@ class HomePage extends React.Component {
                         headerClass="panel-primary"
                         headerText="Users" 
                         footerText="Manage users, create new ones, etc..."
-                        iconClass="fa-user-circle"
+                        iconClass={icons.User}
                     />
 
                     <PanelLink
@@ -32,7 +33,7 @@ class HomePage extends React.Component {
                         headerClass="panel-primary"
                         headerText="Projects" 
                         footerText="Administer projects, add participants, etc..."
-                        iconClass="fa-tasks"
+                        iconClass={icons.Project}
                     />
 
                     <PanelLink
@@ -40,7 +41,7 @@ class HomePage extends React.Component {
                         headerClass="panel-warning"
                         headerText="Audit Logs" 
                         footerText="View audit logs of recent activity and filter by various criteria."
-                        iconClass="fa-history"
+                        iconClass={icons.Audit}
                     />
 
                     <PanelLink
@@ -48,7 +49,7 @@ class HomePage extends React.Component {
                         headerClass="panel-info"
                         headerText="Workflows" 
                         footerText="Create new workflows and modify existing ones, etc..."
-                        iconClass="fa-briefcase"
+                        iconClass={icons.Workflow}
                     />
 
                     <PanelLink
@@ -56,7 +57,7 @@ class HomePage extends React.Component {
                         headerClass="panel-info"
                         headerText="Workflow Steps" 
                         footerText="Create new workflow steps, modify existing ones, etc"
-                        iconClass="fa-code-fork"
+                        iconClass={icons.WorkflowStep}
                     />
 
 
