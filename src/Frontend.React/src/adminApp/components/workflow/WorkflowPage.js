@@ -4,6 +4,11 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as workflowActions from '../../actions/workflowActions';
+import * as api from '../../common/stubApi';
+import PanelTable from '../../../common/components/PanelTable';
+import WorkflowTableHead from './WorkflowTableHead';
+import WorkflowTableBody from './WorkflowTableBody';
+import icons from '../../../common/icons';
 
 class WorkflowPage extends React.Component {
 
@@ -34,6 +39,9 @@ class WorkflowPage extends React.Component {
     }
 
     render() {
+
+        const workflows = api.getWorkflows();
+
         return (
             <div>
                 <div className="col-md-3"></div>
@@ -42,7 +50,17 @@ class WorkflowPage extends React.Component {
                         <li className="breadcrumb-item"><a href="">Home</a></li>
                         <li className="breadcrumb-item active">Workflows</li>
                     </ol>
-                    <h1>Workflows</h1>
+                   
+                    <PanelTable
+                        panelClass="panel-primary"
+                        iconClass={icons.Workflow}
+                        panelHeaderText="Workflows"
+                        panelBodyText="Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows."
+                    >
+                        <WorkflowTableHead />
+                        <WorkflowTableBody rows={workflows} />
+                    </PanelTable>
+
                 </div>
                 <div className="col-md-3"></div>
             </div>

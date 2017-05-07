@@ -88,3 +88,28 @@ export function getProjects() {
         },
     ];
 }
+
+export function getWorkflows() {
+    return [
+      {
+          name: "Workflow 1",
+          steps: 5,
+          createdDate: new Date("2017-01-01")
+      },
+      {
+          name: "Workflow 2",
+          steps: 3,
+          createdDate: new Date("2017-01-01")
+      },
+      {
+          name: "Workflow 3",
+          steps: 10,
+          createdDate: new Date("2017-01-01")
+      },
+      {
+          name: "Workflow 4",
+          steps: 1,
+          createdDate: new Date("2017-01-01")
+      },
+    ];
+}
