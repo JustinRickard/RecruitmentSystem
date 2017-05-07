@@ -50,6 +50,12 @@ class UserPage extends React.Component {
                 <div className="col-md-2"></div>
 
                 <div className="col-md-8">
+
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><a href="">Home</a></li>
+                        <li className="breadcrumb-item active">Users</li>
+                    </ol>
+
                     <PanelTable
                         panelClass="panel-primary"
                         iconClass={icons.User}

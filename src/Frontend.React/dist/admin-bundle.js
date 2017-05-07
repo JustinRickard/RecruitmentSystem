@@ -35944,6 +35944,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getClients = getClients;
 exports.getUsers = getUsers;
+exports.getProjects = getProjects;
 
 var _react = __webpack_require__(9);
 
@@ -35997,6 +35998,30 @@ function getUsers() {
         surname: "Delaggio",
         roles: ["CLIENT_ADMIN"],
         client: { name: "Client 1" }
+    }];
+}
+
+function getProjects() {
+    return [{
+        name: "Project 1",
+        workflowName: "Workflow 1",
+        closeTime: new Date()
+    }, {
+        name: "Project 2",
+        workflowName: "Workflow 2",
+        closeTime: new Date()
+    }, {
+        name: "Project 3",
+        workflowName: "Workflow 3",
+        closeTime: new Date()
+    }, {
+        name: "Project 4",
+        workflowName: "Workflow 4",
+        closeTime: new Date()
+    }, {
+        name: "Project 5",
+        workflowName: "Workflow 5",
+        closeTime: new Date()
     }];
 }
 
@@ -37815,10 +37840,6 @@ var _clientActions = __webpack_require__(558);
 
 var clientActions = _interopRequireWildcard(_clientActions);
 
-var _ClientTable = __webpack_require__(568);
-
-var _ClientTable2 = _interopRequireDefault(_ClientTable);
-
 var _stubApi = __webpack_require__(542);
 
 var api = _interopRequireWildcard(_stubApi);
@@ -37899,6 +37920,24 @@ var ClientPage = function (_React$Component) {
                     'div',
                     { className: 'col-md-8' },
                     _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Clients'
+                        )
+                    ),
+                    _react2.default.createElement(
                         _PanelTable2.default,
                         {
                             panelClass: 'panel-primary',
@@ -37938,87 +37977,7 @@ function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ClientPage);
 
 /***/ }),
-/* 568 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(9);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _ClientTableHead = __webpack_require__(544);
-
-var _ClientTableHead2 = _interopRequireDefault(_ClientTableHead);
-
-var _ClientTableBody = __webpack_require__(543);
-
-var _ClientTableBody2 = _interopRequireDefault(_ClientTableBody);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ClientTable = function (_React$Component) {
-    _inherits(ClientTable, _React$Component);
-
-    function ClientTable() {
-        _classCallCheck(this, ClientTable);
-
-        return _possibleConstructorReturn(this, (ClientTable.__proto__ || Object.getPrototypeOf(ClientTable)).apply(this, arguments));
-    }
-
-    _createClass(ClientTable, [{
-        key: 'render',
-        value: function render() {
-
-            console.log("ClientTable:");
-            console.log(this.props.rows);
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'panel panel-default' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'panel-heading' },
-                    'Clients'
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'panel-body' },
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        'Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.'
-                    )
-                ),
-                _react2.default.createElement(
-                    'table',
-                    { className: 'table table-striped table-responsive' },
-                    _react2.default.createElement(_ClientTableHead2.default, null),
-                    _react2.default.createElement(_ClientTableBody2.default, { rows: this.props.rows })
-                )
-            );
-        }
-    }]);
-
-    return ClientTable;
-}(_react2.default.Component);
-
-exports.default = ClientTable;
-
-/***/ }),
+/* 568 */,
 /* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38323,6 +38282,26 @@ var _projectActions = __webpack_require__(559);
 
 var projectActions = _interopRequireWildcard(_projectActions);
 
+var _stubApi = __webpack_require__(542);
+
+var api = _interopRequireWildcard(_stubApi);
+
+var _PanelTable = __webpack_require__(545);
+
+var _PanelTable2 = _interopRequireDefault(_PanelTable);
+
+var _ProjectTableHead = __webpack_require__(618);
+
+var _ProjectTableHead2 = _interopRequireDefault(_ProjectTableHead);
+
+var _ProjectTableBody = __webpack_require__(617);
+
+var _ProjectTableBody2 = _interopRequireDefault(_ProjectTableBody);
+
+var _icons = __webpack_require__(616);
+
+var _icons2 = _interopRequireDefault(_icons);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -38376,13 +38355,16 @@ var ProjectPage = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+
+            var projects = api.getProjects();
+
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement('div', { className: 'col-md-3' }),
+                _react2.default.createElement('div', { className: 'col-md-2' }),
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-md-6' },
+                    { className: 'col-md-8' },
                     _react2.default.createElement(
                         'ol',
                         { className: 'breadcrumb' },
@@ -38402,12 +38384,18 @@ var ProjectPage = function (_React$Component) {
                         )
                     ),
                     _react2.default.createElement(
-                        'h1',
-                        null,
-                        'Projects'
+                        _PanelTable2.default,
+                        {
+                            panelClass: 'panel-primary',
+                            iconClass: _icons2.default.Project,
+                            panelHeaderText: 'Projects',
+                            panelBodyText: 'Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects.'
+                        },
+                        _react2.default.createElement(_ProjectTableHead2.default, null),
+                        _react2.default.createElement(_ProjectTableBody2.default, { rows: projects })
                     )
                 ),
-                _react2.default.createElement('div', { className: 'col-md-3' })
+                _react2.default.createElement('div', { className: 'col-md-2' })
             );
         }
     }]);
@@ -38546,6 +38534,24 @@ var UserPage = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'col-md-8' },
+                    _react2.default.createElement(
+                        'ol',
+                        { className: 'breadcrumb' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item' },
+                            _react2.default.createElement(
+                                'a',
+                                { href: '' },
+                                'Home'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'breadcrumb-item active' },
+                            'Users'
+                        )
+                    ),
                     _react2.default.createElement(
                         _PanelTable2.default,
                         {
@@ -40498,6 +40504,229 @@ var iconClasses = {
 };
 
 exports.default = iconClasses;
+
+/***/ }),
+/* 617 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ProjectTableRow = __webpack_require__(619);
+
+var _ProjectTableRow2 = _interopRequireDefault(_ProjectTableRow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProjectTableBody = function (_React$Component) {
+    _inherits(ProjectTableBody, _React$Component);
+
+    function ProjectTableBody() {
+        _classCallCheck(this, ProjectTableBody);
+
+        return _possibleConstructorReturn(this, (ProjectTableBody.__proto__ || Object.getPrototypeOf(ProjectTableBody)).apply(this, arguments));
+    }
+
+    _createClass(ProjectTableBody, [{
+        key: 'render',
+        value: function render() {
+
+            var rows = [];
+            for (var i = 0; i < this.props.rows.length; i++) {
+                rows.push(_react2.default.createElement(_ProjectTableRow2.default, { row: this.props.rows[i] }));
+            }
+
+            return _react2.default.createElement(
+                'tbody',
+                null,
+                rows
+            );
+        }
+    }]);
+
+    return ProjectTableBody;
+}(_react2.default.Component);
+
+exports.default = ProjectTableBody;
+
+/***/ }),
+/* 618 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProjectTableHead = function (_React$Component) {
+    _inherits(ProjectTableHead, _React$Component);
+
+    function ProjectTableHead() {
+        _classCallCheck(this, ProjectTableHead);
+
+        return _possibleConstructorReturn(this, (ProjectTableHead.__proto__ || Object.getPrototypeOf(ProjectTableHead)).apply(this, arguments));
+    }
+
+    _createClass(ProjectTableHead, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'thead',
+                null,
+                _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Name'
+                    ),
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Workflow'
+                    ),
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Close time'
+                    ),
+                    _react2.default.createElement('th', null),
+                    _react2.default.createElement('th', null),
+                    _react2.default.createElement('th', null)
+                )
+            );
+        }
+    }]);
+
+    return ProjectTableHead;
+}(_react2.default.Component);
+
+exports.default = ProjectTableHead;
+
+/***/ }),
+/* 619 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProjectTableRow = function (_React$Component) {
+    _inherits(ProjectTableRow, _React$Component);
+
+    function ProjectTableRow() {
+        _classCallCheck(this, ProjectTableRow);
+
+        return _possibleConstructorReturn(this, (ProjectTableRow.__proto__ || Object.getPrototypeOf(ProjectTableRow)).apply(this, arguments));
+    }
+
+    _createClass(ProjectTableRow, [{
+        key: "render",
+        value: function render() {
+
+            return _react2.default.createElement(
+                "tr",
+                null,
+                _react2.default.createElement(
+                    "td",
+                    { className: "align-middle" },
+                    this.props.row.name
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    this.props.row.workflowName
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    this.props.row.closeTime.toLocaleString()
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    _react2.default.createElement(
+                        "button",
+                        { className: "btn btn-default" },
+                        "Details"
+                    )
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    _react2.default.createElement(
+                        "button",
+                        { className: "btn btn-primary" },
+                        "Edit"
+                    )
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    _react2.default.createElement(
+                        "button",
+                        { className: "btn btn-danger" },
+                        "Delete"
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ProjectTableRow;
+}(_react2.default.Component);
+
+exports.default = ProjectTableRow;
 
 /***/ })
 /******/ ]);

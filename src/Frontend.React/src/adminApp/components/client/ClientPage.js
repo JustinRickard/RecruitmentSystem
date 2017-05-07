@@ -4,7 +4,6 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as clientActions from '../../actions/clientActions';
-import ClientTable from './ClientTable';
 import * as api from '../../common/stubApi';
 import PanelTable from '../../../common/components/PanelTable';
 import ClientTableHead from './ClientTableHead';
@@ -49,6 +48,12 @@ class ClientPage extends React.Component {
                 <div className="col-md-2"></div>
 
                 <div className="col-md-8">
+
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><a href="">Home</a></li>
+                        <li className="breadcrumb-item active">Clients</li>
+                    </ol>
+
                     <PanelTable
                         panelClass="panel-primary"
                         iconClass={icons.Client}

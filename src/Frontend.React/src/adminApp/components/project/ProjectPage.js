@@ -4,6 +4,11 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as projectActions from '../../actions/projectActions';
+import * as api from '../../common/stubApi';
+import PanelTable from '../../../common/components/PanelTable';
+import ProjectTableHead from './ProjectTableHead';
+import ProjectTableBody from './ProjectTableBody';
+import icons from '../../../common/icons';
 
 class ProjectPage extends React.Component {
 
@@ -39,17 +44,30 @@ class ProjectPage extends React.Component {
     }
 
     render() {
+
+        const projects = api.getProjects();
+
         return (
             <div>
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
+                <div className="col-md-2"></div>
+                <div className="col-md-8">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href="">Home</a></li>
                             <li className="breadcrumb-item active">Projects</li>
                         </ol>
-                        <h1>Projects</h1>
+                        
+                        <PanelTable
+                        panelClass="panel-primary"
+                        iconClass={icons.Project}
+                        panelHeaderText="Projects"
+                        panelBodyText="Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects."
+                    >
+                        <ProjectTableHead />
+                        <ProjectTableBody rows={projects} />
+                    </PanelTable>
+
                 </div>
-                <div className="col-md-3"></div>
+                <div className="col-md-2"></div>
             </div>
         );
     }
