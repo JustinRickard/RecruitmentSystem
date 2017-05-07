@@ -113,3 +113,44 @@ export function getWorkflows() {
       },
     ];
 }
+
+export function getWorkflowSteps() {
+    return [
+        {
+            name: "Workflow step 1",
+            type: "Simple text multiple choice",
+            createdDate: new Date(),
+            data: {
+                title: "Simple text multiple choice step",
+                questions: []
+            }
+        },
+        {
+            name: "Workflow step 2",
+            type: "Scenario text multiple choice",
+            createdDate: new Date(),
+            data: {
+                title: "scenario text multiple choice step",
+                questions: []
+            }
+        },
+        {
+            name: "Workflow step 3",
+            type: "User input form",
+            createdDate: new Date(),
+            data: {
+                title: "Registration form",
+                questions: []
+            }
+        },
+        {
+            name: "Workflow step 4",
+            type: "Eligibility check",
+            createdDate: new Date(),
+            data: {
+                title: "Eligiblity example",
+                questions: []
+            }
+        },
+    ];
+}

@@ -4,6 +4,11 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as workflowStepActions from '../../actions/workflowStepActions';
+import * as api from '../../common/stubApi';
+import PanelTable from '../../../common/components/PanelTable';
+import WorkflowStepTableHead from './WorkflowStepTableHead';
+import WorkflowStepTableBody from './WorkflowStepTableBody';
+import icons from '../../../common/icons';
 
 class WorkflowStepPage extends React.Component {
 
@@ -36,6 +41,9 @@ class WorkflowStepPage extends React.Component {
     }
 
     render() {
+
+        const steps = api.getWorkflowSteps();
+
         return (
             <div>
                 <div className="col-md-3"></div>
@@ -45,7 +53,17 @@ class WorkflowStepPage extends React.Component {
                         <li className="breadcrumb-item"><a href="/workflows">Workflows</a></li>
                         <li className="breadcrumb-item active">Workflow Steps</li>
                     </ol>
-                    <h1>Workflows</h1>
+                    
+                    <PanelTable
+                        panelClass="panel-info"
+                        iconClass={icons.WorkflowStep}
+                        panelHeaderText="Workflows Steps"
+                        panelBodyText="Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps."
+                    >
+                        <WorkflowStepTableHead />
+                        <WorkflowStepTableBody rows={steps} />
+                    </PanelTable>
+
                 </div>
                 <div className="col-md-3"></div>
             </div>

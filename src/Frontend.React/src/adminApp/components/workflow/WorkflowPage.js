@@ -52,7 +52,7 @@ class WorkflowPage extends React.Component {
                     </ol>
                    
                     <PanelTable
-                        panelClass="panel-primary"
+                        panelClass="panel-info"
                         iconClass={icons.Workflow}
                         panelHeaderText="Workflows"
                         panelBodyText="Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows."

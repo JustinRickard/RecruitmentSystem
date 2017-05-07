@@ -35946,6 +35946,7 @@ exports.getClients = getClients;
 exports.getUsers = getUsers;
 exports.getProjects = getProjects;
 exports.getWorkflows = getWorkflows;
+exports.getWorkflowSteps = getWorkflowSteps;
 
 var _react = __webpack_require__(9);
 
@@ -36043,6 +36044,42 @@ function getWorkflows() {
         name: "Workflow 4",
         steps: 1,
         createdDate: new Date("2017-01-01")
+    }];
+}
+
+function getWorkflowSteps() {
+    return [{
+        name: "Workflow step 1",
+        type: "Simple text multiple choice",
+        createdDate: new Date(),
+        data: {
+            title: "Simple text multiple choice step",
+            questions: []
+        }
+    }, {
+        name: "Workflow step 2",
+        type: "Scenario text multiple choice",
+        createdDate: new Date(),
+        data: {
+            title: "scenario text multiple choice step",
+            questions: []
+        }
+    }, {
+        name: "Workflow step 3",
+        type: "User input form",
+        createdDate: new Date(),
+        data: {
+            title: "Registration form",
+            questions: []
+        }
+    }, {
+        name: "Workflow step 4",
+        type: "Eligibility check",
+        createdDate: new Date(),
+        data: {
+            title: "Eligiblity example",
+            questions: []
+        }
     }];
 }
 
@@ -38975,7 +39012,7 @@ var WorkflowPage = function (_React$Component) {
                     _react2.default.createElement(
                         _PanelTable2.default,
                         {
-                            panelClass: 'panel-primary',
+                            panelClass: 'panel-info',
                             iconClass: _icons2.default.Workflow,
                             panelHeaderText: 'Workflows',
                             panelBodyText: 'Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows.'
@@ -39043,6 +39080,26 @@ var _workflowStepActions = __webpack_require__(562);
 
 var workflowStepActions = _interopRequireWildcard(_workflowStepActions);
 
+var _stubApi = __webpack_require__(542);
+
+var api = _interopRequireWildcard(_stubApi);
+
+var _PanelTable = __webpack_require__(545);
+
+var _PanelTable2 = _interopRequireDefault(_PanelTable);
+
+var _WorkflowStepTableHead = __webpack_require__(626);
+
+var _WorkflowStepTableHead2 = _interopRequireDefault(_WorkflowStepTableHead);
+
+var _WorkflowStepTableBody = __webpack_require__(624);
+
+var _WorkflowStepTableBody2 = _interopRequireDefault(_WorkflowStepTableBody);
+
+var _icons = __webpack_require__(616);
+
+var _icons2 = _interopRequireDefault(_icons);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39093,6 +39150,9 @@ var WorkflowStepPage = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+
+            var steps = api.getWorkflowSteps();
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -39128,9 +39188,15 @@ var WorkflowStepPage = function (_React$Component) {
                         )
                     ),
                     _react2.default.createElement(
-                        'h1',
-                        null,
-                        'Workflows'
+                        _PanelTable2.default,
+                        {
+                            panelClass: 'panel-info',
+                            iconClass: _icons2.default.WorkflowStep,
+                            panelHeaderText: 'Workflows Steps',
+                            panelBodyText: 'Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps.'
+                        },
+                        _react2.default.createElement(_WorkflowStepTableHead2.default, null),
+                        _react2.default.createElement(_WorkflowStepTableBody2.default, { rows: steps })
                     )
                 ),
                 _react2.default.createElement('div', { className: 'col-md-3' })
@@ -41001,6 +41067,230 @@ var WorkflowTableRow = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = WorkflowTableRow;
+
+/***/ }),
+/* 624 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _WorkflowStepTableRow = __webpack_require__(627);
+
+var _WorkflowStepTableRow2 = _interopRequireDefault(_WorkflowStepTableRow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WorkflowStepTableBody = function (_React$Component) {
+    _inherits(WorkflowStepTableBody, _React$Component);
+
+    function WorkflowStepTableBody() {
+        _classCallCheck(this, WorkflowStepTableBody);
+
+        return _possibleConstructorReturn(this, (WorkflowStepTableBody.__proto__ || Object.getPrototypeOf(WorkflowStepTableBody)).apply(this, arguments));
+    }
+
+    _createClass(WorkflowStepTableBody, [{
+        key: 'render',
+        value: function render() {
+
+            var rows = [];
+            for (var i = 0; i < this.props.rows.length; i++) {
+                rows.push(_react2.default.createElement(_WorkflowStepTableRow2.default, { row: this.props.rows[i] }));
+            }
+
+            return _react2.default.createElement(
+                'tbody',
+                null,
+                rows
+            );
+        }
+    }]);
+
+    return WorkflowStepTableBody;
+}(_react2.default.Component);
+
+exports.default = WorkflowStepTableBody;
+
+/***/ }),
+/* 625 */,
+/* 626 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WorkflowStepTableHead = function (_React$Component) {
+    _inherits(WorkflowStepTableHead, _React$Component);
+
+    function WorkflowStepTableHead() {
+        _classCallCheck(this, WorkflowStepTableHead);
+
+        return _possibleConstructorReturn(this, (WorkflowStepTableHead.__proto__ || Object.getPrototypeOf(WorkflowStepTableHead)).apply(this, arguments));
+    }
+
+    _createClass(WorkflowStepTableHead, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'thead',
+                null,
+                _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Name'
+                    ),
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Type'
+                    ),
+                    _react2.default.createElement(
+                        'th',
+                        null,
+                        'Created date'
+                    ),
+                    _react2.default.createElement('th', null),
+                    _react2.default.createElement('th', null),
+                    _react2.default.createElement('th', null)
+                )
+            );
+        }
+    }]);
+
+    return WorkflowStepTableHead;
+}(_react2.default.Component);
+
+exports.default = WorkflowStepTableHead;
+
+/***/ }),
+/* 627 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WorkflowStepTableRow = function (_React$Component) {
+    _inherits(WorkflowStepTableRow, _React$Component);
+
+    function WorkflowStepTableRow() {
+        _classCallCheck(this, WorkflowStepTableRow);
+
+        return _possibleConstructorReturn(this, (WorkflowStepTableRow.__proto__ || Object.getPrototypeOf(WorkflowStepTableRow)).apply(this, arguments));
+    }
+
+    _createClass(WorkflowStepTableRow, [{
+        key: "render",
+        value: function render() {
+
+            return _react2.default.createElement(
+                "tr",
+                null,
+                _react2.default.createElement(
+                    "td",
+                    { className: "align-middle" },
+                    this.props.row.name
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    this.props.row.type
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    this.props.row.createdDate.toLocaleString()
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    _react2.default.createElement(
+                        "button",
+                        { className: "btn btn-default" },
+                        "Details"
+                    )
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    _react2.default.createElement(
+                        "button",
+                        { className: "btn btn-primary" },
+                        "Edit"
+                    )
+                ),
+                _react2.default.createElement(
+                    "td",
+                    null,
+                    _react2.default.createElement(
+                        "button",
+                        { className: "btn btn-danger" },
+                        "Delete"
+                    )
+                )
+            );
+        }
+    }]);
+
+    return WorkflowStepTableRow;
+}(_react2.default.Component);
+
+exports.default = WorkflowStepTableRow;
 
 /***/ })
 /******/ ]);
