@@ -10967,157 +10967,7 @@ var iconClasses = {
 exports.default = iconClasses;
 
 /***/ }),
-/* 162 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.getClients = getClients;
-exports.getUsers = getUsers;
-exports.getProjects = getProjects;
-exports.getWorkflows = getWorkflows;
-exports.getWorkflowSteps = getWorkflowSteps;
-
-var _react = __webpack_require__(8);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getClients() {
-
-    return [{
-        name: "Main Client account",
-        parentName: "-"
-    }, {
-        name: "Client 1",
-        parentName: "Main Client account"
-    }, {
-        name: "Client 2",
-        parentName: "Main Client account"
-    }, {
-        name: "Client 3",
-        parentName: "Main Client account"
-    }];
-}
-
-function getUsers() {
-    return [{
-        email: "example1@example.org",
-        username: "example1",
-        forename: "Andrew",
-        surname: "Da Silva",
-        roles: ["SUPER_ADMIN"],
-        client: { name: "Main Client" }
-    }, {
-        email: "example2@example.org",
-        username: "example2",
-        forename: "Badadini",
-        surname: "Rocha",
-        roles: ["CLIENT_ADMIN"],
-        client: { name: "Main Client" }
-    }, {
-        email: "example3@example.org",
-        username: "example3",
-        forename: "Charles",
-        surname: "Finklestein",
-        roles: ["PARTICIPANT"],
-        client: { name: "Main Client" }
-    }, {
-        email: "example4@example.org",
-        username: "example4",
-        forename: "Doris",
-        surname: "Delaggio",
-        roles: ["CLIENT_ADMIN"],
-        client: { name: "Client 1" }
-    }];
-}
-
-function getProjects() {
-    return [{
-        name: "Project 1",
-        workflowName: "Workflow 1",
-        closeTime: new Date()
-    }, {
-        name: "Project 2",
-        workflowName: "Workflow 2",
-        closeTime: new Date()
-    }, {
-        name: "Project 3",
-        workflowName: "Workflow 3",
-        closeTime: new Date()
-    }, {
-        name: "Project 4",
-        workflowName: "Workflow 4",
-        closeTime: new Date()
-    }, {
-        name: "Project 5",
-        workflowName: "Workflow 5",
-        closeTime: new Date()
-    }];
-}
-
-function getWorkflows() {
-    return [{
-        name: "Workflow 1",
-        steps: 5,
-        createdDate: new Date("2017-01-01")
-    }, {
-        name: "Workflow 2",
-        steps: 3,
-        createdDate: new Date("2017-01-01")
-    }, {
-        name: "Workflow 3",
-        steps: 10,
-        createdDate: new Date("2017-01-01")
-    }, {
-        name: "Workflow 4",
-        steps: 1,
-        createdDate: new Date("2017-01-01")
-    }];
-}
-
-function getWorkflowSteps() {
-    return [{
-        name: "Workflow step 1",
-        type: "Simple text multiple choice",
-        createdDate: new Date(),
-        data: {
-            title: "Simple text multiple choice step",
-            questions: []
-        }
-    }, {
-        name: "Workflow step 2",
-        type: "Scenario text multiple choice",
-        createdDate: new Date(),
-        data: {
-            title: "scenario text multiple choice step",
-            questions: []
-        }
-    }, {
-        name: "Workflow step 3",
-        type: "User input form",
-        createdDate: new Date(),
-        data: {
-            title: "Registration form",
-            questions: []
-        }
-    }, {
-        name: "Workflow step 4",
-        type: "Eligibility check",
-        createdDate: new Date(),
-        data: {
-            title: "Eligiblity example",
-            questions: []
-        }
-    }];
-}
-
-/***/ }),
+/* 162 */,
 /* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37794,9 +37644,9 @@ var _clientActions = __webpack_require__(557);
 
 var clientActions = _interopRequireWildcard(_clientActions);
 
-var _stubApi = __webpack_require__(162);
+var _mockClientApi = __webpack_require__(629);
 
-var api = _interopRequireWildcard(_stubApi);
+var api = _interopRequireWildcard(_mockClientApi);
 
 var _PanelTable = __webpack_require__(163);
 
@@ -37823,6 +37673,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import * as api from '../../api/client/clientApi';
+
 
 var ClientPage = function (_React$Component) {
     _inherits(ClientPage, _React$Component);
@@ -38368,9 +38220,9 @@ var _projectActions = __webpack_require__(558);
 
 var projectActions = _interopRequireWildcard(_projectActions);
 
-var _stubApi = __webpack_require__(162);
+var _mockProjectApi = __webpack_require__(630);
 
-var api = _interopRequireWildcard(_stubApi);
+var api = _interopRequireWildcard(_mockProjectApi);
 
 var _PanelTable = __webpack_require__(163);
 
@@ -38397,6 +38249,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import * as api from '../../api/project/projectApi';
+
 
 var ProjectPage = function (_React$Component) {
     _inherits(ProjectPage, _React$Component);
@@ -38769,9 +38623,9 @@ var _userActions = __webpack_require__(559);
 
 var userActions = _interopRequireWildcard(_userActions);
 
-var _stubApi = __webpack_require__(162);
+var _mockUserApi = __webpack_require__(631);
 
-var api = _interopRequireWildcard(_stubApi);
+var api = _interopRequireWildcard(_mockUserApi);
 
 var _PanelTable = __webpack_require__(163);
 
@@ -38798,6 +38652,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import * as api from '../../api/user/userApi';
+
 
 var UserPage = function (_React$Component) {
     _inherits(UserPage, _React$Component);
@@ -39178,9 +39034,9 @@ var _workflowActions = __webpack_require__(560);
 
 var workflowActions = _interopRequireWildcard(_workflowActions);
 
-var _stubApi = __webpack_require__(162);
+var _mockWorkflowApi = __webpack_require__(632);
 
-var api = _interopRequireWildcard(_stubApi);
+var api = _interopRequireWildcard(_mockWorkflowApi);
 
 var _PanelTable = __webpack_require__(163);
 
@@ -39207,6 +39063,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import * as api from '../../api/workflow/workflowApi';
+
 
 var WorkflowPage = function (_React$Component) {
     _inherits(WorkflowPage, _React$Component);
@@ -39575,9 +39433,9 @@ var _workflowStepActions = __webpack_require__(561);
 
 var workflowStepActions = _interopRequireWildcard(_workflowStepActions);
 
-var _stubApi = __webpack_require__(162);
+var _mockWorkflowApi = __webpack_require__(632);
 
-var api = _interopRequireWildcard(_stubApi);
+var api = _interopRequireWildcard(_mockWorkflowApi);
 
 var _PanelTable = __webpack_require__(163);
 
@@ -39604,6 +39462,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import * as api from '../../api/workflow/workflowApi';
+
 
 var WorkflowStepPage = function (_React$Component) {
     _inherits(WorkflowStepPage, _React$Component);
@@ -41559,6 +41419,208 @@ var EditButton = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = EditButton;
+
+/***/ }),
+/* 629 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getClients = getClients;
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getClients() {
+
+    return [{
+        name: "Main Client account",
+        parentName: "-"
+    }, {
+        name: "Client 1",
+        parentName: "Main Client account"
+    }, {
+        name: "Client 2",
+        parentName: "Main Client account"
+    }, {
+        name: "Client 3",
+        parentName: "Main Client account"
+    }];
+}
+
+/***/ }),
+/* 630 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getProjects = getProjects;
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getProjects() {
+    return [{
+        name: "Project 1",
+        workflowName: "Workflow 1",
+        closeTime: new Date()
+    }, {
+        name: "Project 2",
+        workflowName: "Workflow 2",
+        closeTime: new Date()
+    }, {
+        name: "Project 3",
+        workflowName: "Workflow 3",
+        closeTime: new Date()
+    }, {
+        name: "Project 4",
+        workflowName: "Workflow 4",
+        closeTime: new Date()
+    }, {
+        name: "Project 5",
+        workflowName: "Workflow 5",
+        closeTime: new Date()
+    }];
+}
+
+/***/ }),
+/* 631 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getUsers = getUsers;
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getUsers() {
+    return [{
+        email: "example1@example.org",
+        username: "example1",
+        forename: "Andrew",
+        surname: "Da Silva",
+        roles: ["SUPER_ADMIN"],
+        client: { name: "Main Client" }
+    }, {
+        email: "example2@example.org",
+        username: "example2",
+        forename: "Badadini",
+        surname: "Rocha",
+        roles: ["CLIENT_ADMIN"],
+        client: { name: "Main Client" }
+    }, {
+        email: "example3@example.org",
+        username: "example3",
+        forename: "Charles",
+        surname: "Finklestein",
+        roles: ["PARTICIPANT"],
+        client: { name: "Main Client" }
+    }, {
+        email: "example4@example.org",
+        username: "example4",
+        forename: "Doris",
+        surname: "Delaggio",
+        roles: ["CLIENT_ADMIN"],
+        client: { name: "Client 1" }
+    }];
+}
+
+/***/ }),
+/* 632 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getWorkflows = getWorkflows;
+exports.getWorkflowSteps = getWorkflowSteps;
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getWorkflows() {
+    return [{
+        name: "Workflow 1",
+        steps: 5,
+        createdDate: new Date("2017-01-01")
+    }, {
+        name: "Workflow 2",
+        steps: 3,
+        createdDate: new Date("2017-01-01")
+    }, {
+        name: "Workflow 3",
+        steps: 10,
+        createdDate: new Date("2017-01-01")
+    }, {
+        name: "Workflow 4",
+        steps: 1,
+        createdDate: new Date("2017-01-01")
+    }];
+}
+
+function getWorkflowSteps() {
+    return [{
+        name: "Workflow step 1",
+        type: "Simple text multiple choice",
+        createdDate: new Date(),
+        data: {
+            title: "Simple text multiple choice step",
+            questions: []
+        }
+    }, {
+        name: "Workflow step 2",
+        type: "Scenario text multiple choice",
+        createdDate: new Date(),
+        data: {
+            title: "scenario text multiple choice step",
+            questions: []
+        }
+    }, {
+        name: "Workflow step 3",
+        type: "User input form",
+        createdDate: new Date(),
+        data: {
+            title: "Registration form",
+            questions: []
+        }
+    }, {
+        name: "Workflow step 4",
+        type: "Eligibility check",
+        createdDate: new Date(),
+        data: {
+            title: "Eligiblity example",
+            questions: []
+        }
+    }];
+}
 
 /***/ })
 /******/ ]);
