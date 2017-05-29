@@ -1,0 +1,16 @@
+/*
+    Style changes applied on top of bootstrap styling for costmetic improvements.
+    TODO: Consider using less CSS precompiler if appropriate.
+*/
+
+button i {
+    margin-right: 10px;
+}
+
+.panel-heading h1,h2,h3,h4,h5,h6 {
+    display: inline;
+}
+
+.panel-heading i {
+     margin-right: 10px;
+}

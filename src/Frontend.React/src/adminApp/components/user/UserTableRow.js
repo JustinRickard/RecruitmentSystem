@@ -1,6 +1,14 @@
 import React from 'react';
+import DetailsButton from '../../../common/components/DetailsButton';
+import EditButton from '../../../common/components/EditButton';
+import DeleteButton from '../../../common/components/DeleteButton';
 
 class UserTableRow extends React.Component {
+
+    tempOnClick() {
+
+    }
+
     render() {
 
         return (
@@ -9,9 +17,9 @@ class UserTableRow extends React.Component {
                 <td>{this.props.row.username}</td>
                 <td>{this.props.row.forename}</td>
                 <td>{this.props.row.surname}</td>
-                <td><button className="btn btn-default">Details</button></td>
-                <td><button className="btn btn-primary">Edit</button></td>
-                <td><button className="btn btn-danger">Delete</button></td>
+                <td><DetailsButton onClick={this.tempOnClick} /></td>
+                <td><EditButton onClick={this.tempOnClick} /></td>
+                <td><DeleteButton onClick={this.tempOnClick} /></td>  
             </tr>
         );
     }
