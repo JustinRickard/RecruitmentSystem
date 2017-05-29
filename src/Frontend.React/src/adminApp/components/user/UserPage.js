@@ -61,6 +61,10 @@ class UserPage extends React.Component {
                         iconClass={icons.User}
                         panelHeaderText="Users"
                         panelBodyText="Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records."
+                        headerButtonText="New User"
+                        headerButtonClass="btn-success panel-header-button"
+                        headerButtonIconClass="fa-plus"
+                        onHeaderButtonClick={this.onCreateClick}
                     >
                         <UserTableHead />
                         <UserTableBody rows={users} />

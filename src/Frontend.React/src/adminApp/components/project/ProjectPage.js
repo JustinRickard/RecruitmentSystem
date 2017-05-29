@@ -61,6 +61,10 @@ class ProjectPage extends React.Component {
                         iconClass={icons.Project}
                         panelHeaderText="Projects"
                         panelBodyText="Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects."
+                        headerButtonText="New Project"
+                        headerButtonClass="btn-success panel-header-button"
+                        headerButtonIconClass="fa-plus"
+                        onHeaderButtonClick={this.onCreateClick}
                     >
                         <ProjectTableHead />
                         <ProjectTableBody rows={projects} />

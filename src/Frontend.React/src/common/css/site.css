@@ -14,3 +14,9 @@ button i {
 .panel-heading i {
      margin-right: 10px;
 }
+
+.panel-heading button {
+    float: right;
+    font-size: larger;
+    line-height: 10px;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import IconButton from './IconButton';
 
 class PanelTable extends React.Component {
     render() {
@@ -11,7 +12,10 @@ class PanelTable extends React.Component {
                 <div className="panel-heading">
                     <i className={iconClass}></i>
                     <h3>{this.props.panelHeaderText}</h3>
-                    </div>
+                    {this.props.headerButtonText &&
+                        <IconButton buttonClass={this.props.headerButtonClass} iconClass={this.props.headerButtonIconClass} text={this.props.headerButtonText} onClick={this.props.onHeaderButonClick}  />
+                    }
+                    </div>                    
                 <div className="panel-body">
                     <p>{this.props.panelBodyText}</p>
                 </div>

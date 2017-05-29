@@ -11134,6 +11134,10 @@ var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _IconButton = __webpack_require__(625);
+
+var _IconButton2 = _interopRequireDefault(_IconButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11169,7 +11173,8 @@ var PanelTable = function (_React$Component) {
                         'h3',
                         null,
                         this.props.panelHeaderText
-                    )
+                    ),
+                    this.props.headerButtonText && _react2.default.createElement(_IconButton2.default, { buttonClass: this.props.headerButtonClass, iconClass: this.props.headerButtonIconClass, text: this.props.headerButtonText, onClick: this.props.onHeaderButonClick })
                 ),
                 _react2.default.createElement(
                     'div',
@@ -37896,7 +37901,11 @@ var ClientPage = function (_React$Component) {
                             panelClass: 'panel-primary',
                             iconClass: _icons2.default.Client,
                             panelHeaderText: 'Clients',
-                            panelBodyText: 'Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.'
+                            panelBodyText: 'Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.',
+                            headerButtonText: 'New Client',
+                            headerButtonClass: 'btn-success panel-header-button',
+                            headerButtonIconClass: 'fa-plus',
+                            onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_ClientTableHead2.default, null),
                         _react2.default.createElement(_ClientTableBody2.default, { rows: clients })
@@ -38470,7 +38479,11 @@ var ProjectPage = function (_React$Component) {
                             panelClass: 'panel-primary',
                             iconClass: _icons2.default.Project,
                             panelHeaderText: 'Projects',
-                            panelBodyText: 'Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects.'
+                            panelBodyText: 'Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects.',
+                            headerButtonText: 'New Project',
+                            headerButtonClass: 'btn-success panel-header-button',
+                            headerButtonIconClass: 'fa-plus',
+                            onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_ProjectTableHead2.default, null),
                         _react2.default.createElement(_ProjectTableBody2.default, { rows: projects })
@@ -38865,7 +38878,11 @@ var UserPage = function (_React$Component) {
                             panelClass: 'panel-primary',
                             iconClass: _icons2.default.User,
                             panelHeaderText: 'Users',
-                            panelBodyText: 'Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records.'
+                            panelBodyText: 'Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records.',
+                            headerButtonText: 'New User',
+                            headerButtonClass: 'btn-success panel-header-button',
+                            headerButtonIconClass: 'fa-plus',
+                            onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_UserTableHead2.default, null),
                         _react2.default.createElement(_UserTableBody2.default, { rows: users })
@@ -39267,7 +39284,11 @@ var WorkflowPage = function (_React$Component) {
                             panelClass: 'panel-info',
                             iconClass: _icons2.default.Workflow,
                             panelHeaderText: 'Workflows',
-                            panelBodyText: 'Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows.'
+                            panelBodyText: 'Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows.',
+                            headerButtonText: 'New Workflow',
+                            headerButtonClass: 'btn-success panel-header-button',
+                            headerButtonIconClass: 'fa-plus',
+                            onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_WorkflowTableHead2.default, null),
                         _react2.default.createElement(_WorkflowTableBody2.default, { rows: workflows })
@@ -39671,7 +39692,11 @@ var WorkflowStepPage = function (_React$Component) {
                             panelClass: 'panel-info',
                             iconClass: _icons2.default.WorkflowStep,
                             panelHeaderText: 'Workflows Steps',
-                            panelBodyText: 'Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps.'
+                            panelBodyText: 'Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps.',
+                            headerButtonText: 'New Workflow Step',
+                            headerButtonClass: 'btn-success panel-header-button',
+                            headerButtonIconClass: 'fa-plus',
+                            onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_WorkflowStepTableHead2.default, null),
                         _react2.default.createElement(_WorkflowStepTableBody2.default, { rows: steps })

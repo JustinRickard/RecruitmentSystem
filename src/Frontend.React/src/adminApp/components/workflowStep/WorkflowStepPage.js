@@ -59,6 +59,10 @@ class WorkflowStepPage extends React.Component {
                         iconClass={icons.WorkflowStep}
                         panelHeaderText="Workflows Steps"
                         panelBodyText="Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps."
+                        headerButtonText="New Workflow Step"
+                        headerButtonClass="btn-success panel-header-button"
+                        headerButtonIconClass="fa-plus"
+                        onHeaderButtonClick={this.onCreateClick}
                     >
                         <WorkflowStepTableHead />
                         <WorkflowStepTableBody rows={steps} />

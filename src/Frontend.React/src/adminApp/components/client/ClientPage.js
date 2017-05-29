@@ -59,6 +59,10 @@ class ClientPage extends React.Component {
                         iconClass={icons.Client}
                         panelHeaderText="Clients"
                         panelBodyText="Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details."
+                        headerButtonText="New Client"
+                        headerButtonClass="btn-success panel-header-button"
+                        headerButtonIconClass="fa-plus"
+                        onHeaderButtonClick={this.onCreateClick}
                     >
                         <ClientTableHead />
                         <ClientTableBody rows={clients} />
