@@ -37477,7 +37477,7 @@ var Header = function (_React$Component) {
                                 _react2.default.createElement(
                                     _reactRouter.IndexLink,
                                     { to: '/' },
-                                    'Home'
+                                    _react2.default.createElement('i', { className: 'fa fa-home fa-2x' })
                                 )
                             ),
                             _react2.default.createElement(
@@ -37521,6 +37521,15 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
+                                    { to: 'WorkflowSteps' },
+                                    'Workflow Steps'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                'li',
+                                null,
+                                _react2.default.createElement(
+                                    _reactRouter.Link,
                                     { to: 'Audits' },
                                     'Audit'
                                 )
@@ -37537,20 +37546,7 @@ var Header = function (_React$Component) {
                         )
                     )
                 )
-            )
-
-            /*
-            <div className="navbar navbar-default">
-                <div className="container-fluid">
-                    <div className="navbar-header">
-                        <div>
-                            <h2>{this.props.text}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            */
-            ;
+            );
         }
     }]);
 

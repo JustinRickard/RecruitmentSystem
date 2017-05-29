@@ -28,29 +28,18 @@ class Header extends React.Component{
                     </div>
                     <div className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
-                            <li><IndexLink to="/">Home</IndexLink></li>
+                            <li><IndexLink to="/"><i className="fa fa-home fa-2x"></i></IndexLink></li>
                             <li><Link to="Clients">Clients</Link></li>
                             <li><Link to="Users">Users</Link></li>
                             <li><Link to="Projects">Projects</Link></li>
                             <li><Link to="Workflows">Workflows</Link></li>
+                            <li><Link to="WorkflowSteps">Workflow Steps</Link></li>
                             <li><Link to="Audits">Audit</Link></li>
                             <li><Link to="Logout">Log out</Link></li>
                         </ul>
                     </div>
                 </div>
             </nav>
-
-            /*
-            <div className="navbar navbar-default">
-                <div className="container-fluid">
-                    <div className="navbar-header">
-                        <div>
-                            <h2>{this.props.text}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            */
         );
     }
 }
