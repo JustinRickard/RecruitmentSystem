@@ -7,6 +7,9 @@ export default function clientReducer(state = [], action) {
                 Object.assign({}, action.client)
             ];
         
+        case actionTypes.ClientLoadSuccess:
+            return action.clients;
+
         case actionTypes.ClientDelete:
             // Filter list?
         

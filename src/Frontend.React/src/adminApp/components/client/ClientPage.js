@@ -4,8 +4,8 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as clientActions from '../../actions/clientActions';
-import * as api from '../../api/client/mockClientApi';
-// import * as api from '../../api/client/clientApi';
+import ClientApi from '../../api/client/mockClientApi';
+// import ClientApi from '../../api/client/clientApi';
 import PanelTable from '../../../common/components/PanelTable';
 import ClientTableHead from './ClientTableHead';
 import ClientTableBody from './ClientTableBody';
@@ -40,9 +40,11 @@ class ClientPage extends React.Component {
         this.props.actions.editClient(this.state.client);
     }
 
-    render() {
+    componentDidMount() {
+        this.props.actions.loadClients();
+    }
 
-        const clients = api.getClients();
+    render() {
 
         return (
             <div>
@@ -66,7 +68,7 @@ class ClientPage extends React.Component {
                         onHeaderButtonClick={this.onCreateClick}
                     >
                         <ClientTableHead />
-                        <ClientTableBody rows={clients} />
+                        <ClientTableBody rows={this.props.clients} />
                     </PanelTable>
                 </div>
 
