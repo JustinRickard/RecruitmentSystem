@@ -11196,6 +11196,29 @@ var PanelTable = function (_React$Component) {
             var panelClass = 'panel ' + this.props.panelClass;
             var iconClass = 'fa ' + this.props.iconClass + ' fa-2x fa-fw';
 
+            console.log(this.props.children);
+            var content = null;
+
+            // TODO: Replace children[1] with an enum
+            if (this.props.children[1].props.rows.length > 0) {
+                content = _react2.default.createElement(
+                    'table',
+                    { className: 'table table-striped table-responsive table-hover' },
+                    this.props.children
+                );
+            } else {
+                content = _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement('i', { className: 'spinner fa fa-refresh fa-spin fa-5x fa-fw' }),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'sr-only' },
+                        'Loading...'
+                    )
+                );
+            }
+
             return _react2.default.createElement(
                 'div',
                 { className: panelClass },
@@ -11219,11 +11242,7 @@ var PanelTable = function (_React$Component) {
                         this.props.panelBodyText
                     )
                 ),
-                _react2.default.createElement(
-                    'table',
-                    { className: 'table table-striped table-responsive table-hover' },
-                    this.props.children
-                )
+                content
             );
         }
     }]);
