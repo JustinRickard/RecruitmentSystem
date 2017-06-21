@@ -37508,12 +37508,20 @@ exports.createUser = createUser;
 exports.editUser = editUser;
 exports.deleteUser = deleteUser;
 exports.obliterateUser = obliterateUser;
+exports.loadUsersSuccess = loadUsersSuccess;
+exports.loadUsers = loadUsers;
 
 var _actionTypes = __webpack_require__(107);
 
 var _actionTypes2 = _interopRequireDefault(_actionTypes);
 
+var _mockUserApi = __webpack_require__(569);
+
+var _mockUserApi2 = _interopRequireDefault(_mockUserApi);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import userApi from '../api/user/userApi';
 
 function createUser(user) {
     return {
@@ -37540,6 +37548,22 @@ function obliterateUser(user) {
     return {
         type: _actionTypes2.default.UserObliterate,
         user: user
+    };
+}
+
+function loadUsersSuccess(users) {
+    return {
+        type: _actionTypes2.default.UserLoadSuccess, users: users
+    };
+}
+
+function loadUsers() {
+    return function (dispatch) {
+        return _mockUserApi2.default.getUsers().then(function (users) {
+            dispatch(loadUsersSuccess(users));
+        }).catch(function (error) {
+            throw error; // TODO: Add error handler
+        });
     };
 }
 
@@ -37719,7 +37743,8 @@ exports.default = ProjectApi;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getUsers = getUsers;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(6);
 
@@ -37731,37 +37756,58 @@ var _delay2 = _interopRequireDefault(_delay);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function getUsers() {
-    return [{
-        email: "example1@example.org",
-        username: "example1",
-        forename: "Andrew",
-        surname: "Da Silva",
-        roles: ["SUPER_ADMIN"],
-        client: { name: "Main Client" }
-    }, {
-        email: "example2@example.org",
-        username: "example2",
-        forename: "Badadini",
-        surname: "Rocha",
-        roles: ["CLIENT_ADMIN"],
-        client: { name: "Main Client" }
-    }, {
-        email: "example3@example.org",
-        username: "example3",
-        forename: "Charles",
-        surname: "Finklestein",
-        roles: ["PARTICIPANT"],
-        client: { name: "Main Client" }
-    }, {
-        email: "example4@example.org",
-        username: "example4",
-        forename: "Doris",
-        surname: "Delaggio",
-        roles: ["CLIENT_ADMIN"],
-        client: { name: "Client 1" }
-    }];
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var users = [{
+    email: "example1@example.org",
+    username: "example1",
+    forename: "Andrew",
+    surname: "Da Silva",
+    roles: ["SUPER_ADMIN"],
+    client: { name: "Main Client" }
+}, {
+    email: "example2@example.org",
+    username: "example2",
+    forename: "Badadini",
+    surname: "Rocha",
+    roles: ["CLIENT_ADMIN"],
+    client: { name: "Main Client" }
+}, {
+    email: "example3@example.org",
+    username: "example3",
+    forename: "Charles",
+    surname: "Finklestein",
+    roles: ["PARTICIPANT"],
+    client: { name: "Main Client" }
+}, {
+    email: "example4@example.org",
+    username: "example4",
+    forename: "Doris",
+    surname: "Delaggio",
+    roles: ["CLIENT_ADMIN"],
+    client: { name: "Client 1" }
+}];
+
+var UserApi = function () {
+    function UserApi() {
+        _classCallCheck(this, UserApi);
+    }
+
+    _createClass(UserApi, null, [{
+        key: 'getUsers',
+        value: function getUsers() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve(Object.assign([], users));
+                }, _delay2.default);
+            });
+        }
+    }]);
+
+    return UserApi;
+}();
+
+exports.default = UserApi;
 
 /***/ }),
 /* 570 */
@@ -39219,7 +39265,7 @@ var userActions = _interopRequireWildcard(_userActions);
 
 var _mockUserApi = __webpack_require__(569);
 
-var api = _interopRequireWildcard(_mockUserApi);
+var UserApi = _interopRequireWildcard(_mockUserApi);
 
 var _PanelTable = __webpack_require__(165);
 
@@ -39288,10 +39334,13 @@ var UserPage = function (_React$Component) {
             this.props.actions.editUser(this.state.user);
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.actions.loadUsers();
+        }
+    }, {
         key: 'render',
         value: function render() {
-
-            var users = api.getUsers();
 
             return _react2.default.createElement(
                 'div',
@@ -39331,7 +39380,7 @@ var UserPage = function (_React$Component) {
                             onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_UserTableHead2.default, null),
-                        _react2.default.createElement(_UserTableBody2.default, { rows: users })
+                        _react2.default.createElement(_UserTableBody2.default, { rows: this.props.users })
                     )
                 ),
                 _react2.default.createElement('div', { className: 'col-md-2' })
@@ -39405,7 +39454,7 @@ var UserTableBody = function (_React$Component) {
 
             var rows = [];
             for (var i = 0; i < this.props.rows.length; i++) {
-                rows.push(_react2.default.createElement(_UserTableRow2.default, { row: this.props.rows[i] }));
+                rows.push(_react2.default.createElement(_UserTableRow2.default, { row: this.props.rows[i], key: i }));
             }
 
             return _react2.default.createElement(
@@ -40572,6 +40621,35 @@ function projectReducer() {
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = userReducer;
+
+var _actionTypes = __webpack_require__(107);
+
+var _actionTypes2 = _interopRequireDefault(_actionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function userReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _actionTypes2.default.UserCreate:
+            return [].concat(_toConsumableArray(state), [Object.assign({}, action.user)]);
+
+        case _actionTypes2.default.UserLoadSuccess:
+            return action.users;
+
+        default:
+            return state;
+    }
+}
 
 /***/ }),
 /* 601 */

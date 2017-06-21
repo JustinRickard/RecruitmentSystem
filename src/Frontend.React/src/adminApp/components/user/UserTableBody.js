@@ -7,7 +7,7 @@ class UserTableBody extends React.Component {
 
         const rows=[];
         for(var i=0; i < this.props.rows.length; i++) {
-            rows.push(<UserTableRow row={this.props.rows[i]} />);
+            rows.push(<UserTableRow row={this.props.rows[i]} key={i} />);
         }
 
         return (

@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from '../../actions/userActions';
-import * as api from '../../api/user/mockUserApi';
+import * as UserApi from '../../api/user/mockUserApi';
 // import * as api from '../../api/user/userApi';
 import PanelTable from '../../../common/components/PanelTable';
 import UserTableHead from './UserTableHead';
@@ -42,9 +42,11 @@ class UserPage extends React.Component {
         this.props.actions.editUser(this.state.user);
     }
 
-    render() {
+    componentDidMount() {
+        this.props.actions.loadUsers();
+    }
 
-        const users = api.getUsers();
+    render() {
 
         return (
             <div>
@@ -68,7 +70,7 @@ class UserPage extends React.Component {
                         onHeaderButtonClick={this.onCreateClick}
                     >
                         <UserTableHead />
-                        <UserTableBody rows={users} />
+                        <UserTableBody rows={this.props.users} />
                     </PanelTable>
                 </div>
 
