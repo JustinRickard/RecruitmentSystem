@@ -36333,15 +36333,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var clients = [{
+    id: "CL_M001",
     name: "Main Client account",
     parentName: "-"
 }, {
+    id: "CL_S001",
     name: "Client 1",
     parentName: "Main Client account"
 }, {
+    id: "CL_S002",
     name: "Client 2",
     parentName: "Main Client account"
 }, {
+    id: "CL_S001",
     name: "Client 3",
     parentName: "Main Client account"
 }];
@@ -38417,7 +38421,7 @@ var ClientTableBody = function (_React$Component) {
 
             var rows = [];
             for (var i = 0; i < this.props.rows.length; i++) {
-                rows.push(_react2.default.createElement(_ClientTableRow2.default, { row: this.props.rows[i] }));
+                rows.push(_react2.default.createElement(_ClientTableRow2.default, { row: this.props.rows[i], key: i }));
             }
 
             return _react2.default.createElement(
@@ -39000,7 +39004,7 @@ var ProjectTableBody = function (_React$Component) {
 
             var rows = [];
             for (var i = 0; i < this.props.rows.length; i++) {
-                rows.push(_react2.default.createElement(_ProjectTableRow2.default, { row: this.props.rows[i] }));
+                rows.push(_react2.default.createElement(_ProjectTableRow2.default, { row: this.props.rows[i], key: i }));
             }
 
             return _react2.default.createElement(
