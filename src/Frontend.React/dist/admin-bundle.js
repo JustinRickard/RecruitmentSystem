@@ -11200,7 +11200,8 @@ var PanelTable = function (_React$Component) {
             var content = null;
 
             // TODO: Replace children[1] with an enum
-            if (this.props.children[1].props.rows.length > 0) {
+            var rows = this.props.children[1].props.rows;
+            if (rows && rows.length > 0) {
                 content = _react2.default.createElement(
                     'table',
                     { className: 'table table-striped table-responsive table-hover' },
@@ -37414,12 +37415,20 @@ exports.deleteProject = deleteProject;
 exports.obliterateProject = obliterateProject;
 exports.addUsersToProject = addUsersToProject;
 exports.removeUsersFromProject = removeUsersFromProject;
+exports.loadProjectsSuccess = loadProjectsSuccess;
+exports.loadProjects = loadProjects;
 
 var _actionTypes = __webpack_require__(107);
 
 var _actionTypes2 = _interopRequireDefault(_actionTypes);
 
+var _mockProjectApi = __webpack_require__(568);
+
+var _mockProjectApi2 = _interopRequireDefault(_mockProjectApi);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import projectApi from '../api/project/projectApi';
 
 function createProject(project) {
     return {
@@ -37462,6 +37471,22 @@ function removeUsersFromProject(project, users) {
         type: _actionTypes2.default.ProjecAddUser,
         project: project,
         users: users
+    };
+}
+
+function loadProjectsSuccess(projects) {
+    return {
+        type: _actionTypes2.default.ProjectLoadSuccess, projects: projects
+    };
+}
+
+function loadProjects() {
+    return function (dispatch) {
+        return _mockProjectApi2.default.getProjects().then(function (projects) {
+            dispatch(loadProjectsSuccess(projects));
+        }).catch(function (error) {
+            throw error; // TODO: Add error handler
+        });
     };
 }
 
@@ -37622,7 +37647,8 @@ function obliterateWorkflowStep(workflowStep) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getProjects = getProjects;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(6);
 
@@ -37634,29 +37660,50 @@ var _delay2 = _interopRequireDefault(_delay);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function getProjects() {
-    return [{
-        name: "Project 1",
-        workflowName: "Workflow 1",
-        closeTime: new Date()
-    }, {
-        name: "Project 2",
-        workflowName: "Workflow 2",
-        closeTime: new Date()
-    }, {
-        name: "Project 3",
-        workflowName: "Workflow 3",
-        closeTime: new Date()
-    }, {
-        name: "Project 4",
-        workflowName: "Workflow 4",
-        closeTime: new Date()
-    }, {
-        name: "Project 5",
-        workflowName: "Workflow 5",
-        closeTime: new Date()
-    }];
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var projects = [{
+    name: "Project 1",
+    workflowName: "Workflow 1",
+    closeTime: new Date()
+}, {
+    name: "Project 2",
+    workflowName: "Workflow 2",
+    closeTime: new Date()
+}, {
+    name: "Project 3",
+    workflowName: "Workflow 3",
+    closeTime: new Date()
+}, {
+    name: "Project 4",
+    workflowName: "Workflow 4",
+    closeTime: new Date()
+}, {
+    name: "Project 5",
+    workflowName: "Workflow 5",
+    closeTime: new Date()
+}];
+
+var ProjectApi = function () {
+    function ProjectApi() {
+        _classCallCheck(this, ProjectApi);
+    }
+
+    _createClass(ProjectApi, null, [{
+        key: 'getProjects',
+        value: function getProjects() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve(Object.assign([], projects));
+                }, _delay2.default);
+            });
+        }
+    }]);
+
+    return ProjectApi;
+}();
+
+exports.default = ProjectApi;
 
 /***/ }),
 /* 569 */
@@ -38762,7 +38809,7 @@ var projectActions = _interopRequireWildcard(_projectActions);
 
 var _mockProjectApi = __webpack_require__(568);
 
-var api = _interopRequireWildcard(_mockProjectApi);
+var ProjectApi = _interopRequireWildcard(_mockProjectApi);
 
 var _PanelTable = __webpack_require__(165);
 
@@ -38833,10 +38880,13 @@ var ProjectPage = function (_React$Component) {
             this.props.actions.editProject(this.state.project);
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.actions.loadProjects();
+        }
+    }, {
         key: 'render',
         value: function render() {
-
-            var projects = api.getProjects();
 
             return _react2.default.createElement(
                 'div',
@@ -38876,7 +38926,7 @@ var ProjectPage = function (_React$Component) {
                             onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_ProjectTableHead2.default, null),
-                        _react2.default.createElement(_ProjectTableBody2.default, { rows: projects })
+                        _react2.default.createElement(_ProjectTableBody2.default, { rows: this.props.projects })
                     )
                 ),
                 _react2.default.createElement('div', { className: 'col-md-2' })
@@ -40482,6 +40532,35 @@ exports.default = rootReducer;
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = projectReducer;
+
+var _actionTypes = __webpack_require__(107);
+
+var _actionTypes2 = _interopRequireDefault(_actionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function projectReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _actionTypes2.default.ProjectCreate:
+            return [].concat(_toConsumableArray(state), [Object.assign({}, action.project)]);
+
+        case _actionTypes2.default.ProjectLoadSuccess:
+            return action.projects;
+
+        default:
+            return state;
+    }
+}
 
 /***/ }),
 /* 600 */

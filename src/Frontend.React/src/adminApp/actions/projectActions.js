@@ -1,4 +1,6 @@
 import actionTypes from '../common/actionTypes';
+import projectApi from '../api/project/mockProjectApi';
+// import projectApi from '../api/project/projectApi';
 
 export function createProject(project) {
     return {
@@ -41,5 +43,23 @@ export function removeUsersFromProject(project, users) {
         type: actionTypes.ProjecAddUser,
         project,
         users
+    }
+}
+
+export function loadProjectsSuccess(projects) {
+    return {
+        type: actionTypes.ProjectLoadSuccess, projects
+    };
+}
+
+export function loadProjects() {
+    return function(dispatch) {
+        return projectApi.getProjects()
+        .then(projects => {
+            dispatch(loadProjectsSuccess(projects));
+        })
+        .catch(error => {
+            throw(error); // TODO: Add error handler
+        });
     }
 }

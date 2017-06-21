@@ -11,7 +11,8 @@ class PanelTable extends React.Component {
         let content = null;
 
         // TODO: Replace children[1] with an enum
-        if (this.props.children[1].props.rows.length > 0) {        
+        const rows = this.props.children[1].props.rows;
+        if (rows && rows.length > 0) {        
             content =
                  <table className="table table-striped table-responsive table-hover">
                     {this.props.children}

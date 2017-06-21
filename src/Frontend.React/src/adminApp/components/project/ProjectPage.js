@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as projectActions from '../../actions/projectActions';
-import * as api from '../../api/project/mockProjectApi';
+import * as ProjectApi from '../../api/project/mockProjectApi';
 // import * as api from '../../api/project/projectApi';
 import PanelTable from '../../../common/components/PanelTable';
 import ProjectTableHead from './ProjectTableHead';
@@ -44,9 +44,11 @@ class ProjectPage extends React.Component {
         this.props.actions.editProject(this.state.project);
     }
 
-    render() {
+    componentDidMount() {
+        this.props.actions.loadProjects();
+    }
 
-        const projects = api.getProjects();
+    render() {
 
         return (
             <div>
@@ -68,7 +70,7 @@ class ProjectPage extends React.Component {
                         onHeaderButtonClick={this.onCreateClick}
                     >
                         <ProjectTableHead />
-                        <ProjectTableBody rows={projects} />
+                        <ProjectTableBody rows={this.props.projects} />
                     </PanelTable>
 
                 </div>
