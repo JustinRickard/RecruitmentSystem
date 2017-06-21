@@ -20,3 +20,8 @@ button i {
     font-size: larger;
     line-height: 10px;
 }
+
+div.no-content {
+    text-align: center;
+    margin: 80px;
+}

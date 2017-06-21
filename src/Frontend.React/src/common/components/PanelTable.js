@@ -11,14 +11,14 @@ class PanelTable extends React.Component {
         let content = null;
 
         // TODO: Replace children[1] with an enum
-        if (this.props.children[1].props.rows.length > 0) {
+        if (this.props.children[1].props.rows.length > 0) {        
             content =
                  <table className="table table-striped table-responsive table-hover">
                     {this.props.children}
                 </table>
         } else {
             content = 
-                <div>
+                <div className="no-content">
                     <i className="spinner fa fa-refresh fa-spin fa-5x fa-fw"></i>
                     <span className="sr-only">Loading...</span>
                 </div>

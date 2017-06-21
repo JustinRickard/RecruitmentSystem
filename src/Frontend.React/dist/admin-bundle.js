@@ -11209,7 +11209,7 @@ var PanelTable = function (_React$Component) {
             } else {
                 content = _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'no-content' },
                     _react2.default.createElement('i', { className: 'spinner fa fa-refresh fa-spin fa-5x fa-fw' }),
                     _react2.default.createElement(
                         'span',
