@@ -41,9 +41,11 @@ class WorkflowStepPage extends React.Component {
         this.props.actions.editWorkflowStep(this.state.workflowStep);
     }
 
-    render() {
+    componentDidMount() {
+        this.props.actions.loadWorkflowSteps();
+    }
 
-        const steps = api.getWorkflowSteps();
+    render() {
 
         return (
             <div>
@@ -66,7 +68,7 @@ class WorkflowStepPage extends React.Component {
                         onHeaderButtonClick={this.onCreateClick}
                     >
                         <WorkflowStepTableHead />
-                        <WorkflowStepTableBody rows={steps} />
+                        <WorkflowStepTableBody rows={this.props.workflowSteps} />
                     </PanelTable>
 
                 </div>

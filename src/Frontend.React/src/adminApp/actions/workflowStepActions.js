@@ -1,4 +1,6 @@
 import actionTypes from '../common/actionTypes';
+import workflowApi from '../api/workflow/mockWorkflowApi';
+// import workflowApi from '../api/workflow/workflowApi';
 
 export function createWorkflowStep(workflowStep) {
     return {
@@ -25,5 +27,23 @@ export function obliterateWorkflowStep(workflowStep) {
     return {
         type: actionTypes.workflowStepObliterate,
         workflowStep
+    }
+}
+
+export function loadWorkflowStepsSuccess(workflowSteps) {
+    return {
+        type: actionTypes.WorkflowStepLoadSuccess, workflowSteps
+    };
+}
+
+export function loadWorkflowSteps() {
+    return function(dispatch) {
+        return workflowApi.getWorkflowSteps()
+        .then(workflowSteps => {
+            dispatch(loadWorkflowStepsSuccess(workflowSteps));
+        })
+        .catch(error => {
+            throw(error); // TODO: Add error handler
+        });
     }
 }

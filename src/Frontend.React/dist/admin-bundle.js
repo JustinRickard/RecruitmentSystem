@@ -37697,12 +37697,20 @@ exports.createWorkflowStep = createWorkflowStep;
 exports.editWorkflowStep = editWorkflowStep;
 exports.deleteWorkflowStep = deleteWorkflowStep;
 exports.obliterateWorkflowStep = obliterateWorkflowStep;
+exports.loadWorkflowStepsSuccess = loadWorkflowStepsSuccess;
+exports.loadWorkflowSteps = loadWorkflowSteps;
 
 var _actionTypes = __webpack_require__(107);
 
 var _actionTypes2 = _interopRequireDefault(_actionTypes);
 
+var _mockWorkflowApi = __webpack_require__(550);
+
+var _mockWorkflowApi2 = _interopRequireDefault(_mockWorkflowApi);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import workflowApi from '../api/workflow/workflowApi';
 
 function createWorkflowStep(workflowStep) {
     return {
@@ -37729,6 +37737,22 @@ function obliterateWorkflowStep(workflowStep) {
     return {
         type: _actionTypes2.default.workflowStepObliterate,
         workflowStep: workflowStep
+    };
+}
+
+function loadWorkflowStepsSuccess(workflowSteps) {
+    return {
+        type: _actionTypes2.default.WorkflowStepLoadSuccess, workflowSteps: workflowSteps
+    };
+}
+
+function loadWorkflowSteps() {
+    return function (dispatch) {
+        return _mockWorkflowApi2.default.getWorkflowSteps().then(function (workflowSteps) {
+            dispatch(loadWorkflowStepsSuccess(workflowSteps));
+        }).catch(function (error) {
+            throw error; // TODO: Add error handler
+        });
     };
 }
 
@@ -40215,10 +40239,13 @@ var WorkflowStepPage = function (_React$Component) {
             this.props.actions.editWorkflowStep(this.state.workflowStep);
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.actions.loadWorkflowSteps();
+        }
+    }, {
         key: 'render',
         value: function render() {
-
-            var steps = api.getWorkflowSteps();
 
             return _react2.default.createElement(
                 'div',
@@ -40267,7 +40294,7 @@ var WorkflowStepPage = function (_React$Component) {
                             onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_WorkflowStepTableHead2.default, null),
-                        _react2.default.createElement(_WorkflowStepTableBody2.default, { rows: steps })
+                        _react2.default.createElement(_WorkflowStepTableBody2.default, { rows: this.props.workflowSteps })
                     )
                 ),
                 _react2.default.createElement('div', { className: 'col-md-3' })
@@ -40762,6 +40789,35 @@ function workflowReducer() {
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = workflowStepReducer;
+
+var _actionTypes = __webpack_require__(107);
+
+var _actionTypes2 = _interopRequireDefault(_actionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function workflowStepReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _actionTypes2.default.WorkflowStepCreate:
+            return [].concat(_toConsumableArray(state), [Object.assign({}, action.workflowStep)]);
+
+        case _actionTypes2.default.WorkflowStepLoadSuccess:
+            return action.workflowSteps;
+
+        default:
+            return state;
+    }
+}
 
 /***/ }),
 /* 603 */
