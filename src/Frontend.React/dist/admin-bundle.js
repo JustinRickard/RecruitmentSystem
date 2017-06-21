@@ -36381,6 +36381,9 @@ exports.default = ClientApi;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 exports.getWorkflows = getWorkflows;
 exports.getWorkflowSteps = getWorkflowSteps;
 
@@ -36394,61 +36397,101 @@ var _delay2 = _interopRequireDefault(_delay);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var workflows = [{
+    id: "WF_001",
+    name: "Workflow 1",
+    steps: 5,
+    createdDate: new Date("2017-01-01")
+}, {
+    id: "WF_002",
+    name: "Workflow 2",
+    steps: 3,
+    createdDate: new Date("2017-01-01")
+}, {
+    id: "WF_003",
+    name: "Workflow 3",
+    steps: 10,
+    createdDate: new Date("2017-01-01")
+}, {
+    id: "WF_004",
+    name: "Workflow 4",
+    steps: 1,
+    createdDate: new Date("2017-01-01")
+}];
+
+var workflowSteps = [{
+    name: "Workflow step 1",
+    type: "Simple text multiple choice",
+    createdDate: new Date(),
+    data: {
+        title: "Simple text multiple choice step",
+        questions: []
+    }
+}, {
+    name: "Workflow step 2",
+    type: "Scenario text multiple choice",
+    createdDate: new Date(),
+    data: {
+        title: "scenario text multiple choice step",
+        questions: []
+    }
+}, {
+    name: "Workflow step 3",
+    type: "User input form",
+    createdDate: new Date(),
+    data: {
+        title: "Registration form",
+        questions: []
+    }
+}, {
+    name: "Workflow step 4",
+    type: "Eligibility check",
+    createdDate: new Date(),
+    data: {
+        title: "Eligiblity example",
+        questions: []
+    }
+}];
+
 function getWorkflows() {
-    return [{
-        name: "Workflow 1",
-        steps: 5,
-        createdDate: new Date("2017-01-01")
-    }, {
-        name: "Workflow 2",
-        steps: 3,
-        createdDate: new Date("2017-01-01")
-    }, {
-        name: "Workflow 3",
-        steps: 10,
-        createdDate: new Date("2017-01-01")
-    }, {
-        name: "Workflow 4",
-        steps: 1,
-        createdDate: new Date("2017-01-01")
-    }];
+    return workflows;
 }
 
 function getWorkflowSteps() {
-    return [{
-        name: "Workflow step 1",
-        type: "Simple text multiple choice",
-        createdDate: new Date(),
-        data: {
-            title: "Simple text multiple choice step",
-            questions: []
-        }
-    }, {
-        name: "Workflow step 2",
-        type: "Scenario text multiple choice",
-        createdDate: new Date(),
-        data: {
-            title: "scenario text multiple choice step",
-            questions: []
-        }
-    }, {
-        name: "Workflow step 3",
-        type: "User input form",
-        createdDate: new Date(),
-        data: {
-            title: "Registration form",
-            questions: []
-        }
-    }, {
-        name: "Workflow step 4",
-        type: "Eligibility check",
-        createdDate: new Date(),
-        data: {
-            title: "Eligiblity example",
-            questions: []
-        }
-    }];
+    return workflowSteps;
 }
+
+var WorkflowApi = function () {
+    function WorkflowApi() {
+        _classCallCheck(this, WorkflowApi);
+    }
+
+    _createClass(WorkflowApi, null, [{
+        key: 'getWorkflows',
+        value: function getWorkflows() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve(Object.assign([], workflows));
+                }, _delay2.default);
+            });
+        }
+    }, {
+        key: 'getWorkflowSteps',
+        value: function getWorkflowSteps() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve(Object.assign([], workflowSteps));
+                }, _delay2.default);
+            });
+        }
+    }]);
+
+    return WorkflowApi;
+}();
+
+exports.default = WorkflowApi;
 
 /***/ }),
 /* 551 */
@@ -37581,12 +37624,20 @@ exports.createWorkflow = createWorkflow;
 exports.editWorkflow = editWorkflow;
 exports.deleteWorkflow = deleteWorkflow;
 exports.obliterateWorkflow = obliterateWorkflow;
+exports.loadWorkflowsSuccess = loadWorkflowsSuccess;
+exports.loadWorkflows = loadWorkflows;
 
 var _actionTypes = __webpack_require__(107);
 
 var _actionTypes2 = _interopRequireDefault(_actionTypes);
 
+var _mockWorkflowApi = __webpack_require__(550);
+
+var _mockWorkflowApi2 = _interopRequireDefault(_mockWorkflowApi);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import workflowApi from '../api/workflow/workflowApi';
 
 function createWorkflow(workflow) {
     return {
@@ -37613,6 +37664,22 @@ function obliterateWorkflow(workflow) {
     return {
         type: _actionTypes2.default.WorkflowObliterate,
         workflow: workflow
+    };
+}
+
+function loadWorkflowsSuccess(workflows) {
+    return {
+        type: _actionTypes2.default.WorkflowLoadSuccess, workflows: workflows
+    };
+}
+
+function loadWorkflows() {
+    return function (dispatch) {
+        return _mockWorkflowApi2.default.getWorkflows().then(function (workflows) {
+            dispatch(loadWorkflowsSuccess(workflows));
+        }).catch(function (error) {
+            throw error; // TODO: Add error handler
+        });
     };
 }
 
@@ -39745,10 +39812,13 @@ var WorkflowPage = function (_React$Component) {
             this.props.actions.editWorkflow(this.state.workflow);
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.actions.loadWorkflows();
+        }
+    }, {
         key: 'render',
         value: function render() {
-
-            var workflows = api.getWorkflows();
 
             return _react2.default.createElement(
                 'div',
@@ -39788,7 +39858,7 @@ var WorkflowPage = function (_React$Component) {
                             onHeaderButtonClick: this.onCreateClick
                         },
                         _react2.default.createElement(_WorkflowTableHead2.default, null),
-                        _react2.default.createElement(_WorkflowTableBody2.default, { rows: workflows })
+                        _react2.default.createElement(_WorkflowTableBody2.default, { rows: this.props.workflows })
                     )
                 ),
                 _react2.default.createElement('div', { className: 'col-md-3' })
@@ -39801,7 +39871,6 @@ var WorkflowPage = function (_React$Component) {
 
 WorkflowPage.propTypes = {
     workflows: _propTypes2.default.array.isRequired,
-    workflowSteps: _propTypes2.default.array.isRequired,
     actions: _propTypes2.default.object.isRequired
 };
 
@@ -39863,7 +39932,7 @@ var WorkflowTableBody = function (_React$Component) {
 
             var rows = [];
             for (var i = 0; i < this.props.rows.length; i++) {
-                rows.push(_react2.default.createElement(_WorkflowTableRow2.default, { row: this.props.rows[i] }));
+                rows.push(_react2.default.createElement(_WorkflowTableRow2.default, { row: this.props.rows[i], key: i }));
             }
 
             return _react2.default.createElement(
@@ -40657,6 +40726,35 @@ function userReducer() {
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = workflowReducer;
+
+var _actionTypes = __webpack_require__(107);
+
+var _actionTypes2 = _interopRequireDefault(_actionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function workflowReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _actionTypes2.default.WorkflowCreate:
+            return [].concat(_toConsumableArray(state), [Object.assign({}, action.workflow)]);
+
+        case _actionTypes2.default.WorkflowLoadSuccess:
+            return action.workflows;
+
+        default:
+            return state;
+    }
+}
 
 /***/ }),
 /* 602 */

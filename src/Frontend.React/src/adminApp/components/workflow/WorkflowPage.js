@@ -39,9 +39,11 @@ class WorkflowPage extends React.Component {
         this.props.actions.editWorkflow(this.state.workflow);
     }
 
-    render() {
+    componentDidMount() {
+        this.props.actions.loadWorkflows();
+    }
 
-        const workflows = api.getWorkflows();
+    render() {
 
         return (
             <div>
@@ -63,7 +65,7 @@ class WorkflowPage extends React.Component {
                         onHeaderButtonClick={this.onCreateClick}
                     >
                         <WorkflowTableHead />
-                        <WorkflowTableBody rows={workflows} />
+                        <WorkflowTableBody rows={this.props.workflows} />
                     </PanelTable>
 
                 </div>
@@ -75,7 +77,6 @@ class WorkflowPage extends React.Component {
 
 WorkflowPage.propTypes = {
     workflows: PropTypes.array.isRequired,
-    workflowSteps: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 }
 
