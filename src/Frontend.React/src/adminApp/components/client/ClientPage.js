@@ -29,7 +29,7 @@ class ClientPage extends React.Component {
     }    
 
     onCreateClick() {
-        this.props.actions.createClient(this.state.client);
+        // route to add page
     }
 
     onDeleteClick() {

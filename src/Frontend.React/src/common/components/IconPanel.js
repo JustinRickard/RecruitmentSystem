@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Panel extends React.Component {
+class IconPanel extends React.Component {
     render() {
 
         const headerClass = 'panel ' + this.props.headerClass
@@ -20,4 +20,4 @@ class Panel extends React.Component {
     }
 }
 
-export default Panel
+export default IconPanel
