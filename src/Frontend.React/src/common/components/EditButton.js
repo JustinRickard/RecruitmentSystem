@@ -1,17 +1,17 @@
 import React from 'react';
 import IconButton from './IconButton';
+import T from 'i18n-react';
 
 class EditButton extends React.Component {
     render() {
 
         const iconClass = 'fa-edit';
         const buttonClass = 'btn-primary';
-        const text = 'Edit'; // TODO: Translate with i18n
 
         return (
             <IconButton
                 iconClass={iconClass}
-                text={text}
+                text={ T.translate("generic.button.edit") }
                 buttonClass={buttonClass}
                 onClick={this.props.onClick}
             />
