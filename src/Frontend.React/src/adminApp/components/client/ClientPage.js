@@ -10,6 +10,7 @@ import PanelTable from '../../../common/components/PanelTable';
 import ClientTableHead from './ClientTableHead';
 import ClientTableBody from './ClientTableBody';
 import icons from '../../../common/icons';
+import text from '../../../common/text';
 
 class ClientPage extends React.Component {
 
@@ -53,16 +54,16 @@ class ClientPage extends React.Component {
                 <div className="col-md-8">
 
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="">Home</a></li>
-                        <li className="breadcrumb-item active">Clients</li>
+                        <li className="breadcrumb-item"><a href="">{text("generic.home")}</a></li>
+                        <li className="breadcrumb-item active">{text("client.clients")}</li>
                     </ol>
 
                     <PanelTable
                         panelClass="panel-primary"
                         iconClass={icons.Client}
-                        panelHeaderText="Clients"
-                        panelBodyText="Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details."
-                        headerButtonText="New Client"
+                        panelHeaderText={text("client.clients")}
+                        panelBodyText={text("client.intro")}
+                        headerButtonText={text("client.new")}
                         headerButtonClass="btn-success panel-header-button"
                         headerButtonIconClass="fa-plus"
                         onHeaderButtonClick={this.onCreateClick}

@@ -13,11 +13,18 @@ const en_gb = {
             edit: "Edit",
             delete: "Delete"            
         },
-        home: "Home"
+        home: "Home",
+        name: "Name",
+        code: "Code"
     },
     client: {
         clients: "Clients",
-        new: "New Client"
+        intro: "Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.",
+        new: "New Client",
+        fields: {
+            parentAccount: "Parent account"
+        }
+        
     },
     project: {
         projects: "Projects",
@@ -34,6 +41,9 @@ const en_gb = {
     workflowStep: {
         clients: "Workflow Steps",
         new: "New Workflow Step"
+    },
+    audit: {
+        audits: "Audit Logs"
     }
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import FormDropdownInput from '../../../common/components/FormDropdownInput';
 import FormTextInput from '../../../common/components/FormTextInput';
 import FormBoolInput from '../../../common/components/FormBoolInput';
-
+import text from '../../../common/text';
 
 class ClientForm extends React.Component {
 
@@ -11,18 +11,18 @@ class ClientForm extends React.Component {
             <div>
             <FormDropdownInput 
                 id="parentId"
-                label="Parent account"
+                label={text("client.parentAccount")}
                 options={this.props.clients.map(function(c) { return { value: c.id, text: c.Name }})}
             />
 
             <FormTextInput 
                 id="name"
-                label="Name"
+                label={text("generic.name")}
             />
 
             <FormTextInput 
                 id="code"
-                label="Code"
+                label={text("generic.code")}
             />
 
             </div>

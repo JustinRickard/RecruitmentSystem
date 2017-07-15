@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as auditActions from '../../actions/auditActions';
+import text from '../../../common/text';
 
 class AuditPage extends React.Component {
 
@@ -13,10 +14,10 @@ class AuditPage extends React.Component {
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="">Home</a></li>
-                            <li className="breadcrumb-item active">Audits</li>
+                            <li className="breadcrumb-item"><a href="">{text("generic.home")}</a></li>
+                            <li className="breadcrumb-item active">{text("audit.audits")}</li>
                         </ol>
-                        <h1>Audit logs</h1>
+                        <h1>{text("audit.audits")}</h1>
                 </div>
                 <div className="col-md-3"></div>
             </div>

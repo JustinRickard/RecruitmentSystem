@@ -5,6 +5,7 @@ import FormPanel from '../../../common/components/FormPanel';
 import Breadcrumb3Items from '../../../common/components/Breadcrumb3Item';
 import ClientForm from './ClientForm';
 import icons from '../../../common/icons';
+import text from '../../../common/text';
 
 class ClientPage extends React.Component {
 
@@ -34,12 +35,12 @@ class ClientPage extends React.Component {
                 <div className="col-md-2"></div>
 
                 <div className="col-md-8">
-                    <Breadcrumb3Items href1="Clients" label1="Clients" label2="Add" />
+                    <Breadcrumb3Items href1="Clients" label1={text("client.clients")} label2={text("generic.create")} />
 
                     <FormPanel
                         headerClass="panel-primary"
                         iconClass={icons.Client}
-                        headerText="Add Client">
+                        headerText={text("generic.save")}>
                         <ClientForm />
                     </FormPanel>
                 </div>
