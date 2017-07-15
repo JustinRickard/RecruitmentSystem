@@ -38245,6 +38245,7 @@ var en_gb = {
 
     },
     user: {
+        intro: "Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records.",
         users: "Users",
         summary: "Manage users, create new ones, etc...",
         new: "New User"
@@ -39785,6 +39786,10 @@ var _icons = __webpack_require__(161);
 
 var _icons2 = _interopRequireDefault(_icons);
 
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39805,14 +39810,7 @@ var UserPage = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (UserPage.__proto__ || Object.getPrototypeOf(UserPage)).call(this, props, context));
 
-        _this.state = {
-            user: {
-                firstName: "",
-                surname: "",
-                email: "",
-                useEmailAsLogin: true
-            }
-        };
+        _this.state = {};
 
         _this.onCreateClick = _this.onCreateClick.bind(_this);
         _this.onDeleteClick = _this.onDeleteClick.bind(_this);
@@ -39860,13 +39858,13 @@ var UserPage = function (_React$Component) {
                             _react2.default.createElement(
                                 'a',
                                 { href: '' },
-                                'Home'
+                                (0, _text2.default)("generic.home")
                             )
                         ),
                         _react2.default.createElement(
                             'li',
                             { className: 'breadcrumb-item active' },
-                            'Users'
+                            (0, _text2.default)("user.users")
                         )
                     ),
                     _react2.default.createElement(
@@ -39874,9 +39872,9 @@ var UserPage = function (_React$Component) {
                         {
                             panelClass: 'panel-primary',
                             iconClass: _icons2.default.User,
-                            panelHeaderText: 'Users',
-                            panelBodyText: 'Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records.',
-                            headerButtonText: 'New User',
+                            panelHeaderText: (0, _text2.default)("user.users"),
+                            panelBodyText: (0, _text2.default)("user.intro"),
+                            headerButtonText: (0, _text2.default)("user.new"),
                             headerButtonClass: 'btn-success panel-header-button',
                             headerButtonIconClass: 'fa-plus',
                             onHeaderButtonClick: this.onCreateClick

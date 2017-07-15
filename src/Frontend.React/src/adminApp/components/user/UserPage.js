@@ -10,6 +10,7 @@ import PanelTable from '../../../common/components/PanelTable';
 import UserTableHead from './UserTableHead';
 import UserTableBody from './UserTableBody';
 import icons from '../../../common/icons';
+import text from '../../../common/text';
 
 class UserPage extends React.Component {
 
@@ -17,12 +18,6 @@ class UserPage extends React.Component {
         super(props, context)
 
         this.state = {
-            user: {
-                firstName: "",
-                surname: "",
-                email: "",
-                useEmailAsLogin: true
-            }
         }
 
         this.onCreateClick = this.onCreateClick.bind(this);
@@ -55,16 +50,16 @@ class UserPage extends React.Component {
                 <div className="col-md-8">
 
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="">Home</a></li>
-                        <li className="breadcrumb-item active">Users</li>
+                        <li className="breadcrumb-item"><a href="">{text("generic.home")}</a></li>
+                        <li className="breadcrumb-item active">{text("user.users")}</li>
                     </ol>
 
                     <PanelTable
                         panelClass="panel-primary"
                         iconClass={icons.User}
-                        panelHeaderText="Users"
-                        panelBodyText="Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records."
-                        headerButtonText="New User"
+                        panelHeaderText={text("user.users")}
+                        panelBodyText={text("user.intro")}
+                        headerButtonText={text("user.new")}
                         headerButtonClass="btn-success panel-header-button"
                         headerButtonIconClass="fa-plus"
                         onHeaderButtonClick={this.onCreateClick}

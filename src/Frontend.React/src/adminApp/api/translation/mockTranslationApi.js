@@ -35,6 +35,7 @@ const en_gb = {
                 
     },
     user: {
+        intro: "Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records.",
         users: "Users",
         summary: "Manage users, create new ones, etc...",
         new: "New User"
