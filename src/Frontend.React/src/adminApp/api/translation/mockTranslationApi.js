@@ -19,31 +19,36 @@ const en_gb = {
     },
     client: {
         clients: "Clients",
+        summary: "Manage clients, create new ones, etc...",
         intro: "Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.",
         new: "New Client",
         fields: {
             parentAccount: "Parent account"
-        }
-        
+        }       
     },
     project: {
         projects: "Projects",
+        summary: "Administer projects, add participants, etc...",
         new: "New Project"
     },
     user: {
         users: "Users",
+        summary: "Manage users, create new ones, etc...",
         new: "New User"
     },
     workflow: {
-        workflows: "workflows",
+        workflows: "Workflows",
+        summary: "Create new workflows and modify existing ones, etc...",
         new: "New Workflow"
     },
     workflowStep: {
-        clients: "Workflow Steps",
+        workflowSteps: "Workflow Steps",
+        summary: "Create new workflow steps, modify existing ones, etc",
         new: "New Workflow Step"
     },
     audit: {
-        audits: "Audit Logs"
+        audits: "Audit Logs",
+        summary: "View audit logs of recent activity and filter by various criteria."
     }
 };
 

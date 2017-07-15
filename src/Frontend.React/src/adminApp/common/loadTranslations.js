@@ -2,13 +2,10 @@ import React from 'react';
 import T from 'i18n-react';
 import translationApi from '../api/translation/mockTranslationApi';
 
-export default function loadTranslations(cultureCode) {
+export function getTranslations(cultureCode) {
+    return translationApi.getTranslations(cultureCode);
+}
 
-    let translations = translationApi.getTranslations(cultureCode)
-        .then(text => {
-            T.setTexts(text);
-        })
-        .catch(error => {
-            throw(error); // TODO: Add error handler
-        });
+export function loadTranslations(text) {
+    T.setTexts(text)
 }

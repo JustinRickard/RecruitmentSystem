@@ -3,6 +3,8 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import PanelLink from './PanelLink';
 import icons from '../../../common/icons';
+import text from '../../../common/text';
+import urlPaths from '../../common/urlPaths';
 
 class HomePage extends React.Component {
 
@@ -13,53 +15,52 @@ class HomePage extends React.Component {
                 <div className="col-xs-12 col-sm-12 col-md-8">
 
                     <PanelLink
-                        link="/clients"
+                        link={urlPaths.client.main}
                         headerClass="panel-primary"
-                        headerText="Clients" 
-                        footerText="Manage clients, create new ones, etc..."
+                        headerText={text("client.clients")}
+                        footerText={text("client.summary")}
                         iconClass={icons.Client}
                     />
 
                     <PanelLink
-                        link="/users"
+                        link={urlPaths.user.main}
                         headerClass="panel-primary"
-                        headerText="Users" 
-                        footerText="Manage users, create new ones, etc..."
+                        headerText={text("user.users")}
+                        footerText={text("user.summary")}
                         iconClass={icons.User}
                     />
 
                     <PanelLink
-                        link="/projects"
+                        link={urlPaths.project.main}
                         headerClass="panel-primary"
-                        headerText="Projects" 
-                        footerText="Administer projects, add participants, etc..."
+                        headerText={text("project.projects")}
+                        footerText={text("project.summary")}
                         iconClass={icons.Project}
                     />
 
                     <PanelLink
-                        link="/audits"
+                        link={urlPaths.audit.main}
                         headerClass="panel-warning"
-                        headerText="Audit Logs" 
-                        footerText="View audit logs of recent activity and filter by various criteria."
+                        headerText={text("audit.audits")}
+                        footerText={text("audit.summary")}
                         iconClass={icons.Audit}
                     />
 
                     <PanelLink
-                        link="/workflows"
+                        link={urlPaths.workflow.main}
                         headerClass="panel-info"
-                        headerText="Workflows" 
-                        footerText="Create new workflows and modify existing ones, etc..."
+                        headerText={text("workflow.workflows")}
+                        footerText={text("workflow.summary")}
                         iconClass={icons.Workflow}
                     />
 
                     <PanelLink
-                        link="/workflowSteps"
+                        link={urlPaths.workflowStep.main}
                         headerClass="panel-info"
-                        headerText="Workflow Steps" 
-                        footerText="Create new workflow steps, modify existing ones, etc"
+                        headerText={text("workflowStep.workflowSteps")}
+                        footerText={text("workflowStep.summary")}
                         iconClass={icons.WorkflowStep}
                     />
-
 
                 </div>               
                 <div className="col-md-2"></div>

@@ -10981,7 +10981,7 @@ exports.default = iconClasses;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = 2000;
+exports.default = 500;
 
 /***/ }),
 /* 163 */
@@ -37643,7 +37643,8 @@ function warning(message) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = loadTranslations;
+exports.getTranslations = getTranslations;
+exports.loadTranslations = loadTranslations;
 
 var _react = __webpack_require__(5);
 
@@ -37659,13 +37660,12 @@ var _mockTranslationApi2 = _interopRequireDefault(_mockTranslationApi);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function loadTranslations(cultureCode) {
+function getTranslations(cultureCode) {
+    return _mockTranslationApi2.default.getTranslations(cultureCode);
+}
 
-    var translations = _mockTranslationApi2.default.getTranslations(cultureCode).then(function (text) {
-        _i18nReact2.default.setTexts(text);
-    }).catch(function (error) {
-        throw error; // TODO: Add error handler
-    });
+function loadTranslations(text) {
+    _i18nReact2.default.setTexts(text);
 }
 
 /***/ }),
@@ -37721,19 +37721,23 @@ var _LogoutPage = __webpack_require__(575);
 
 var _LogoutPage2 = _interopRequireDefault(_LogoutPage);
 
+var _urlPaths = __webpack_require__(638);
+
+var _urlPaths2 = _interopRequireDefault(_urlPaths);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _react2.default.createElement(
     _reactRouter.Route,
     { path: '/', component: _App2.default },
     _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _UserPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/clients', component: _ClientPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/projects', component: _ProjectPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/workflows', component: _WorkflowPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/workflowSteps', component: _WorkflowStepPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/audits', component: _AuditPage2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _LogoutPage2.default })
+    _react2.default.createElement(_reactRouter.Route, { path: _urlPaths2.default.user.main, component: _UserPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: _urlPaths2.default.client.main, component: _ClientPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: _urlPaths2.default.project.main, component: _ProjectPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: _urlPaths2.default.workflow.main, component: _WorkflowPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: _urlPaths2.default.workflowStep.main, component: _WorkflowStepPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: _urlPaths2.default.audit.main, component: _AuditPage2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: _urlPaths2.default.logout, component: _LogoutPage2.default })
 );
 
 /***/ }),
@@ -38225,31 +38229,36 @@ var en_gb = {
     },
     client: {
         clients: "Clients",
+        summary: "Manage clients, create new ones, etc...",
         intro: "Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.",
         new: "New Client",
         fields: {
             parentAccount: "Parent account"
         }
-
     },
     project: {
         projects: "Projects",
+        summary: "Administer projects, add participants, etc...",
         new: "New Project"
     },
     user: {
         users: "Users",
+        summary: "Manage users, create new ones, etc...",
         new: "New User"
     },
     workflow: {
-        workflows: "workflows",
+        workflows: "Workflows",
+        summary: "Create new workflows and modify existing ones, etc...",
         new: "New Workflow"
     },
     workflowStep: {
-        clients: "Workflow Steps",
+        workflowSteps: "Workflow Steps",
+        summary: "Create new workflow steps, modify existing ones, etc",
         new: "New Workflow Step"
     },
     audit: {
-        audits: "Audit Logs"
+        audits: "Audit Logs",
+        summary: "View audit logs of recent activity and filter by various criteria."
     }
 };
 
@@ -39150,6 +39159,14 @@ var _icons = __webpack_require__(161);
 
 var _icons2 = _interopRequireDefault(_icons);
 
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
+
+var _urlPaths = __webpack_require__(638);
+
+var _urlPaths2 = _interopRequireDefault(_urlPaths);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39178,45 +39195,45 @@ var HomePage = function (_React$Component) {
                     'div',
                     { className: 'col-xs-12 col-sm-12 col-md-8' },
                     _react2.default.createElement(_PanelLink2.default, {
-                        link: '/clients',
+                        link: _urlPaths2.default.client.main,
                         headerClass: 'panel-primary',
-                        headerText: 'Clients',
-                        footerText: 'Manage clients, create new ones, etc...',
+                        headerText: (0, _text2.default)("client.clients"),
+                        footerText: (0, _text2.default)("client.summary"),
                         iconClass: _icons2.default.Client
                     }),
                     _react2.default.createElement(_PanelLink2.default, {
-                        link: '/users',
+                        link: _urlPaths2.default.user.main,
                         headerClass: 'panel-primary',
-                        headerText: 'Users',
-                        footerText: 'Manage users, create new ones, etc...',
+                        headerText: (0, _text2.default)("user.users"),
+                        footerText: (0, _text2.default)("user.summary"),
                         iconClass: _icons2.default.User
                     }),
                     _react2.default.createElement(_PanelLink2.default, {
-                        link: '/projects',
+                        link: _urlPaths2.default.project.main,
                         headerClass: 'panel-primary',
-                        headerText: 'Projects',
-                        footerText: 'Administer projects, add participants, etc...',
+                        headerText: (0, _text2.default)("project.projects"),
+                        footerText: (0, _text2.default)("project.summary"),
                         iconClass: _icons2.default.Project
                     }),
                     _react2.default.createElement(_PanelLink2.default, {
-                        link: '/audits',
+                        link: _urlPaths2.default.audit.main,
                         headerClass: 'panel-warning',
-                        headerText: 'Audit Logs',
-                        footerText: 'View audit logs of recent activity and filter by various criteria.',
+                        headerText: (0, _text2.default)("audit.audits"),
+                        footerText: (0, _text2.default)("audit.summary"),
                         iconClass: _icons2.default.Audit
                     }),
                     _react2.default.createElement(_PanelLink2.default, {
-                        link: '/workflows',
+                        link: _urlPaths2.default.workflow.main,
                         headerClass: 'panel-info',
-                        headerText: 'Workflows',
-                        footerText: 'Create new workflows and modify existing ones, etc...',
+                        headerText: (0, _text2.default)("workflow.workflows"),
+                        footerText: (0, _text2.default)("workflow.summary"),
                         iconClass: _icons2.default.Workflow
                     }),
                     _react2.default.createElement(_PanelLink2.default, {
-                        link: '/workflowSteps',
+                        link: _urlPaths2.default.workflowStep.main,
                         headerClass: 'panel-info',
-                        headerText: 'Workflow Steps',
-                        footerText: 'Create new workflow steps, modify existing ones, etc',
+                        headerText: (0, _text2.default)("workflowStep.workflowSteps"),
+                        footerText: (0, _text2.default)("workflowStep.summary"),
                         iconClass: _icons2.default.WorkflowStep
                     })
                 ),
@@ -40972,19 +40989,25 @@ var _configureStore2 = _interopRequireDefault(_configureStore);
 
 var _loadTranslations = __webpack_require__(562);
 
-var _loadTranslations2 = _interopRequireDefault(_loadTranslations);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var store = (0, _configureStore2.default)();
-(0, _loadTranslations2.default)('en_gb');
 
-// Use browserHistory for production. Use hashHistory for initial development
-(0, _reactDom.render)(_react2.default.createElement(
-    _reactRedux.Provider,
-    { store: store },
-    _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: _routes2.default })
-), document.getElementById('app'));
+function renderApp() {
+    // Use browserHistory for production. Use hashHistory for initial development
+    (0, _reactDom.render)(_react2.default.createElement(
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, routes: _routes2.default })
+    ), document.getElementById('app'));
+}
+
+(0, _loadTranslations.getTranslations)('en_gb').then(function (text) {
+    (0, _loadTranslations.loadTranslations)(text);
+    renderApp();
+}).catch(function (error) {
+    throw error; // TODO: Add error handler
+});
 
 /***/ }),
 /* 600 */
@@ -42489,6 +42512,45 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function text(keycode) {
     return _i18nReact2.default.translate(keycode);
 }
+
+/***/ }),
+/* 638 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var urlPaths = {
+    client: {
+        main: "/clients",
+        new: ""
+    },
+    user: {
+        main: "/users",
+        new: ""
+    },
+    project: {
+        main: "/projects",
+        new: ""
+    },
+    workflow: {
+        main: "/workflows",
+        new: ""
+    },
+    workflowStep: {
+        main: "/workflowSteps",
+        new: ""
+    },
+    audit: {
+        main: "/audits"
+    },
+    logout: "/logout"
+};
+
+exports.default = urlPaths;
 
 /***/ })
 /******/ ]);

@@ -9,16 +9,17 @@ import WorkflowPage from '../components/workflow/WorkflowPage';
 import WorkflowStepPage from '../components/workflowStep/WorkflowStepPage';
 import AuditPage from '../components/audit/AuditPage';
 import LogoutPage from '../components/LogoutPage';
+import urlPaths from '../common/urlPaths';
 
 export default (
         <Route path="/" component={App}>
             <IndexRoute component={HomePage} />
-            <Route path="/users" component={UserPage} />
-            <Route path="/clients" component={ClientPage} />
-            <Route path="/projects" component={ProjectPage} />
-            <Route path="/workflows" component={WorkflowPage} />
-            <Route path="/workflowSteps" component={WorkflowStepPage} />
-            <Route path="/audits" component={AuditPage} />
-            <Route path="/logout" component={LogoutPage} />
+            <Route path={urlPaths.user.main} component={UserPage} />
+            <Route path={urlPaths.client.main} component={ClientPage} />
+            <Route path={urlPaths.project.main} component={ProjectPage} />
+            <Route path={urlPaths.workflow.main} component={WorkflowPage} />
+            <Route path={urlPaths.workflowStep.main} component={WorkflowStepPage} />
+            <Route path={urlPaths.audit.main} component={AuditPage} />
+            <Route path={urlPaths.logout} component={LogoutPage} />
         </Route>
 );
