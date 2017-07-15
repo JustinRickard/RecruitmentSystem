@@ -16370,17 +16370,17 @@ var workflows = [{
     id: "WF_001",
     name: "Workflow 1",
     steps: 5,
-    createdDate: new Date("2017-01-01")
+    createdDate: new Date("2017-11-01")
 }, {
     id: "WF_002",
     name: "Workflow 2",
     steps: 3,
-    createdDate: new Date("2017-01-01")
+    createdDate: new Date("2017-07-21")
 }, {
     id: "WF_003",
     name: "Workflow 3",
     steps: 10,
-    createdDate: new Date("2017-01-01")
+    createdDate: new Date("2017-03-11")
 }, {
     id: "WF_004",
     name: "Workflow 4",
@@ -38224,6 +38224,7 @@ var en_gb = {
             submit: "Submit"
         },
         code: "Code",
+        createdDate: "Create date",
         home: "Home",
         name: "Name"
 
@@ -38251,6 +38252,7 @@ var en_gb = {
         users: "Users"
     },
     workflow: {
+        intro: "Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows.",
         new: "New Workflow",
         summary: "Create new workflows and modify existing ones, etc...",
         workflow: "Workflow",
@@ -38259,7 +38261,8 @@ var en_gb = {
     workflowStep: {
         new: "New Workflow Step",
         summary: "Create new workflow steps, modify existing ones, etc",
-        workflowSteps: "Workflow Steps"
+        workflowSteps: "Workflow Steps",
+        steps: "Steps"
     },
     audit: {
         audits: "Audit Logs",
@@ -40197,6 +40200,10 @@ var _icons = __webpack_require__(161);
 
 var _icons2 = _interopRequireDefault(_icons);
 
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -40269,13 +40276,13 @@ var WorkflowPage = function (_React$Component) {
                             _react2.default.createElement(
                                 'a',
                                 { href: '' },
-                                'Home'
+                                (0, _text2.default)("generic.home")
                             )
                         ),
                         _react2.default.createElement(
                             'li',
                             { className: 'breadcrumb-item active' },
-                            'Workflows'
+                            (0, _text2.default)("workflow.workflows")
                         )
                     ),
                     _react2.default.createElement(
@@ -40283,9 +40290,9 @@ var WorkflowPage = function (_React$Component) {
                         {
                             panelClass: 'panel-info',
                             iconClass: _icons2.default.Workflow,
-                            panelHeaderText: 'Workflows',
-                            panelBodyText: 'Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows.',
-                            headerButtonText: 'New Workflow',
+                            panelHeaderText: (0, _text2.default)("workflow.workflows"),
+                            panelBodyText: (0, _text2.default)("workflow.intro"),
+                            headerButtonText: (0, _text2.default)("workflow.new"),
                             headerButtonClass: 'btn-success panel-header-button',
                             headerButtonIconClass: 'fa-plus',
                             onHeaderButtonClick: this.onCreateClick
@@ -40398,6 +40405,10 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -40427,17 +40438,17 @@ var WorkflowTableHead = function (_React$Component) {
                     _react2.default.createElement(
                         'th',
                         null,
-                        'Name'
+                        (0, _text2.default)("generic.name")
                     ),
                     _react2.default.createElement(
                         'th',
                         null,
-                        'Steps'
+                        (0, _text2.default)("workflow.steps")
                     ),
                     _react2.default.createElement(
                         'th',
                         null,
-                        'Created date'
+                        (0, _text2.default)("generic.createdDate")
                     ),
                     _react2.default.createElement('th', null),
                     _react2.default.createElement('th', null),

@@ -14,6 +14,7 @@ const en_gb = {
             submit: "Submit",
         },
         code: "Code",
+        createdDate: "Create date",
         home: "Home",
         name: "Name"
         
@@ -41,6 +42,7 @@ const en_gb = {
         users: "Users"
     },
     workflow: {
+        intro: "Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows.",
         new: "New Workflow",        
         summary: "Create new workflows and modify existing ones, etc...",        
         workflow: "Workflow",
@@ -49,7 +51,8 @@ const en_gb = {
     workflowStep: {
         new: "New Workflow Step",
         summary: "Create new workflow steps, modify existing ones, etc",
-        workflowSteps: "Workflow Steps"        
+        workflowSteps: "Workflow Steps",
+        steps: "Steps"     
     },
     audit: {
         audits: "Audit Logs",

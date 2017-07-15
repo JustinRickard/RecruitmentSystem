@@ -10,6 +10,7 @@ import PanelTable from '../../../common/components/PanelTable';
 import WorkflowTableHead from './WorkflowTableHead';
 import WorkflowTableBody from './WorkflowTableBody';
 import icons from '../../../common/icons';
+import text from '../../../common/text';
 
 class WorkflowPage extends React.Component {
 
@@ -50,16 +51,16 @@ class WorkflowPage extends React.Component {
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="">Home</a></li>
-                        <li className="breadcrumb-item active">Workflows</li>
+                        <li className="breadcrumb-item"><a href="">{text("generic.home")}</a></li>
+                        <li className="breadcrumb-item active">{text("workflow.workflows")}</li>
                     </ol>
                    
                     <PanelTable
                         panelClass="panel-info"
                         iconClass={icons.Workflow}
-                        panelHeaderText="Workflows"
-                        panelBodyText="Below is a list of all the Workflows within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update Workflows."
-                        headerButtonText="New Workflow"
+                        panelHeaderText={text("workflow.workflows")}
+                        panelBodyText={text("workflow.intro")}
+                        headerButtonText={text("workflow.new")}
                         headerButtonClass="btn-success panel-header-button"
                         headerButtonIconClass="fa-plus"
                         onHeaderButtonClick={this.onCreateClick}
