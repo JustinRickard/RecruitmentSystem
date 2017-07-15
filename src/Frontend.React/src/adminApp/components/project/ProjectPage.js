@@ -10,6 +10,7 @@ import PanelTable from '../../../common/components/PanelTable';
 import ProjectTableHead from './ProjectTableHead';
 import ProjectTableBody from './ProjectTableBody';
 import icons from '../../../common/icons';
+import text from '../../../common/text';
 
 class ProjectPage extends React.Component {
 
@@ -17,14 +18,6 @@ class ProjectPage extends React.Component {
         super(props, context)
 
         this.state = {
-            project: {
-                title: "",
-                workflowId: null,
-                loginMethod: "",
-                openTime: null,
-                closeTime: null,
-                participants: []
-            }
         }
 
         this.onCreateClick = this.onCreateClick.bind(this);
@@ -55,16 +48,16 @@ class ProjectPage extends React.Component {
                 <div className="col-md-2"></div>
                 <div className="col-md-8">
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="">Home</a></li>
-                        <li className="breadcrumb-item active">Projects</li>
+                        <li className="breadcrumb-item"><a href="">{text("generic.home")}</a></li>
+                        <li className="breadcrumb-item active">{text("project.projects")}</li>
                     </ol>
                     
                     <PanelTable
                         panelClass="panel-primary"
                         iconClass={icons.Project}
-                        panelHeaderText="Projects"
-                        panelBodyText="Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects."
-                        headerButtonText="New Project"
+                        panelHeaderText={text("project.projects")}
+                        panelBodyText={text("project.intro")}
+                        headerButtonText={text("project.new")}
                         headerButtonClass="btn-success panel-header-button"
                         headerButtonIconClass="fa-plus"
                         onHeaderButtonClick={this.onCreateClick}

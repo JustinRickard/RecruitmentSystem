@@ -38237,9 +38237,12 @@ var en_gb = {
         }
     },
     project: {
+        closeTime: "Close time",
         projects: "Projects",
         summary: "Administer projects, add participants, etc...",
+        intro: "Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects.",
         new: "New Project"
+
     },
     user: {
         users: "Users",
@@ -38248,6 +38251,7 @@ var en_gb = {
     },
     workflow: {
         workflows: "Workflows",
+        workflow: "Workflow",
         summary: "Create new workflows and modify existing ones, etc...",
         new: "New Workflow"
     },
@@ -39376,6 +39380,10 @@ var _icons = __webpack_require__(161);
 
 var _icons2 = _interopRequireDefault(_icons);
 
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39396,16 +39404,7 @@ var ProjectPage = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ProjectPage.__proto__ || Object.getPrototypeOf(ProjectPage)).call(this, props, context));
 
-        _this.state = {
-            project: {
-                title: "",
-                workflowId: null,
-                loginMethod: "",
-                openTime: null,
-                closeTime: null,
-                participants: []
-            }
-        };
+        _this.state = {};
 
         _this.onCreateClick = _this.onCreateClick.bind(_this);
         _this.onDeleteClick = _this.onDeleteClick.bind(_this);
@@ -39453,13 +39452,13 @@ var ProjectPage = function (_React$Component) {
                             _react2.default.createElement(
                                 'a',
                                 { href: '' },
-                                'Home'
+                                (0, _text2.default)("generic.home")
                             )
                         ),
                         _react2.default.createElement(
                             'li',
                             { className: 'breadcrumb-item active' },
-                            'Projects'
+                            (0, _text2.default)("project.projects")
                         )
                     ),
                     _react2.default.createElement(
@@ -39467,9 +39466,9 @@ var ProjectPage = function (_React$Component) {
                         {
                             panelClass: 'panel-primary',
                             iconClass: _icons2.default.Project,
-                            panelHeaderText: 'Projects',
-                            panelBodyText: 'Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects.',
-                            headerButtonText: 'New Project',
+                            panelHeaderText: (0, _text2.default)("project.projects"),
+                            panelBodyText: (0, _text2.default)("project.intro"),
+                            headerButtonText: (0, _text2.default)("project.new"),
                             headerButtonClass: 'btn-success panel-header-button',
                             headerButtonIconClass: 'fa-plus',
                             onHeaderButtonClick: this.onCreateClick
@@ -39582,6 +39581,10 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39611,17 +39614,17 @@ var ProjectTableHead = function (_React$Component) {
                     _react2.default.createElement(
                         'th',
                         null,
-                        'Name'
+                        (0, _text2.default)("generic.name")
                     ),
                     _react2.default.createElement(
                         'th',
                         null,
-                        'Workflow'
+                        (0, _text2.default)("workflow.workflow")
                     ),
                     _react2.default.createElement(
                         'th',
                         null,
-                        'Close time'
+                        (0, _text2.default)("project.closeTime")
                     ),
                     _react2.default.createElement('th', null),
                     _react2.default.createElement('th', null),

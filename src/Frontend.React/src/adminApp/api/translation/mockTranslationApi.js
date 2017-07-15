@@ -27,9 +27,12 @@ const en_gb = {
         }       
     },
     project: {
+        closeTime: "Close time",
         projects: "Projects",
         summary: "Administer projects, add participants, etc...",
-        new: "New Project"
+        intro: "Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects.",
+        new: "New Project",
+                
     },
     user: {
         users: "Users",
@@ -38,6 +41,7 @@ const en_gb = {
     },
     workflow: {
         workflows: "Workflows",
+        workflow: "Workflow",
         summary: "Create new workflows and modify existing ones, etc...",
         new: "New Workflow"
     },
