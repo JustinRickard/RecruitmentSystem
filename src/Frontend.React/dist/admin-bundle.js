@@ -38214,52 +38214,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var en_gb = {
     generic: {
         button: {
-            next: "Next",
             back: "Back",
-            submit: "Submit",
-            save: "Save",
             create: "Create",
+            delete: "Delete",
             details: "Details",
             edit: "Edit",
-            delete: "Delete"
+            next: "Next",
+            save: "Save",
+            submit: "Submit"
         },
+        code: "Code",
         home: "Home",
-        name: "Name",
-        code: "Code"
+        name: "Name"
+
     },
     client: {
         clients: "Clients",
-        summary: "Manage clients, create new ones, etc...",
-        intro: "Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.",
-        new: "New Client",
         fields: {
             parentAccount: "Parent account"
-        }
+        },
+        intro: "Below is a list of all the client accounts within your control. You can search for clients using the search filter. Use the buttons to view further details and update details.",
+        new: "New Client",
+        summary: "Manage clients, create new ones, etc..."
     },
     project: {
         closeTime: "Close time",
-        projects: "Projects",
-        summary: "Administer projects, add participants, etc...",
         intro: "Below is a list of all the projects within your control. You can search for projects using the search filter. Use the buttons to view further details and update projects.",
-        new: "New Project"
-
+        new: "New Project",
+        projects: "Projects",
+        summary: "Administer projects, add participants, etc..."
     },
     user: {
         intro: "Below is a list of all users within your control. You can search for users using the search filter. Use the buttons to view further details and update user records.",
-        users: "Users",
+        new: "New User",
         summary: "Manage users, create new ones, etc...",
-        new: "New User"
+        users: "Users"
     },
     workflow: {
-        workflows: "Workflows",
-        workflow: "Workflow",
+        new: "New Workflow",
         summary: "Create new workflows and modify existing ones, etc...",
-        new: "New Workflow"
+        workflow: "Workflow",
+        workflows: "Workflows"
     },
     workflowStep: {
-        workflowSteps: "Workflow Steps",
+        new: "New Workflow Step",
         summary: "Create new workflow steps, modify existing ones, etc",
-        new: "New Workflow Step"
+        workflowSteps: "Workflow Steps"
     },
     audit: {
         audits: "Audit Logs",
