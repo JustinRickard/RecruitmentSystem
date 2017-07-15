@@ -1,4 +1,5 @@
 import React from 'react';
+import text from '../../../common/text';
 
 class WorkflowStepTableHead extends React.Component {
     render() {

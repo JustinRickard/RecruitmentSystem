@@ -38259,6 +38259,7 @@ var en_gb = {
         workflows: "Workflows"
     },
     workflowStep: {
+        intro: "Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps.",
         new: "New Workflow Step",
         summary: "Create new workflow steps, modify existing ones, etc",
         workflowSteps: "Workflow Steps",
@@ -40263,10 +40264,10 @@ var WorkflowPage = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement('div', { className: 'col-md-3' }),
+                _react2.default.createElement('div', { className: 'col-md-2' }),
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-md-6' },
+                    { className: 'col-md-8' },
                     _react2.default.createElement(
                         'ol',
                         { className: 'breadcrumb' },
@@ -40301,7 +40302,7 @@ var WorkflowPage = function (_React$Component) {
                         _react2.default.createElement(_WorkflowTableBody2.default, { rows: this.props.workflows })
                     )
                 ),
-                _react2.default.createElement('div', { className: 'col-md-3' })
+                _react2.default.createElement('div', { className: 'col-md-2' })
             );
         }
     }]);
@@ -40609,6 +40610,14 @@ var _icons = __webpack_require__(161);
 
 var _icons2 = _interopRequireDefault(_icons);
 
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
+
+var _urlPaths = __webpack_require__(638);
+
+var _urlPaths2 = _interopRequireDefault(_urlPaths);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -40670,10 +40679,10 @@ var WorkflowStepPage = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement('div', { className: 'col-md-3' }),
+                _react2.default.createElement('div', { className: 'col-md-2' }),
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-md-6' },
+                    { className: 'col-md-8' },
                     _react2.default.createElement(
                         'ol',
                         { className: 'breadcrumb' },
@@ -40683,7 +40692,7 @@ var WorkflowStepPage = function (_React$Component) {
                             _react2.default.createElement(
                                 'a',
                                 { href: '' },
-                                'Home'
+                                (0, _text2.default)("generic.home")
                             )
                         ),
                         _react2.default.createElement(
@@ -40691,14 +40700,14 @@ var WorkflowStepPage = function (_React$Component) {
                             { className: 'breadcrumb-item' },
                             _react2.default.createElement(
                                 'a',
-                                { href: '/workflows' },
-                                'Workflows'
+                                { href: _urlPaths2.default.workflow.main },
+                                (0, _text2.default)("workflow.workflows")
                             )
                         ),
                         _react2.default.createElement(
                             'li',
                             { className: 'breadcrumb-item active' },
-                            'Workflow Steps'
+                            (0, _text2.default)("workflowStep.workflowSteps")
                         )
                     ),
                     _react2.default.createElement(
@@ -40706,9 +40715,9 @@ var WorkflowStepPage = function (_React$Component) {
                         {
                             panelClass: 'panel-info',
                             iconClass: _icons2.default.WorkflowStep,
-                            panelHeaderText: 'Workflows Steps',
-                            panelBodyText: 'Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps.',
-                            headerButtonText: 'New Workflow Step',
+                            panelHeaderText: (0, _text2.default)("workflowStep.workflowSteps"),
+                            panelBodyText: (0, _text2.default)("workflowStep.intro"),
+                            headerButtonText: (0, _text2.default)("workflowStep.new"),
                             headerButtonClass: 'btn-success panel-header-button',
                             headerButtonIconClass: 'fa-plus',
                             onHeaderButtonClick: this.onCreateClick
@@ -40717,7 +40726,7 @@ var WorkflowStepPage = function (_React$Component) {
                         _react2.default.createElement(_WorkflowStepTableBody2.default, { rows: this.props.workflowSteps })
                     )
                 ),
-                _react2.default.createElement('div', { className: 'col-md-3' })
+                _react2.default.createElement('div', { className: 'col-md-2' })
             );
         }
     }]);
@@ -40820,6 +40829,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _text = __webpack_require__(637);
+
+var _text2 = _interopRequireDefault(_text);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

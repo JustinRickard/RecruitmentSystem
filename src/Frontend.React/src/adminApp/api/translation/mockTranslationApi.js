@@ -49,6 +49,7 @@ const en_gb = {
         workflows: "Workflows"
     },
     workflowStep: {
+        intro: "Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps.",
         new: "New Workflow Step",
         summary: "Create new workflow steps, modify existing ones, etc",
         workflowSteps: "Workflow Steps",

@@ -10,6 +10,8 @@ import PanelTable from '../../../common/components/PanelTable';
 import WorkflowStepTableHead from './WorkflowStepTableHead';
 import WorkflowStepTableBody from './WorkflowStepTableBody';
 import icons from '../../../common/icons';
+import text from '../../../common/text';
+import urlPaths from '../../common/urlPaths';
 
 class WorkflowStepPage extends React.Component {
 
@@ -49,20 +51,20 @@ class WorkflowStepPage extends React.Component {
 
         return (
             <div>
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
+                <div className="col-md-2"></div>
+                <div className="col-md-8">
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="">Home</a></li>
-                        <li className="breadcrumb-item"><a href="/workflows">Workflows</a></li>
-                        <li className="breadcrumb-item active">Workflow Steps</li>
+                        <li className="breadcrumb-item"><a href="">{text("generic.home")}</a></li>
+                        <li className="breadcrumb-item"><a href={urlPaths.workflow.main}>{text("workflow.workflows")}</a></li>
+                        <li className="breadcrumb-item active">{text("workflowStep.workflowSteps")}</li>
                     </ol>
                     
                     <PanelTable
                         panelClass="panel-info"
                         iconClass={icons.WorkflowStep}
-                        panelHeaderText="Workflows Steps"
-                        panelBodyText="Below is a list of all the workflow steps within your control. You can search for Workflows using the search filter. Use the buttons to view further details and update workflow steps."
-                        headerButtonText="New Workflow Step"
+                        panelHeaderText={text("workflowStep.workflowSteps")}
+                        panelBodyText={text("workflowStep.intro")}
+                        headerButtonText={text("workflowStep.new")}
                         headerButtonClass="btn-success panel-header-button"
                         headerButtonIconClass="fa-plus"
                         onHeaderButtonClick={this.onCreateClick}
@@ -72,7 +74,7 @@ class WorkflowStepPage extends React.Component {
                     </PanelTable>
 
                 </div>
-                <div className="col-md-3"></div>
+                <div className="col-md-2"></div>
             </div>
         );
     }

@@ -48,8 +48,8 @@ class WorkflowPage extends React.Component {
 
         return (
             <div>
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
+                <div className="col-md-2"></div>
+                <div className="col-md-8">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><a href="">{text("generic.home")}</a></li>
                         <li className="breadcrumb-item active">{text("workflow.workflows")}</li>
@@ -70,7 +70,7 @@ class WorkflowPage extends React.Component {
                     </PanelTable>
 
                 </div>
-                <div className="col-md-3"></div>
+                <div className="col-md-2"></div>
             </div>
         );
     }
