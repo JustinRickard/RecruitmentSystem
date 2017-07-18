@@ -1,7 +1,7 @@
 const urlPaths = {
     client: {
         main: "/clients",
-        new: "",
+        new: "/clients/new",
     },
     user: {
         main: "/users",

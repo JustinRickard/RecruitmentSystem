@@ -40,8 +40,10 @@ class ClientPage extends React.Component {
                     <FormPanel
                         headerClass="panel-primary"
                         iconClass={icons.Client}
-                        headerText={text("generic.save")}>
-                        <ClientForm />
+                        headerText={text("client.new")}>
+                        <ClientForm
+                            
+                         />
                     </FormPanel>
                 </div>
 

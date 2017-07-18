@@ -14,6 +14,9 @@ class FormPanel extends React.Component {
                     </div>
                 <div className="panel-body">
                     {this.props.children}
+                    <hr />
+                    <SaveButton onClick={this.props.onSaveClick} />
+                    <CancelButton onClick={this.props.onCancelClick} />
                 </div>
             </div>
         );

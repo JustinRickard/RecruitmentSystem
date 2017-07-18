@@ -1,7 +1,7 @@
 import React from 'react';
-import DetailsButton from '../../../common/components/DetailsButton';
-import EditButton from '../../../common/components/EditButton';
-import DeleteButton from '../../../common/components/DeleteButton';
+import DetailsButton from '../../../common/components/buttons/DetailsButton';
+import EditButton from '../../../common/components/buttons/EditButton';
+import DeleteButton from '../../../common/components/buttons/DeleteButton';
 
 class WorkflowStepTableRow extends React.Component {
 
