@@ -4,6 +4,7 @@ import App from '../components/App'
 import HomePage from '../components/home/HomePage';
 import UserPage from '../components/user/UserPage';
 import ClientPage from '../components/client/ClientPage';
+import ClientAddPage from '../components/client/ClientAddPage';
 import ProjectPage from '../components/project/ProjectPage';
 import WorkflowPage from '../components/workflow/WorkflowPage';
 import WorkflowStepPage from '../components/workflowStep/WorkflowStepPage';
@@ -14,8 +15,9 @@ import urlPaths from '../common/urlPaths';
 export default (
         <Route path="/" component={App}>
             <IndexRoute component={HomePage} />
-            <Route path={urlPaths.user.main} component={UserPage} />
             <Route path={urlPaths.client.main} component={ClientPage} />
+            <Route path={urlPaths.client.new} component={ClientAddPage} />
+            <Route path={urlPaths.user.main} component={UserPage} />            
             <Route path={urlPaths.project.main} component={ProjectPage} />
             <Route path={urlPaths.workflow.main} component={WorkflowPage} />
             <Route path={urlPaths.workflowStep.main} component={WorkflowStepPage} />

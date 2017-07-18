@@ -5,6 +5,7 @@ const en_gb = {
     generic: {
         button: {
             back: "Back",                     
+            cancel: "Cancel",
             create: "Create",
             delete: "Delete",
             details: "Details",
@@ -16,8 +17,8 @@ const en_gb = {
         code: "Code",
         createdDate: "Create date",
         home: "Home",
-        name: "Name"
-        
+        name: "Name",
+        pleaseSelectBrackets: "(Please select)"        
     },
     client: {
         clients: "Clients",

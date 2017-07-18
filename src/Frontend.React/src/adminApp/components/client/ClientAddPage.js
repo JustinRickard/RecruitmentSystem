@@ -1,4 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as clientActions from '../../actions/clientActions';
 import ClientApi from '../../api/client/mockClientApi';
 // import ClientApi from '../../api/client/clientApi';
 import FormPanel from '../../../common/components/FormPanel';
@@ -35,15 +38,13 @@ class ClientPage extends React.Component {
                 <div className="col-md-2"></div>
 
                 <div className="col-md-8">
-                    <Breadcrumb3Items href1="Clients" label1={text("client.clients")} label2={text("generic.create")} />
+                    <Breadcrumb3Items href1="Clients" label1={text("client.clients")} label2={text("generic.button.create")} />
 
                     <FormPanel
                         headerClass="panel-primary"
                         iconClass={icons.Client}
                         headerText={text("client.new")}>
-                        <ClientForm
-                            
-                         />
+                        <ClientForm clients={this.props.clients} />
                     </FormPanel>
                 </div>
 
@@ -52,3 +53,17 @@ class ClientPage extends React.Component {
         );
     }
 }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        clients: state.clients
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(clientActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientPage);

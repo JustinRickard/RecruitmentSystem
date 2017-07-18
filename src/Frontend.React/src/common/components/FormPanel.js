@@ -1,4 +1,6 @@
 import React from 'react'
+import SaveButton from './buttons/SaveButton';
+import CancelButton from './buttons/CancelButton';
 
 class FormPanel extends React.Component {
     render() {
@@ -15,8 +17,10 @@ class FormPanel extends React.Component {
                 <div className="panel-body">
                     {this.props.children}
                     <hr />
-                    <SaveButton onClick={this.props.onSaveClick} />
-                    <CancelButton onClick={this.props.onCancelClick} />
+                    <div className="btn-toolbar">              
+                        <CancelButton onClick={this.props.onCancelClick} />
+                        <SaveButton onClick={this.props.onSaveClick} />
+                    </div>
                 </div>
             </div>
         );
