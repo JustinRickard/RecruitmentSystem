@@ -12,41 +12,26 @@ using Common.Interfaces.Helpers;
 using Common.Dto;
 using Common.Classes;
 using Common.Helpers;
+using DB.Seed.MongoDB.Helpers;
 
 namespace DB.Seed.MongoDB
 {
     public class Program
     {
         public static IConfigurationRoot Configuration { get; set; }
+        public static IServiceProvider ServiceProvider {get; set; }
 
         public static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-                // .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-            Configuration = builder.Build();
-
-            var serviceProvider = new ServiceCollection()
-                .AddLogging()
-                .AddSingleton<IUserRepository, UserRepository>()
-                .AddSingleton<IPasswordHelper, PasswordHelper>()
-                .AddSingleton<IJsonHelper, JsonHelper>()
-                .AddOptions()
-                .Configure<AppSettings>(Configuration.GetSection("AppSettings"))                
-                .BuildServiceProvider();
+            Configuration = ConfigurationHelper.BuildConfig();
+            ServiceProvider = ConfigurationHelper.BuildServiceProvider(Configuration);            
             
-
-            serviceProvider
-                .GetService<ILoggerFactory>()
-                .AddConsole(LogLevel.Debug);
-            
-            var logger = serviceProvider.GetService<ILoggerFactory>()
+            var logger = ServiceProvider.GetService<ILoggerFactory>()
                 .CreateLogger<Program>();
             logger.LogDebug("Starting DB seeding...");
 
-            var userRepository = serviceProvider.GetService<IUserRepository>();
-            var jsonHelper = serviceProvider.GetService<IJsonHelper>();
+            var userRepository = ServiceProvider.GetService<IUserRepository>();
+            var jsonHelper = ServiceProvider.GetService<IJsonHelper>();
 
             logger.LogDebug("ConnectionString:");
             logger.LogDebug(Configuration["AppSettings:ConnectionString"]);            
