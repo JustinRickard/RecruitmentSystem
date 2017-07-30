@@ -11,6 +11,8 @@ import ClientTableHead from './ClientTableHead';
 import ClientTableBody from './ClientTableBody';
 import icons from '../../../common/icons';
 import text from '../../../common/text';
+import Router from '../../../common/router';
+import urlPaths from '../../common/urlPaths';
 
 class ClientPage extends React.Component {
 
@@ -30,7 +32,10 @@ class ClientPage extends React.Component {
     }    
 
     onCreateClick() {
-        // route to add page
+        console.log("Clicked onCreateClick");
+        // Router.navigateTo(urlPaths.client.new);
+        // this.props.dispatch(Router.navigateTo(urlPaths.client.new));
+        dispatch(Router.navigateTo(urlPaths.client.new));
     }
 
     onDeleteClick() {

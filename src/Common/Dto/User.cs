@@ -19,17 +19,27 @@ namespace Common.Dto
             DateTimeOffset dateCreated,
             DateTimeOffset lastModified,
             bool deleted
-        ) 
+        ) : this(client, firstName, lastName, email, username)
         {
             Id = id;
+            DateCreated = dateCreated;
+            LastModified = lastModified;
+            Deleted = deleted;
+        }
+
+        public User (
+            string client, 
+            string firstName,
+            string lastName,
+            string email,
+            string username
+        )
+        {
             Client = client;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Username = username;
-            DateCreated = dateCreated;
-            LastModified = lastModified;
-            Deleted = deleted;
         }
 
         public string Client { get; set; }
