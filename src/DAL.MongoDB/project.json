@@ -7,7 +7,9 @@
     "MongoDB.Driver": "2.3.0",
     "MongoDB.Driver.Core": "2.3.0",
     "Common": "1.0.0-*",
-    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0"
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0",
+    "Microsoft.Extensions.Configuration": "1.1.0"
   },
 
   "frameworks": {

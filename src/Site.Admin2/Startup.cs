@@ -39,23 +39,6 @@ namespace Site.Admin2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            /*
-            var appSettings = new AppSettings();
-            var passwordHelper = new PasswordHelper();
-            var userRepository = new UserRepository(appSettings, passwordHelper);
-
-            
-             IUserStore<User> userStore =  new UserStore(services. .GetService <IUserService>());
-             IRoleStore<Role> roleStore = new RoleStore();
-             IUserClaimsPrincipalFactory<User> userPrincipalFactory = new UserPrincipalFactory();
-            services.AddInstance<IUserStore<User>>(userStore);
-            services.AddInstance<IRoleStore<ApplicationRole>>(roleStore);
-            services.AddInstance<IUserClaimsPrincipalFactory<ApplicationUser>>(userPrincipalFactory);
-            
-            */
-
-
             services.AddIdentity<User, Role>()
                 .AddUserStore<UserStore>()
                 .AddRoleStore<RoleStore>()
@@ -80,9 +63,6 @@ namespace Site.Admin2
             services.AddScoped<IJsonHelper, JsonHelper>();
             services.AddScoped<IAuditHelper, AuditHelper>();
             services.AddScoped<IPasswordHelper, PasswordHelper>();
-
-            // services.AddInstance<IUserStore, UserStore>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

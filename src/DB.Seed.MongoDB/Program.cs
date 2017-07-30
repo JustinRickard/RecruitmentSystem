@@ -41,10 +41,10 @@ namespace DB.Seed.MongoDB
 
             var user = new User(
                 "Client 1",
-                "User",
-                "One",
+                "User2",
+                "Two",
                 "userone@example.org",
-                "UserOne"
+                "UserTwo"
             );
 
             var maybeUserTask = userRepository.Add(user);

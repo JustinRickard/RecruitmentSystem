@@ -6,8 +6,10 @@ using Microsoft.Extensions.Logging;
 using Common.Classes;
 using Common.Helpers;
 using Common.Interfaces.Repositories;
+using Common.ExtensionMethods;
 using Common.Interfaces.Helpers;
 using DAL.MongoDB.Repositories;
+using DAL.MongoDB.ExtensionMethods;
 
 namespace DB.Seed.MongoDB.Helpers
 {
@@ -24,13 +26,16 @@ namespace DB.Seed.MongoDB.Helpers
         }
 
         public static IServiceProvider BuildServiceProvider(IConfigurationRoot config) {
-                IServiceProvider serviceProvider = new ServiceCollection()
+                IServiceCollection services = new ServiceCollection()
                     .AddLogging()
-                    .AddSingleton<IUserRepository, UserRepository>()
-                    .AddSingleton<IPasswordHelper, PasswordHelper>()
-                    .AddSingleton<IJsonHelper, JsonHelper>()
                     .AddOptions()
-                    .Configure<AppSettings>(config.GetSection("AppSettings"))                
+                    .Configure<AppSettings>(config.GetSection("AppSettings"));
+                
+                // Dependency injection bindings for application
+                services.BindCommonServicesAsSingleton();
+                services.BindRepositoriesAsSingleton();
+
+                IServiceProvider serviceProvider = services
                     .BuildServiceProvider();
 
                 serviceProvider
