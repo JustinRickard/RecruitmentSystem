@@ -1,0 +1,22 @@
+[
+	{
+		ClientCode: "ADMIN"
+		Username: "admin",
+		Password: "Adm1n93JrRec",
+		Email: "adminemail@example.org",
+		Forename: "Admin",
+		Surname: "User",
+		Settings: {
+			CultureCode: 'en-GB'
+		},
+		Roles: [
+			'SuperAdmin'
+		],		
+		Features: [
+			'CsvReports',
+			'PdfReports',
+			'MultiplePdfReportDownloads',
+			'MultipleParticipantUploads'
+		]
+	},
+]
