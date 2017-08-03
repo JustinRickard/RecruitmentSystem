@@ -1,34 +1,32 @@
 [
-	{
-		Name: "Admin account",
-		Code: "ADMIN",
-		ParentCode: null,
-		Subodmain: "admin",
-		Settings: {
-			DefaultReturnUrl: null,
-			DefaultMaximumWeblinkLogins: 3
-		},
-		Features: [
-				'CsvReports',
-				'PdfReports',
-				'MultiplePdfReportDownloads',
-				'MultipleParticipantUploads'
-			]
-		}
-	},
-	{
-		Name: "Admin sub-account account 1",
-		Code: "ADSUB1",
-		ParentCode: null,
-		Subodmain: "admin",
-		Settings: {
-			DefaultReturnUrl: null,
-			DefaultMaximumWeblinkLogins: null
-		},
-		Features: [
-				'CsvReports',
-				'PdfReports'
-			]
-		}
-	}
+  {
+    "Name": "Admin account",
+    "Code": "ADMIN",
+    "ParentCode": null,
+    "Subodmain": "admin",
+    "Settings": {
+      "DefaultReturnUrl": null,
+      "DefaultMaximumWeblinkLogins": 3
+    },
+    "Features": [
+      "CsvReports",
+      "PdfReports",
+      "MultiplePdfReportDownloads",
+      "MultipleParticipantUploads"
+    ]
+  },
+  {
+    "Name": "Admin sub-account account 1",
+    "Code": "ADSUB1",
+    "ParentCode": null,
+    "Subodmain": "admin",
+    "Settings": {
+      "DefaultReturnUrl": null,
+      "DefaultMaximumWeblinkLogins": null
+    },
+    "Features": [
+      "CsvReports",
+      "PdfReports"
+    ]
+  }
 ]
