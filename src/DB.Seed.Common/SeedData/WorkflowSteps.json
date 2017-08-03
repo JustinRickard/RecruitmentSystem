@@ -1,6 +1,7 @@
 [
   {
     "StepType": "SimpleQuestionnaire",
+    "Code": "EX_PERS",
     "Name": "Example Personality Test",
     "Questions": [
       {
@@ -60,6 +61,7 @@
   {
     "StepType": "ScenarioQuestionnaire",
     "Name": "Example Personality Test",
+    "Code": "EX_SCEN",
     "Scenarios": [
       {
         "Code": "ESQ_01",
