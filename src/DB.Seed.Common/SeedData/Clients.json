@@ -4,15 +4,16 @@
 		Code: "ADMIN",
 		ParentCode: null,
 		Subodmain: "admin",
-		Settings {
+		Settings: {
 			DefaultReturnUrl: null,
 			DefaultMaximumWeblinkLogins: 3
 		},
-		Features {
-			'CsvReports',
-			'PdfReports',
-			'MultiplePdfReportDownloads',
-			'MultipleParticipantUploads'
+		Features: [
+				'CsvReports',
+				'PdfReports',
+				'MultiplePdfReportDownloads',
+				'MultipleParticipantUploads'
+			]
 		}
 	},
 	{
@@ -20,13 +21,14 @@
 		Code: "ADSUB1",
 		ParentCode: null,
 		Subodmain: "admin",
-		Settings {
+		Settings: {
 			DefaultReturnUrl: null,
 			DefaultMaximumWeblinkLogins: null
 		},
-		Features {
-			'CsvReports',
-			'PdfReports'
+		Features: [
+				'CsvReports',
+				'PdfReports'
+			]
 		}
 	}
 ]
