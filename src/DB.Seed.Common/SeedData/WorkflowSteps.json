@@ -1,0 +1,123 @@
+[
+	{
+		StepType: "SimpleQuestionnaire",
+		Name: "Example Personality Test",
+		Questions: [
+			{
+				Code: "EPT_01",
+				Text: "I like to work quickly",
+				Responses: [
+					{
+						Code: "EPT_01_R_01",
+						Text: "Strongly disagree",
+						Score: 1
+					},
+					{
+						Code: "EPT_01_R_01",
+						Text: "Disagree",
+						Score: 2
+					},
+					{
+						Code: "EPT_01_R_01",
+						Text: "Agree",
+						Score: 3
+					},
+					{
+						Code: "EPT_01_R_01",
+						Text: "Strongly agree",
+						Score: 4
+					}
+				]
+			},
+			{
+				Code: "EPT_02",
+				Text: "I pay attention to detail",
+				Responses: [
+					{
+						Code: "EPT_02_R_01",
+						Text: "Strongly disagree",
+						Score: 1
+					},
+					{
+						Code: "EPT_02_R_01",
+						Text: "Disagree",
+						Score: 2
+					},
+					{
+						Code: "EPT_02_R_01",
+						Text: "Agree",
+						Score: 3
+					},
+					{
+						Code: "EPT_02_R_01",
+						Text: "Strongly agree",
+						Score: 4
+					}
+				]
+			}
+		]
+	},
+	{
+		StepType: "ScenarioQuestionnaire",
+		Name: "Example Personality Test",
+		Scenarios: [
+			{
+				Code: "ESQ_01",
+				Text: "You are in a supermarket are asked the following questions from customers. The supermarket sells everything including bread, which is in the bread aisle. They do not provide cashback. There is an ATM machine just outside.",
+				Questions: [
+				{
+					Code: "ESQ_01_Q_01",
+					Text: "Why don't you sell bread? This is ridiculous!!!",
+					Responses: [
+						{
+							Code: "ESQ_01_Q_01_R_01",
+							Text: "Dunno!",
+							Score: 1
+						},
+						{
+							Code: "ESQ_01_Q_01_R_02",
+							Text: "Ask someone else.",
+							Score: 2
+						},
+						{
+							Code: "ESQ_01_Q_01_R_03",
+							Text: "We do, it's over there.",
+							Score: 3
+						},
+						{
+							Code: "ESQ_01_Q_01_R_04",
+							Text: "We do sell bread. I will take you to the break isle. Please follow me.",
+							Score: 4
+						}
+					]
+				},
+				{
+					Code: "ESQ_01_Q_02",
+					Text: "Could I have £20 cashback please?",
+					Responses: [
+						{
+							Code: "ESQ_01_Q_02_R_01",
+							Text: "Yes, of course.",
+							Score: 1
+						},
+						{
+							Code: "ESQ_01_Q_02_R_02",
+							Text: "No.",
+							Score: 2
+						},
+						{
+							Code: "ESQ_01_Q_02_R_03",
+							Text: "I'm afraid we don't do cashback, sorry.",
+							Score: 3
+						},
+						{
+							Code: "ESQ_01_Q_02_R_04",
+							Text: "I'm afraid we don't do cashback, sorry. There is an ATM outside which you may use to get cash out.",
+							Score: 4
+						}
+					]
+				}
+			]
+		]
+	}
+]
