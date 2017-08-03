@@ -6,6 +6,7 @@
     "Questions": [
       {
         "Code": "EPT_01",
+        "CompetencyCode": "WORKS_QUICKLY",
         "Text": "I like to work quickly",
         "Responses": [
           {
@@ -32,6 +33,7 @@
       },
       {
         "Code": "EPT_02",
+        "CompetencyCode": "ATTENTION_TO_DETAIL",
         "Text": "I pay attention to detail",
         "Responses": [
           {
@@ -69,6 +71,7 @@
         "Questions": [
           {
             "Code": "ESQ_01_Q_01",
+            "CompetencyCode": "WORKING_WITH_PEOPLE",
             "Text": "Why don't you sell bread? This is ridiculous!!!",
             "Responses": [
               {
@@ -95,6 +98,7 @@
           },
           {
             "Code": "ESQ_01_Q_02",
+            "CompetencyCode": "WORKING_WITH_PEOPLE",
             "Text": "Could I have £20 cashback please?",
             "Responses": [
               {
