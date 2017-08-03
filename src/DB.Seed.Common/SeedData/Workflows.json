@@ -1,0 +1,26 @@
+[
+  {
+    "Code": "EX_PERS",
+    "Name": "Personality Test",
+    "WorkflowSteps": [
+      {
+        "Code": "EX_PERS",
+        "Order": 1
+      }
+    ]
+  },
+  {
+    "Code": "EX_PERS_SCEN",
+    "Name": "Personality Test and Scenario Test",
+    "WorkflowSteps": [
+      {
+        "Code": "EX_PERS",
+        "Order": 1
+      },
+      {
+        "Code": "EX_SCEN",
+        "Order": 2
+      }
+    ]
+  }
+]
