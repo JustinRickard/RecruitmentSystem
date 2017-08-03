@@ -1,0 +1,18 @@
+[
+  {
+    "Code": "EX_PERS_1",
+    "Name": "Example Personality test 1",
+    "WorkflowCode": "EX_PERS",
+    "LoginMethod": "Weblink",
+    "StartTime": "2017-08-01",
+    "EndTime": "2018-03-01"
+  },
+  {
+    "Code": "EX_PERS_SCEN_1",
+    "Name": "Example Personality and Scenario test 1",
+    "WorkflowCode": "EX_PERS_SCEN",
+    "LoginMethod": "Weblink",
+    "StartTime": "2017-08-01",
+    "EndTime": "2018-03-01"
+  }
+]
